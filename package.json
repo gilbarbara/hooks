@@ -1,0 +1,22 @@
+{
+  "name": "@gilbarbara/hooks",
+  "version": "0.1.0",
+  "description": "Collection of useful react hooks",
+  "author": "Gil Barbara <gilbarbara@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gilbarbara/hooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gilbarbara/hooks/issues"
+  },
+  "homepage": "https://github.com/gilbarbara/hooks#readme",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "hooks"
+  ],
+  "peerDependencies": {
+    "react": "^16.13.0"
+  },
+}
