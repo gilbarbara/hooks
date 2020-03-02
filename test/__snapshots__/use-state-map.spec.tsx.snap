@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useStateMap should re-render the id has changed 1`] = `
+<div>
+  <h1>
+    {
+  "data": [],
+  "status": "idle"
+}
+  </h1>
+  <button
+    type="button"
+  >
+    Update
+  </button>
+</div>
+`;
+
+exports[`useStateMap should re-render the id has changed 2`] = `
+<div>
+  <h1>
+    {
+  "data": [],
+  "status": "running"
+}
+  </h1>
+  <button
+    type="button"
+  >
+    Update
+  </button>
+</div>
+`;

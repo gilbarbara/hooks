@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useWindowSize should show the changes 1`] = `
+<div>
+  {
+  "width": 1024,
+  "height": 768
+}
+</div>
+`;

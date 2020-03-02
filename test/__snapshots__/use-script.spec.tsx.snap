@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useScript should re-render the id has changed 1`] = `<div />`;
