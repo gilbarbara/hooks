@@ -1,7 +1,7 @@
 {
   "name": "@gilbarbara/hooks",
-  "version": "0.1.0",
-  "description": "Collection of useful react hooks",
+  "version": "0.0.1",
+  "description": "Collection of useful React hooks",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
     "type": "git",
@@ -17,6 +17,6 @@
     "hooks"
   ],
   "peerDependencies": {
-    "react": "^16.13.0"
-  },
+    "react": "^16.8.0"
+  }
 }
