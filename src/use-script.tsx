@@ -1,72 +1,69 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { canUseDOM } from './utils';
 
-interface Options {
+interface UseScriptOptions {
   async?: boolean;
   defer?: boolean;
   id?: string;
+  type?: string;
 }
 
-export default function useScript(src: string, options: Options = {}) {
+export default function useScript(src: string, idOrOptions: string | UseScriptOptions = {}) {
+  const options = typeof idOrOptions === 'string' ? { id: idOrOptions } : idOrOptions;
+  const script = useRef<HTMLScriptElement>();
   const [state, setState] = useState({
     loaded: false,
     error: false,
   });
 
+  const onLoad = useCallback(() => {
+    setState({
+      loaded: true,
+      error: false,
+    });
+  }, []);
+
+  const onError = useCallback(() => {
+    /* istanbul ignore else */
+    if (script.current) {
+      script.current.remove();
+    }
+
+    setState({
+      loaded: false,
+      error: true,
+    });
+  }, []);
+
   useEffect(
     () => {
-      if (!canUseDOM) {
-        return undefined;
-      }
-      const id = options.id || src;
-
-      // If script already loaded, skip
-      if (document.getElementById(id)) {
-        setState({
-          loaded: true,
-          error: false,
-        });
-
+      if (!canUseDOM || script.current) {
         return undefined;
       }
 
-      // Create script
-      const script = document.createElement('script');
-      script.async = options.async ?? true;
-      script.defer = options.defer ?? false;
-      script.id = id;
-      script.src = src;
+      const element = document.createElement('script');
+      element.async = options.async ?? true;
+      element.defer = options.defer ?? false;
+      element.type = options.type || 'text/javascript';
+      element.id = options.id || src;
+      element.src = src;
 
-      // Script event listener callbacks for load and error
-      const onScriptLoad = () => {
-        setState({
-          loaded: true,
-          error: false,
-        });
-      };
+      script.current = element;
 
-      const onScriptError = () => {
-        script.remove();
+      const { current } = script;
 
-        setState({
-          loaded: true,
-          error: true,
-        });
-      };
-
-      script.addEventListener('load', onScriptLoad);
-      script.addEventListener('error', onScriptError);
+      current.addEventListener('load', onLoad);
+      current.addEventListener('error', onError);
 
       // Add script to document body
-      document.body.appendChild(script);
+      document.body.appendChild(current);
 
-      // Remove event listeners on cleanup
       return () => {
-        script.removeEventListener('load', onScriptLoad);
-        script.removeEventListener('error', onScriptError);
+        current.removeEventListener('load', onLoad);
+        current.removeEventListener('error', onError);
       };
     },
-    [options, src], // Only re-run effect if script src changes
+    [onError, onLoad, options, src], // Only re-run effect if script src changes
   );
 
   return [state.loaded, state.error];

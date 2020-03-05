@@ -7,21 +7,22 @@ type Changes<T> = {
   };
 };
 
-interface Options {
+interface UseWhyDidYouUpdateOptions {
   name?: string;
   skipLog?: boolean;
 }
 
 export default function useWhyDidYouUpdate<T extends object>(
   props: T,
-  options: string | Options = {},
+  nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
 ) {
   type K = keyof T;
 
   const [changes, setChanges] = useState<Changes<T>>({});
   const previousProps = useRef<T>();
 
-  const { name, skipLog = false } = typeof options === 'string' ? { name: options } : options;
+  const { name, skipLog = false } =
+    typeof nameOrOptions === 'string' ? { name: nameOrOptions } : nameOrOptions;
 
   useEffect(() => {
     const { current } = previousProps;
@@ -30,7 +31,7 @@ export default function useWhyDidYouUpdate<T extends object>(
 
     if (current) {
       // Get all keys from previous and current props
-      const allKeys = Object.keys({ ...previousProps.current, ...props }) as K[];
+      const allKeys = Object.keys({ ...current, ...props }) as K[];
 
       // Use this object to keep track of changed props
       const changesObj: Changes<T> = {};
@@ -50,7 +51,7 @@ export default function useWhyDidYouUpdate<T extends object>(
         setChanges(changesObj);
 
         if (!skipLog) {
-          console.log(`[why-did-you-update${name ? `: ${name}}` : ''}]`, changesObj); //eslint-disable-line no-console
+          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObj); //eslint-disable-line no-console
         }
       }
     }

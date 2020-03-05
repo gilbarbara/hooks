@@ -5,7 +5,7 @@ exports[`useWhyDidYouUpdate should show the changes 1`] = `<div />`;
 exports[`useWhyDidYouUpdate should show the changes 2`] = `
 <div>
   {
-  "ham": {
+  "version": {
     "from": 1,
     "to": 2
   }

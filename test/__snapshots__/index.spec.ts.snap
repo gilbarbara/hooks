@@ -4,6 +4,7 @@ exports[`@gilbarbara/hooks should have all exports 1`] = `
 Array [
   "useScript",
   "useThrottle",
+  "useThrottleValue",
   "useWhyDidYouUpdate",
 ]
 `;

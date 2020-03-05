@@ -1,5 +1,5 @@
 {
-  "globals": {
-    "skipEventLoop": false
+  "rules": {
+    "no-console": "off"
   }
 }

@@ -5,46 +5,91 @@ import useThrottle from '../src/use-throttle';
 
 jest.useFakeTimers();
 
+const mockFn = jest.fn();
+
+const Component = ({ fn = mockFn, ms = 500, ...rest }: any) => {
+  const throttledFn = useThrottle(fn, ms, rest);
+
+  return (
+    <button type="button" onClick={throttledFn}>
+      Update
+    </button>
+  );
+};
+
 describe('useThrottle', () => {
-  const mockSearch = jest.fn();
-
-  const Component = (options: any) => {
-    const [text, setText] = React.useState('');
-    const throttledText = useThrottle(text, 500, options);
-
-    React.useEffect(() => {
-      if (throttledText) {
-        mockSearch(throttledText);
-      }
-    }, [throttledText]);
-
-    return (
-      <div>
-        <input type="text" onChange={e => setText(e.target.value)} />
-        <p>Actual value: {text}</p>
-        <p>Throttle value: {throttledText}</p>
-      </div>
-    );
-  };
-  const { getByRole } = render(<Component />);
+  afterEach(() => {
+    mockFn.mockReset();
+  });
 
   it('should throttle the callback', () => {
-    fireEvent.change(getByRole('textbox'), { target: { value: 'test' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testi' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testin' } });
+    const { getByRole } = render(<Component />);
+    expect(mockFn).toHaveBeenCalledTimes(0);
 
-    expect(mockSearch).toHaveBeenCalledTimes(1);
-    expect(mockSearch).toHaveBeenLastCalledWith('test');
+    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button'));
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
 
     act(() => {
-      jest.advanceTimersByTime(600);
+      jest.advanceTimersByTime(500);
     });
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my gear' } });
+    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button'));
 
-    expect(mockSearch).toHaveBeenCalledTimes(2);
-    expect(mockSearch).toHaveBeenLastCalledWith('testing');
+    expect(mockFn).toHaveBeenCalledTimes(2);
+  });
+
+  it('should throttle the callback without leading', () => {
+    const { getByRole } = render(<Component leading={false} trailing />);
+
+    fireEvent.click(getByRole('button'));
+
+    expect(mockFn).toHaveBeenCalledTimes(0);
+
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button'));
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(mockFn).toHaveBeenCalledTimes(2);
+  });
+
+  it('should throttle the callback with trailing', () => {
+    const mockFn2 = jest.fn();
+    const { getByRole } = render(<Component fn={mockFn2} trailing />);
+
+    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button'));
+
+    expect(mockFn2).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(mockFn2).toHaveBeenCalledTimes(2);
+
+    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button'));
+
+    expect(mockFn2).toHaveBeenCalledTimes(3);
+
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(mockFn2).toHaveBeenCalledTimes(4);
   });
 });
