@@ -2,15 +2,8 @@
 
 exports[`@gilbarbara/hooks should have all exports 1`] = `
 Array [
-  "useDebounce",
-  "useEventListener",
-  "useInterval",
-  "useOnScreen",
   "useScript",
-  "useStateMap",
-  "useTimeout",
   "useThrottle",
   "useWhyDidYouUpdate",
-  "useWindowSize",
 ]
 `;

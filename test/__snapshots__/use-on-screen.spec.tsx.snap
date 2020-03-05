@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`useOnScreen should render the is visible 1`] = `
-<div>
-  Offscreen
-</div>
-`;
