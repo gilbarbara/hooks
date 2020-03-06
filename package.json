@@ -1,6 +1,6 @@
 {
   "name": "@gilbarbara/hooks",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Collection of useful React hooks",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
