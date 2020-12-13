@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { canUseDOM } from './utils';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { canUseDOM, isString } from './utils';
 
 interface UseScriptOptions {
   async?: boolean;
@@ -8,8 +8,13 @@ interface UseScriptOptions {
   type?: string;
 }
 
-export default function useScript(src: string, idOrOptions: string | UseScriptOptions = {}) {
-  const options = typeof idOrOptions === 'string' ? { id: idOrOptions } : idOrOptions;
+export default function useScript(
+  src: string,
+  idOrOptions: string | UseScriptOptions = {},
+): [loaded: boolean, error: boolean] {
+  const options = useMemo(() => (isString(idOrOptions) ? { id: idOrOptions } : idOrOptions), [
+    idOrOptions,
+  ]);
   const script = useRef<HTMLScriptElement>();
   const [state, setState] = useState({
     loaded: false,
