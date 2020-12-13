@@ -35,7 +35,7 @@ describe('useScript', () => {
     );
 
     act(() => {
-      script!.dispatchEvent(new Event('load'));
+      script?.dispatchEvent(new Event('load'));
     });
 
     expect(container.firstChild).toMatchSnapshot();
@@ -51,7 +51,7 @@ describe('useScript', () => {
     );
 
     act(() => {
-      script!.dispatchEvent(new Event('error'));
+      script?.dispatchEvent(new Event('error'));
     });
 
     expect(container.firstChild).toMatchSnapshot();

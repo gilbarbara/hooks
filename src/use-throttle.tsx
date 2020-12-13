@@ -11,7 +11,7 @@ export default function useThrottle(
   options?: UseThrottleOptions,
 ): () => void {
   const [now, setNow] = useState(0);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<number>();
   const coolDown = useRef(Date.now());
 
   const leading = options?.leading ?? true;
@@ -30,7 +30,7 @@ export default function useThrottle(
     };
 
     if (timer.current) {
-      timer.current = setTimeout(timerFn, Date.now() - coolDown.current);
+      timer.current = window.setTimeout(timerFn, Date.now() - coolDown.current);
     }
 
     if (!timer.current) {
@@ -39,13 +39,13 @@ export default function useThrottle(
         fn();
       }
 
-      timer.current = setTimeout(timerFn, ms);
+      timer.current = window.setTimeout(timerFn, ms);
       coolDown.current = Date.now();
     }
 
     return () => {
       if (timer.current) {
-        clearTimeout(timer.current);
+        window.clearTimeout(timer.current);
       }
     };
   }, [fn, leading, ms, now, trailing]);

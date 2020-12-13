@@ -12,7 +12,7 @@ export default function useThrottleValue<T>(
 ): unknown {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const coolDown = useRef(Date.now());
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<number>();
 
   const leading = options?.leading ?? true;
   const trailing = options?.trailing ?? false;
@@ -27,7 +27,7 @@ export default function useThrottleValue<T>(
     };
 
     if (timer.current) {
-      timer.current = setTimeout(timerFn, Date.now() - coolDown.current);
+      timer.current = window.setTimeout(timerFn, Date.now() - coolDown.current);
     }
 
     if (!timer.current && value !== throttledValue) {
@@ -36,12 +36,12 @@ export default function useThrottleValue<T>(
         setThrottledValue(value);
       }
 
-      timer.current = setTimeout(timerFn, ms);
+      timer.current = window.setTimeout(timerFn, ms);
       coolDown.current = Date.now();
     }
 
     return () => {
-      clearTimeout(timer.current!);
+      window.clearTimeout(timer?.current);
     };
   }, [leading, ms, throttledValue, trailing, value]);
 

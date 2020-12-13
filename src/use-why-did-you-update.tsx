@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { isString } from './utils';
+import { PlainObject } from './types';
 
 type Changes<T> = {
   [K in keyof T]?: {
@@ -12,17 +14,18 @@ interface UseWhyDidYouUpdateOptions {
   skipLog?: boolean;
 }
 
-export default function useWhyDidYouUpdate<T extends object>(
+export default function useWhyDidYouUpdate<T extends PlainObject>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
-) {
+): Changes<T> | false {
   type K = keyof T;
 
   const [changes, setChanges] = useState<Changes<T>>({});
   const previousProps = useRef<T>();
 
-  const { name, skipLog = false } =
-    typeof nameOrOptions === 'string' ? { name: nameOrOptions } : nameOrOptions;
+  const { name, skipLog = false } = isString(nameOrOptions)
+    ? { name: nameOrOptions }
+    : nameOrOptions;
 
   useEffect(() => {
     const { current } = previousProps;
