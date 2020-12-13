@@ -12,12 +12,19 @@
     "browser": true,
     "jest": true
   },
-  "globals": {
-    "cy": false
-  },
+  "overrides": [
+    {
+      "files": ["test/**/*.ts?(x)"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ],
   "plugins": ["react-hooks", "prettier"],
   "rules": {
     "no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
+    "no-use-before-define": "off",
     "spaced-comment": [
       "warn",
       "always",
@@ -35,7 +42,6 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
     "import/extensions": ["warn", "never"],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/prefer-default-export": "off",
