@@ -24,7 +24,7 @@
     "src"
   ],
   "types": "./lib",
-  "sideEffects": false,
+  "sideEffects": true,
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
   },
