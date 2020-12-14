@@ -12,11 +12,52 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
+### useFetch
+Make a request with fetch.  
+Returns an object with  `data`, `error` and `status`.
+
+```typescript
+import React from 'react';
+import { useFetch } from '@gilbarbara/hooks';
+
+function Component() {
+  const { data, error, status } = useFetch(
+    'https://api.github.com/search/repositories?q=react&sort=stars',
+    true // you can delay the request until something finishes
+  );
+
+  return (
+    <div>
+      {status === 'failure' && <p>{error?.toString()}</p>}
+      {status === 'success' && <p>{data}</p>}
+      {status === 'running' && <p>Loading</p>}
+    </div>
+  );
+};
+```
+
+**Reference**
+
+```typescript
+type FetchStatus = 'idle' | 'running' | 'success' | 'failure';
+
+interface useFetchOptions {
+  headers?: PlainObject;
+  method?: string;
+  mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  body?: BodyInit;
+  type?: 'json' | 'urlencoded';
+  url: string;
+}
+
+useFetch(urlOrOptions: string | useFetchOptions, wait = false);
+```
+
 ### useScript
 Create a script tag and append it to the `document.body`.  
-Returns an `loaded` and `error` properties.
+Returns an array with `loaded` and `error` properties.
 
-```jsx
+```typescript
 import React from 'react';
 import { useScript } from '@gilbarbara/hooks';
 
@@ -37,7 +78,7 @@ function Component() {
 
 **Reference**
 
-```tsx
+```typescript
 interface UseScriptOptions {
   async?: boolean;
   defer?: boolean;
@@ -55,7 +96,7 @@ useScript(src: string, idOrOptions: string | UseScriptOptions = {});
 Return a throttled function that only invokes `fn` once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
-```jsx
+```typescript
 import React from 'react';
 import { useThrottle } from '@gilbarbara/hooks';
 
@@ -73,7 +114,7 @@ function Component() {
 
 **Reference**
 
-```tsx
+```typescript
 interface UseThrottleOptions {
   leading?: boolean; // default: true
   trailing?: boolean; // default: false
@@ -89,7 +130,7 @@ useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions):
 Return a throttled value that only changes once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
-```jsx
+```typescript
 import React, { useCallback, useEffect, useState } from 'react';
 import { useThrottleValue } from '@gilbarbara/hooks';
 
@@ -115,7 +156,7 @@ function Component() {
 
 **Reference**
 
-```tsx
+```typescript
 interface UseThrottleOptions {
   leading?: boolean; // default: true
   trailing?: boolean; // default: false
@@ -130,7 +171,7 @@ useThrottleValue(value: string, ms = 500, options?: UseThrottleOptions):
 
 Get which prop changes are causing a component to re-render.
 
-```jsx
+```typescript
 const Component = (props: any) => {
   const changes = useWhyDidYouUpdate(props, { skipLog: true });
   // Or just log the changes
@@ -142,13 +183,15 @@ const Component = (props: any) => {
 
 **Reference**
 
-```tsx
+```typescript
+type PlainObject<T = unknown> = Record<string | number | symbol, T>;
+
 interface UseWhyDidYouUpdateOptions {
   name?: string;
   skipLog?: boolean;
 }
 
-useWhyDidYouUpdate<T extends object>(
+useWhyDidYouUpdate<T extends PlainObject>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
 );

@@ -1,1 +1,1 @@
-export type PlainObject = Record<string | number | symbol, unknown>;
+export type PlainObject<T = unknown> = Record<string | number | symbol, T>;
