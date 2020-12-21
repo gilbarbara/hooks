@@ -14,7 +14,7 @@ interface UseWhyDidYouUpdateOptions {
   skipLog?: boolean;
 }
 
-export default function useWhyDidYouUpdate<T extends PlainObject>(
+export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
 ): Changes<T> | false {
