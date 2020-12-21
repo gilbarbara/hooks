@@ -53,6 +53,28 @@ interface useFetchOptions {
 useFetch(urlOrOptions: string | useFetchOptions, wait = false);
 ```
 
+### useRenderCount
+Log how many times the component was rendered.   
+Useful to debug optimizations.
+
+```typescript
+import React from 'react';
+import { useRenderCount } from '@gilbarbara/hooks';
+
+function Component() {
+  useRenderCount()
+
+  return (
+    <div>Something</div>
+  );
+};
+```
+
+**Reference**
+
+```typescript
+useScript(name?: string);
+```
 ### useScript
 Create a script tag and append it to the `document.body`.  
 Returns an array with `loaded` and `error` properties.
