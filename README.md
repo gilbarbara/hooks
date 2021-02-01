@@ -75,6 +75,54 @@ function Component() {
 ```typescript
 useScript(name?: string);
 ```
+
+### useResponsive
+Get responsive breakpoints
+
+```typescript
+import React from 'react';
+import { useResponsive } from '@gilbarbara/hooks';
+
+function Component() {
+  const { between, min, max, orientation, size } = useResponsive();
+
+  return (
+    <div>
+      {max('sm', 'landscape') && <h1>Extra Small</h1>}
+      {between('sm', 'lg') && <h1>Small to Large</h1>}
+      <p>Extra Small {min('xs') ? '✔' : '✖️'}</p>
+      <p>Small {min('sm') ? '✔' : '✖️'}</p>
+      <p>Medium {min('md') ? '✔' : '✖️'}</p>
+      <p>Large {min('lg') ? '✔' : '✖️'}</p>
+      <p>Extra Large {min('xl') ? '✔' : '✖️'}</p>
+      <footer>
+        {size} - {orientation}
+      </footer>
+    </div>
+  );
+}
+```
+
+**Reference**
+
+```typescript
+const defaultBreakpoints = { xs: 0, sm: 400, md: 768, lg: 1024, xl: 1280 };
+
+interface Responsive<T> {
+  between(min: keyof T, max: keyof T, andOrientation?: Orientation): boolean;
+  min(breakpoint: keyof T, andOrientation?: Orientation): boolean;
+  max(breakpoint: keyof T, andOrientation?: Orientation): boolean;
+  orientation: Orientation;
+  size: keyof T;
+}
+
+useResponsive<T extends Record<string, number> | typeof defaultBreakpoints>(
+  breakpoints?: T,
+  initialWidth = Infinity,
+  initialHeight = Infinity
+): Responsive<T>;
+```
+
 ### useScript
 Create a script tag and append it to the `document.body`.  
 Returns an array with `loaded` and `error` properties.
@@ -143,7 +191,6 @@ useSingleton(cb: () => void);
 
 
 ### useThrottle
-
 Return a throttled function that only invokes `fn` once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
@@ -177,7 +224,6 @@ useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions):
 
 
 ### useThrottleValue
-
 Return a throttled value that only changes once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
@@ -216,10 +262,7 @@ interface UseThrottleOptions {
 useThrottleValue(value: string, ms = 500, options?: UseThrottleOptions):
 ```
 
-
-
 ### useWhyDidYouUpdate
-
 Get which prop changes are causing a component to re-render.
 
 ```typescript

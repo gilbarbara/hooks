@@ -1,6 +1,7 @@
 import {
   useFetch,
   useRenderCount,
+  useResponsive,
   useScript,
   useSingleton,
   useThrottle,
@@ -12,6 +13,7 @@ describe('hooks', () => {
   it('should have all exports', () => {
     expect(useFetch).toEqual(expect.any(Function));
     expect(useRenderCount).toEqual(expect.any(Function));
+    expect(useResponsive).toEqual(expect.any(Function));
     expect(useScript).toEqual(expect.any(Function));
     expect(useSingleton).toEqual(expect.any(Function));
     expect(useThrottle).toEqual(expect.any(Function));
