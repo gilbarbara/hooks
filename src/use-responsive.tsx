@@ -54,7 +54,7 @@ function useResponsiveBase<T extends Record<string, number>>(
       },
       max(breakpoint, andOrientation) {
         return (
-          width <= breakpoints[breakpoint] && (!andOrientation || andOrientation === orientation)
+          width < breakpoints[breakpoint] && (!andOrientation || andOrientation === orientation)
         );
       },
       orientation,

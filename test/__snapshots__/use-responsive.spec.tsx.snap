@@ -112,13 +112,7 @@ exports[`useResponsive max should render properly for 1100 with "xl" 1`] = `
 </div>
 `;
 
-exports[`useResponsive max should render properly for 1280 with "xl" 1`] = `
-<div>
-  <h1>
-    xl
-  </h1>
-</div>
-`;
+exports[`useResponsive max should render properly for 1280 with "xl" 1`] = `null`;
 
 exports[`useResponsive min should render properly for 320 with "xs" and "landscape" 1`] = `null`;
 
