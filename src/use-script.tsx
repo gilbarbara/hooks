@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import { canUseDOM, isString } from './utils';
 
 interface UseScriptOptions {
@@ -47,6 +48,7 @@ export default function useScript(
       }
 
       const element = document.createElement('script');
+
       element.async = options.async ?? true;
       element.defer = options.defer ?? false;
       element.type = options.type || 'text/javascript';

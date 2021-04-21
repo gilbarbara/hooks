@@ -24,6 +24,7 @@ export default function useThrottle(
 
     const timerFn = () => {
       timer.current = undefined;
+
       if (trailing) {
         fn();
       }

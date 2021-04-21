@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { isString } from './utils';
+
 import { PlainObject } from './types';
+import { isString } from './utils';
 
 type Changes<T> = {
   [K in keyof T]?: {
@@ -54,7 +55,7 @@ export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
         setChanges(changesObj);
 
         if (!skipLog) {
-          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObj); //eslint-disable-line no-console
+          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObj); // eslint-disable-line no-console
         }
       }
     }

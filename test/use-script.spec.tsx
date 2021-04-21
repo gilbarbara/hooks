@@ -3,7 +3,7 @@ import { act, render } from '@testing-library/react';
 
 import useScript from '../src/use-script';
 
-const Component = () => {
+function Component() {
   const [loaded, error] = useScript(
     'https://maps.googleapis.com/maps/api/js?key=Ab2S23Bd&callback=initMap',
   );
@@ -14,7 +14,7 @@ const Component = () => {
       {error && <span>error</span>}
     </div>
   );
-};
+}
 
 describe('useScript', () => {
   afterEach(() => {
