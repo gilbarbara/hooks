@@ -7,8 +7,8 @@ import { renderToString } from 'react-dom/server';
 
 import useResponsive from '../src/use-responsive';
 
-const Component = ({ width, height }: any) => {
-  const { size, min, max, orientation } = useResponsive(undefined, width, height);
+function Component({ height, width }: any) {
+  const { max, min, orientation, size } = useResponsive(undefined, width, height);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Component = ({ width, height }: any) => {
       <p>{orientation}</p>
     </div>
   );
-};
+}
 
 describe('useResponsive', () => {
   it('should render the largest breakpoint with the default width and height', () => {
@@ -28,13 +28,13 @@ describe('useResponsive', () => {
   });
 
   it('should render the smallest breakpoint with 400x640', () => {
-    const html = renderToString(<Component width={360} height={640} />);
+    const html = renderToString(<Component height={640} width={360} />);
 
     expect(html).toMatchSnapshot();
   });
 
   it('should render the "sm" breakpoint and landscape with 640x400', () => {
-    const html = renderToString(<Component width={640} height={400} />);
+    const html = renderToString(<Component height={400} width={640} />);
 
     expect(html).toMatchSnapshot();
   });

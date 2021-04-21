@@ -6,11 +6,11 @@ import useWhyDidYouUpdate from '../src/use-why-did-you-update';
 let name: string;
 let skipLog: boolean;
 
-const Component = (props: any) => {
+function Component(props: any) {
   const changes = useWhyDidYouUpdate(props, { name, skipLog });
 
   return <div>{!!changes && JSON.stringify(changes, null, 2)}</div>;
-};
+}
 
 describe('useWhyDidYouUpdate', () => {
   const { log } = console;

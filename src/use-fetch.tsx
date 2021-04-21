@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { isPlainObject, isString, isURL } from './utils';
 
 import { PlainObject } from './types';
+import { isPlainObject, isString, isURL } from './utils';
 
 export type FetchStatus = 'idle' | 'running' | 'success' | 'failure';
 
@@ -11,10 +11,10 @@ interface ResponseError extends Error {
 }
 
 interface useFetchOptions {
+  body?: BodyInit;
   headers?: PlainObject;
   method?: string;
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
-  body?: BodyInit;
   type?: 'json' | 'urlencoded';
   url: string;
 }
@@ -71,6 +71,7 @@ async function request(options: useFetchOptions): Promise<any> {
 
     if (response.status > 299) {
       const error = new Error(response.statusText) as ResponseError;
+
       error.status = response.status;
       error.response = content;
 

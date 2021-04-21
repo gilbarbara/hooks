@@ -3,11 +3,11 @@ import { render } from '@testing-library/react';
 
 import useRenderCount from '../src/use-render-count';
 
-const Component = ({ name, version }: any) => {
+function Component({ name, version }: any) {
   useRenderCount(name);
 
   return <div>{version}</div>;
-};
+}
 
 describe('useRenderCount', () => {
   const spy = jest.spyOn(console, 'log');

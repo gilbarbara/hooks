@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { act, render, screen } from '@testing-library/react';
 
-import useFetch from '../src/use-fetch';
-import { PlainObject } from '../src/types';
-
 import repositories from './__fixtures__/repositories.json';
+
+import { PlainObject } from '../src/types';
+import useFetch from '../src/use-fetch';
 
 const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 
-const Component = ({ fetchOptions, wait }: any) => {
+function Component({ fetchOptions, wait }: any) {
   const { data, error, status } = useFetch<PlainObject<any>[]>(fetchOptions, wait);
 
   return (
@@ -24,7 +24,7 @@ const Component = ({ fetchOptions, wait }: any) => {
       {status === 'running' && <p data-testid="running">Loading</p>}
     </div>
   );
-};
+}
 
 describe('useFetch', () => {
   beforeAll(() => {

@@ -7,13 +7,13 @@ declare let window: any;
 
 interface Props {
   breakpoints?: Record<string, number>;
-  minimum?: keyof Breakpoints | string;
   maximum?: keyof Breakpoints | string;
+  minimum?: keyof Breakpoints | string;
   orientation?: Orientation;
 }
 
-const Component = ({ breakpoints, minimum, maximum, orientation }: Props) => {
-  const { between, min, max, size } = useResponsive(breakpoints);
+function Component({ breakpoints, maximum, minimum, orientation }: Props) {
+  const { between, max, min, size } = useResponsive(breakpoints);
   let output = !minimum && !maximum;
 
   if (minimum && maximum) {
@@ -33,7 +33,7 @@ const Component = ({ breakpoints, minimum, maximum, orientation }: Props) => {
       <h1>{size}</h1>
     </div>
   );
-};
+}
 
 describe('useResponsive', () => {
   const spy = jest.spyOn(console, 'warn').mockImplementation();
@@ -92,7 +92,7 @@ describe('useResponsive', () => {
     ] as const)('should render properly for %p between %s/%s', (width, min, max) => {
       window.innerWidth = width;
 
-      const { container } = render(<Component minimum={min} maximum={max} />);
+      const { container } = render(<Component maximum={max} minimum={min} />);
 
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -115,7 +115,7 @@ describe('useResponsive', () => {
       window.innerWidth = width;
 
       const { container } = render(
-        <Component breakpoints={breakpoints} minimum={min} maximum={max} />,
+        <Component breakpoints={breakpoints} maximum={max} minimum={min} />,
       );
 
       expect(spy).toHaveBeenCalledWith('The "small" breakpoint should be 0');

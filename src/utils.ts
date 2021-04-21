@@ -24,6 +24,7 @@ export function isURL(value: unknown): value is string {
 
   try {
     new URL(value); // eslint-disable-line no-new
+
     return true;
   } catch {
     return false;

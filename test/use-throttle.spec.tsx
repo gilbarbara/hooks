@@ -7,15 +7,15 @@ jest.useFakeTimers();
 
 const mockFn = jest.fn();
 
-const Component = ({ fn = mockFn, ms = 500, ...rest }: any) => {
+function Component({ fn = mockFn, ms = 500, ...rest }: any) {
   const throttledFn = useThrottle(fn, ms, rest);
 
   return (
-    <button type="button" onClick={throttledFn}>
+    <button onClick={throttledFn} type="button">
       Update
     </button>
   );
-};
+}
 
 describe('useThrottle', () => {
   afterEach(() => {
@@ -24,6 +24,7 @@ describe('useThrottle', () => {
 
   it('should throttle the callback', () => {
     const { getByRole } = render(<Component />);
+
     expect(mockFn).toHaveBeenCalledTimes(0);
 
     fireEvent.click(getByRole('button'));

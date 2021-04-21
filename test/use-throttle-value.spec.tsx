@@ -7,7 +7,7 @@ jest.useFakeTimers();
 
 const mockFn = jest.fn();
 
-const Component = (options: any) => {
+function Component(options: any) {
   const [text, setText] = React.useState('');
   const throttledText = useThrottleValue(text, 500, options);
 
@@ -17,12 +17,12 @@ const Component = (options: any) => {
 
   return (
     <div>
-      <input type="text" onChange={e => setText(e.target.value)} />
+      <input onChange={e => setText(e.target.value)} type="text" />
       <p>Actual value: {text}</p>
       <p>Throttle value: {throttledText}</p>
     </div>
   );
-};
+}
 
 describe('useThrottleValue', () => {
   afterEach(() => {
@@ -31,6 +31,7 @@ describe('useThrottleValue', () => {
 
   it('should throttle the value changes', () => {
     const { getByRole } = render(<Component />);
+
     expect(mockFn).toHaveBeenCalledTimes(1);
     expect(mockFn).toHaveBeenLastCalledWith('');
 
@@ -55,6 +56,7 @@ describe('useThrottleValue', () => {
 
   it('should throttle the value changes with trailing', () => {
     const { getByRole } = render(<Component trailing />);
+
     expect(mockFn).toHaveBeenCalledTimes(1);
     expect(mockFn).toHaveBeenLastCalledWith('');
 

@@ -5,7 +5,7 @@ import useSingleton from '../src/use-singleton';
 
 const mockFn = jest.fn();
 
-const Component = () => {
+function Component() {
   const [count, setCount] = React.useState(0);
 
   useSingleton(() => {
@@ -17,11 +17,11 @@ const Component = () => {
   };
 
   return (
-    <button type="button" onClick={handleClick}>
+    <button onClick={handleClick} type="button">
       Count: {count}
     </button>
   );
-};
+}
 
 describe('useSingleton', () => {
   afterEach(() => {
@@ -30,6 +30,7 @@ describe('useSingleton', () => {
 
   it('should call the singleton just once', () => {
     const { getByRole } = render(<Component />);
+
     expect(mockFn).toHaveBeenCalledTimes(1);
 
     fireEvent.click(getByRole('button'));
