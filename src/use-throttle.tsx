@@ -8,7 +8,7 @@ interface UseThrottleOptions {
 export default function useThrottle(
   fn: () => void,
   ms = 500,
-  options?: UseThrottleOptions,
+  options: UseThrottleOptions = {},
 ): () => void {
   const [now, setNow] = useState(0);
   const timer = useRef<number>();

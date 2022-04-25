@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useFetch should handle "wait" 1`] = `
+exports[`useFetch should handle "shouldWait" 1`] = `
 <div
   data-testid="content"
 />

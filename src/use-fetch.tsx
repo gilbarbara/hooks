@@ -53,11 +53,7 @@ async function request(options: useFetchOptions): Promise<any> {
     credentials: undefined,
   };
 
-  if (body && !isString(body) && type === 'json') {
-    params.body = JSON.stringify(body);
-  } else {
-    params.body = body;
-  }
+  params.body = body && !isString(body) && type === 'json' ? JSON.stringify(body) : body;
 
   return fetch(url, params).then(async response => {
     const text = await response.text();
@@ -82,9 +78,9 @@ async function request(options: useFetchOptions): Promise<any> {
   });
 }
 
-export default function useFetch<T = unknown>(
+export default function useFetch<T = any>(
   urlOrOptions: string | useFetchOptions,
-  wait = false,
+  shouldWait = false,
 ): useFetchResponse<T> {
   const isActive = useRef(false);
   const [state, setState] = useState<useFetchResponse<T>>({
@@ -106,7 +102,7 @@ export default function useFetch<T = unknown>(
   }, []);
 
   useEffect(() => {
-    if (state.status === 'idle' && !wait) {
+    if (state.status === 'idle' && !shouldWait) {
       setState(s => ({
         ...s,
         status: 'running',
@@ -141,7 +137,7 @@ export default function useFetch<T = unknown>(
           }
         });
     }
-  }, [state, urlOrOptions, wait]);
+  }, [state, urlOrOptions, shouldWait]);
 
   return state;
 }

@@ -5,11 +5,7 @@ interface UseThrottleOptions {
   trailing?: boolean;
 }
 
-export default function useThrottleValue<T>(
-  value: T,
-  ms: number,
-  options?: UseThrottleOptions,
-): unknown {
+export default function useThrottleValue<T>(value: T, ms: number, options?: UseThrottleOptions): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const coolDown = useRef(Date.now());
   const timer = useRef<number>();

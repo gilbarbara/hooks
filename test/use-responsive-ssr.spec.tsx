@@ -22,20 +22,20 @@ function Component({ height, width }: any) {
 
 describe('useResponsive', () => {
   it('should render the largest breakpoint with the default width and height', () => {
-    const html = renderToString(<Component />);
+    const view = renderToString(<Component />);
 
-    expect(html).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it('should render the smallest breakpoint with 400x640', () => {
-    const html = renderToString(<Component height={640} width={360} />);
+    const view = renderToString(<Component height={640} width={360} />);
 
-    expect(html).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it('should render the "sm" breakpoint and landscape with 640x400', () => {
-    const html = renderToString(<Component height={400} width={640} />);
+    const view = renderToString(<Component height={400} width={640} />);
 
-    expect(html).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 });

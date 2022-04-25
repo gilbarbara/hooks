@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`useResponsive should render the "sm" breakpoint and landscape with 640x400 1`] = `
-<div data-reactroot>
+<div>
   <p>
     sm
   </p>
@@ -12,7 +12,7 @@ exports[`useResponsive should render the "sm" breakpoint and landscape with 640x
 `;
 
 exports[`useResponsive should render the largest breakpoint with the default width and height 1`] = `
-<div data-reactroot>
+<div>
   <p>
     xl
   </p>
@@ -23,7 +23,7 @@ exports[`useResponsive should render the largest breakpoint with the default wid
 `;
 
 exports[`useResponsive should render the smallest breakpoint with 400x640 1`] = `
-<div data-reactroot>
+<div>
   <p>
     xs
   </p>

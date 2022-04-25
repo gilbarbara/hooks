@@ -38,12 +38,12 @@ export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
       const allKeys = Object.keys({ ...current, ...props }) as K[];
 
       // Use this object to keep track of changed props
-      const changesObj: Changes<T> = {};
+      const changesObject: Changes<T> = {};
 
       // Iterate through keys
       allKeys.forEach(key => {
         if (current[key] !== props[key]) {
-          changesObj[key] = {
+          changesObject[key] = {
             from: current[key],
             to: props[key],
           };
@@ -51,11 +51,11 @@ export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
       });
 
       // If changesObj not empty then output to console
-      if (Object.keys(changesObj).length) {
-        setChanges(changesObj);
+      if (Object.keys(changesObject).length) {
+        setChanges(changesObject);
 
         if (!skipLog) {
-          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObj); // eslint-disable-line no-console
+          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObject); // eslint-disable-line no-console
         }
       }
     }

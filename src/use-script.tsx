@@ -13,9 +13,10 @@ export default function useScript(
   src: string,
   idOrOptions: string | UseScriptOptions = {},
 ): [loaded: boolean, error: boolean] {
-  const options = useMemo(() => (isString(idOrOptions) ? { id: idOrOptions } : idOrOptions), [
-    idOrOptions,
-  ]);
+  const options = useMemo(
+    () => (isString(idOrOptions) ? { id: idOrOptions } : idOrOptions),
+    [idOrOptions],
+  );
   const script = useRef<HTMLScriptElement>();
   const [state, setState] = useState({
     loaded: false,
