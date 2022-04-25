@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import useSingleton from '../src/use-singleton';
 
@@ -29,16 +29,16 @@ describe('useSingleton', () => {
   });
 
   it('should call the singleton just once', () => {
-    const { getByRole } = render(<Component />);
+    render(<Component />);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(getByRole('button')).toMatchSnapshot();
+    expect(screen.getByRole('button')).toMatchSnapshot();
   });
 });

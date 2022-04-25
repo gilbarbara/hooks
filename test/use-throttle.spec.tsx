@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import useThrottle from '../src/use-throttle';
 
@@ -23,12 +23,12 @@ describe('useThrottle', () => {
   });
 
   it('should throttle the callback', () => {
-    const { getByRole } = render(<Component />);
+    render(<Component />);
 
     expect(mockFn).toHaveBeenCalledTimes(0);
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn).toHaveBeenCalledTimes(1);
 
@@ -36,16 +36,16 @@ describe('useThrottle', () => {
       jest.advanceTimersByTime(500);
     });
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn).toHaveBeenCalledTimes(2);
   });
 
   it('should throttle the callback without leading', () => {
-    const { getByRole } = render(<Component leading={false} trailing />);
+    render(<Component leading={false} trailing />);
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn).toHaveBeenCalledTimes(0);
 
@@ -55,8 +55,8 @@ describe('useThrottle', () => {
 
     expect(mockFn).toHaveBeenCalledTimes(1);
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn).toHaveBeenCalledTimes(1);
 
@@ -69,10 +69,11 @@ describe('useThrottle', () => {
 
   it('should throttle the callback with trailing', () => {
     const mockFn2 = jest.fn();
-    const { getByRole } = render(<Component fn={mockFn2} trailing />);
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    const { rerender } = render(<Component fn={mockFn2} trailing />);
+
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn2).toHaveBeenCalledTimes(1);
 
@@ -80,10 +81,12 @@ describe('useThrottle', () => {
       jest.advanceTimersByTime(500);
     });
 
-    expect(mockFn2).toHaveBeenCalledTimes(2);
+    rerender(<Component fn={mockFn2} trailing={false} />);
 
-    fireEvent.click(getByRole('button'));
-    fireEvent.click(getByRole('button'));
+    expect(mockFn2).toHaveBeenCalledTimes(3);
+
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button'));
 
     expect(mockFn2).toHaveBeenCalledTimes(3);
 
@@ -91,6 +94,6 @@ describe('useThrottle', () => {
       jest.advanceTimersByTime(500);
     });
 
-    expect(mockFn2).toHaveBeenCalledTimes(4);
+    expect(mockFn2).toHaveBeenCalledTimes(3);
   });
 });

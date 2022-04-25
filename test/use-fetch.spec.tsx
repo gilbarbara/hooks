@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import repositories from './__fixtures__/repositories.json';
 
@@ -8,8 +8,8 @@ import useFetch from '../src/use-fetch';
 
 const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 
-function Component({ fetchOptions, wait }: any) {
-  const { data, error, status } = useFetch<PlainObject<any>[]>(fetchOptions, wait);
+function Component({ fetchOptions, shouldWait }: any) {
+  const { data, error, status } = useFetch<PlainObject<any>[]>(fetchOptions, shouldWait);
 
   return (
     <div data-testid="content">
@@ -62,9 +62,9 @@ describe('useFetch', () => {
 
     expect(screen.getByTestId('running')).toMatchSnapshot();
 
-    await act(async () => {
-      rerender(<Component fetchOptions={url} />);
-    });
+    rerender(<Component fetchOptions={url} />);
+
+    await waitForElementToBeRemoved(() => screen.queryByTestId('running'));
 
     expect(screen.getByTestId('success')).toMatchSnapshot();
   });
@@ -72,16 +72,14 @@ describe('useFetch', () => {
   it('should handle hard failure', async () => {
     fetchMock.mockRejectOnce(new Error('Failed to fetch'));
 
-    await act(async () => {
-      render(
-        <Component
-          fetchOptions={{
-            url,
-            type: 'urlencoded',
-          }}
-        />,
-      );
-    });
+    render(
+      <Component
+        fetchOptions={{
+          url,
+          type: 'urlencoded',
+        }}
+      />,
+    );
 
     expect(fetchMock).toHaveBeenCalledWith(
       'https://api.github.com/search/repositories?q=react&sort=stars',
@@ -98,6 +96,8 @@ describe('useFetch', () => {
       },
     );
 
+    await waitForElementToBeRemoved(() => screen.queryByTestId('running'));
+
     expect(screen.getByTestId('failure')).toMatchSnapshot();
   });
 
@@ -107,20 +107,18 @@ describe('useFetch', () => {
       statusText: 'Request failed',
     });
 
-    await act(async () => {
-      render(
-        <Component
-          fetchOptions={{
-            url,
-            method: 'POST',
-            body: { a: 1 },
-            headers: {
-              Authorization: 'Bearer 263619d6-1da5-41fc-ba66-081acacbf9af',
-            },
-          }}
-        />,
-      );
-    });
+    render(
+      <Component
+        fetchOptions={{
+          url,
+          method: 'POST',
+          body: { a: 1 },
+          headers: {
+            Authorization: 'Bearer 263619d6-1da5-41fc-ba66-081acacbf9af',
+          },
+        }}
+      />,
+    );
 
     expect(fetchMock).toHaveBeenCalledWith(
       'https://api.github.com/search/repositories?q=react&sort=stars',
@@ -138,15 +136,17 @@ describe('useFetch', () => {
       },
     );
 
+    await waitForElementToBeRemoved(() => screen.queryByTestId('running'));
+
     expect(screen.getByTestId('failure')).toMatchSnapshot();
   });
 
-  it('should handle "wait"', async () => {
-    await act(async () => {
-      render(<Component fetchOptions={url} wait />);
-    });
+  it('should handle "shouldWait"', async () => {
+    render(<Component fetchOptions={url} shouldWait />);
 
     expect(fetchMock).toHaveBeenCalledTimes(0);
+
+    // await waitForElementToBeRemoved(() => screen.queryByTestId('running'));
 
     expect(screen.getByTestId('content')).toMatchSnapshot();
   });

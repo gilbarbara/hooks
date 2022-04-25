@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import useThrottleValue from '../src/use-throttle-value';
 
@@ -17,7 +17,7 @@ function Component(options: any) {
 
   return (
     <div>
-      <input onChange={e => setText(e.target.value)} type="text" />
+      <input onChange={event => setText(event.target.value)} type="text" />
       <p>Actual value: {text}</p>
       <p>Throttle value: {throttledText}</p>
     </div>
@@ -30,14 +30,14 @@ describe('useThrottleValue', () => {
   });
 
   it('should throttle the value changes', () => {
-    const { getByRole } = render(<Component />);
+    render(<Component />);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
     expect(mockFn).toHaveBeenLastCalledWith('');
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'test' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testi' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testin' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'test' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testi' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testin' } });
 
     expect(mockFn).toHaveBeenCalledTimes(2);
     expect(mockFn).toHaveBeenLastCalledWith('test');
@@ -46,23 +46,23 @@ describe('useThrottleValue', () => {
       jest.advanceTimersByTime(500);
     });
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my gear' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing my' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing my gear' } });
 
     expect(mockFn).toHaveBeenCalledTimes(3);
     expect(mockFn).toHaveBeenLastCalledWith('testing');
   });
 
   it('should throttle the value changes with trailing', () => {
-    const { getByRole } = render(<Component trailing />);
+    render(<Component trailing />);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
     expect(mockFn).toHaveBeenLastCalledWith('');
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'test' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testi' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testin' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'test' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testi' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testin' } });
 
     expect(mockFn).toHaveBeenCalledTimes(2);
     expect(mockFn).toHaveBeenLastCalledWith('test');
@@ -74,9 +74,9 @@ describe('useThrottleValue', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
     expect(mockFn).toHaveBeenLastCalledWith('testin');
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my' } });
-    fireEvent.change(getByRole('textbox'), { target: { value: 'testing my gear' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing my' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing my gear' } });
 
     expect(mockFn).toHaveBeenCalledTimes(4);
     expect(mockFn).toHaveBeenLastCalledWith('testing');
