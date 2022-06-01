@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useElementSize should return the measurements: after 1`] = `
+<div
+  class="test"
+  data-testid="element"
+>
+  {
+  "x": 1,
+  "y": 1,
+  "width": 1,
+  "height": 1,
+  "top": 1,
+  "left": 1,
+  "bottom": 1,
+  "right": 1
+}
+</div>
+`;
+
+exports[`useElementSize should return the measurements: before 1`] = `
+<div
+  class="test"
+  data-testid="element"
+>
+  {
+  "x": 0,
+  "y": 0,
+  "width": 0,
+  "height": 0,
+  "top": 0,
+  "left": 0,
+  "bottom": 0,
+  "right": 0
+}
+</div>
+`;

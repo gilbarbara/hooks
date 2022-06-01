@@ -12,6 +12,46 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
+### useElementSize
+Get element dimensions using a CSS selector.  
+Returns a Rect object.
+
+```tsx
+import React from 'react';
+import { useElementSize } from '@gilbarbara/hooks';
+
+function Component() {
+  const rect = useElementSize('.test');
+
+  return (
+    <div className="test">
+      {JSON.stringify(rect, undefined, 2)}
+    </div>
+  );
+}
+```
+
+**Reference**
+
+```typescript
+interface UseElementRect {
+  bottom: number;
+  height: number;
+  left: number;
+  right: number;
+  top: number;
+  width: number;
+  x: number;
+  y: number;
+}
+
+useElementSize(selector: string);
+```
+
+> This hook uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver), so if you want to support
+legacy browsers, install the [resize-observer-polyfill](https://www.npmjs.com/package/resize-observer-polyfill) in your app.
+
+
 ### useFetch
 Make a request with fetch.  
 Returns an object with  `data`, `error` and `status`.
@@ -73,7 +113,7 @@ function Component() {
 **Reference**
 
 ```typescript
-useScript(name?: string);
+useRenderCount(name?: string);
 ```
 
 ### useResponsive
