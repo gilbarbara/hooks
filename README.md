@@ -12,6 +12,34 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
+### useClickOutside
+Handles click events outside a specific DOM element.
+
+```tsx
+import React from 'react';
+import { useClickOutside } from '@gilbarbara/hooks';
+
+function Component() {
+  const ref = React.useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => {
+    console.log('clicked outside');
+  });
+
+  return (
+    <div ref={ref}>
+      <button type="submit">Send</button>
+      <button type="button">Reset</button>
+    </div>
+  );
+}
+```
+
+**Reference**
+
+```typescript
+useClickOutside(ref: RefObject<HTMLElement>, callback: () => void)
+```
+
 ### useElementSize
 Get element dimensions using a CSS selector.  
 Returns a Rect object.

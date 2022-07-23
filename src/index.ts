@@ -1,3 +1,4 @@
+export { default as useClickOutside } from './use-click-outside';
 export { default as useElementSize } from './use-element-size';
 export { default as useFetch, FetchStatus } from './use-fetch';
 export { default as useRenderCount } from './use-render-count';
