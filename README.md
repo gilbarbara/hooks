@@ -109,7 +109,7 @@ function Component() {
 ```typescript
 type FetchStatus = 'idle' | 'running' | 'success' | 'failure';
 
-interface useFetchOptions {
+interface UseFetchOptions {
   headers?: PlainObject;
   method?: string;
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
@@ -118,7 +118,7 @@ interface useFetchOptions {
   url: string;
 }
 
-useFetch(urlOrOptions: string | useFetchOptions, wait = false);
+useFetch(urlOrOptions: string | UseFetchOptions, wait = false);
 ```
 
 ### useRenderCount

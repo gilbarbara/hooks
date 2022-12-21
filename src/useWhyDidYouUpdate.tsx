@@ -15,7 +15,7 @@ interface UseWhyDidYouUpdateOptions {
   skipLog?: boolean;
 }
 
-export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
+export function useWhyDidYouUpdate<T extends PlainObject<any>>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
 ): Changes<T> | false {
@@ -55,7 +55,9 @@ export default function useWhyDidYouUpdate<T extends PlainObject<any>>(
         setChanges(changesObject);
 
         if (!skipLog) {
-          console.log(`[why-did-you-update${name ? `: ${name}` : ''}]`, changesObject); // eslint-disable-line no-console
+          const nameToken = name ? `: ${name}` : '';
+
+          console.log(`[why-did-you-update${nameToken}]`, changesObject); // eslint-disable-line no-console
         }
       }
     }

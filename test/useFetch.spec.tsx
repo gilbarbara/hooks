@@ -4,7 +4,7 @@ import { render, screen, waitForElementToBeRemoved } from '@testing-library/reac
 import repositories from './__fixtures__/repositories.json';
 
 import { PlainObject } from '../src/types';
-import useFetch from '../src/use-fetch';
+import { useFetch } from '../src/useFetch';
 
 const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 
@@ -145,8 +145,6 @@ describe('useFetch', () => {
     render(<Component fetchOptions={url} shouldWait />);
 
     expect(fetchMock).toHaveBeenCalledTimes(0);
-
-    // await waitForElementToBeRemoved(() => screen.queryByTestId('running'));
 
     expect(screen.getByTestId('content')).toMatchSnapshot();
   });

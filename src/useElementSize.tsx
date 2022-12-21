@@ -13,7 +13,7 @@ const defaultState: UseElementRect = {
   right: 0,
 };
 
-export default function useElementSize(selector: string): UseElementRect {
+export function useElementSize(selector: string): UseElementRect {
   const [element, setElement] = useState<Element | null>();
   const [rect, setRect] = useState<UseElementRect>(defaultState);
 

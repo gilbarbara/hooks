@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { act, render, screen } from '@testing-library/react';
 
-import useElementSize from '../src/use-element-size';
+import { useElementSize } from '../src/useElementSize';
 
 const observe = jest.fn();
 const disconnect = jest.fn();

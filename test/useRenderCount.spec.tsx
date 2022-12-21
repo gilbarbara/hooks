@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import useRenderCount from '../src/use-render-count';
+import { useRenderCount } from '../src/useRenderCount';
 
 function Component({ name, version }: any) {
   useRenderCount(name);

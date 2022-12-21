@@ -5,28 +5,20 @@ interface UseThrottleOptions {
   trailing?: boolean;
 }
 
-export default function useThrottle(
-  fn: () => void,
-  ms = 500,
-  options: UseThrottleOptions = {},
-): () => void {
-  const [now, setNow] = useState(0);
-  const timer = useRef<number>();
+export function useThrottleValue<T>(value: T, ms: number, options?: UseThrottleOptions): T {
+  const [throttledValue, setThrottledValue] = useState<T>(value);
   const coolDown = useRef(Date.now());
+  const timer = useRef<number>();
 
   const leading = options?.leading ?? true;
   const trailing = options?.trailing ?? false;
 
   useEffect(() => {
-    if (!now) {
-      return undefined;
-    }
-
     const timerFn = () => {
       timer.current = undefined;
 
       if (trailing) {
-        fn();
+        setThrottledValue(value);
       }
     };
 
@@ -34,10 +26,10 @@ export default function useThrottle(
       timer.current = window.setTimeout(timerFn, Date.now() - coolDown.current);
     }
 
-    if (!timer.current) {
+    if (!timer.current && value !== throttledValue) {
       /* istanbul ignore else */
       if (leading) {
-        fn();
+        setThrottledValue(value);
       }
 
       timer.current = window.setTimeout(timerFn, ms);
@@ -45,11 +37,9 @@ export default function useThrottle(
     }
 
     return () => {
-      if (timer.current) {
-        window.clearTimeout(timer.current);
-      }
+      window.clearTimeout(timer?.current);
     };
-  }, [fn, leading, ms, now, trailing]);
+  }, [leading, ms, throttledValue, trailing, value]);
 
-  return () => setNow(Date.now());
+  return throttledValue;
 }
