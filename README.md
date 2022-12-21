@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40gilbarbara%2Fhooks.svg)](https://badge.fury.io/js/%40gilbarbara%2Fhooks) [![CI](https://github.com/gilbarbara/hooks/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/hooks/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/0bface079acbe392459c/maintainability)](https://codeclimate.com/github/gilbarbara/hooks/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/0bface079acbe392459c/test_coverage)](https://codeclimate.com/github/gilbarbara/hooks/test_coverage)
 
-Collection of useful React hooks
+Useful React hooks
 
 ## Setup
 
@@ -84,7 +84,7 @@ legacy browsers, install the [resize-observer-polyfill](https://www.npmjs.com/pa
 Make a request with fetch.  
 Returns an object with  `data`, `error` and `status`.
 
-```typescript
+```tsx
 import React from 'react';
 import { useFetch } from '@gilbarbara/hooks';
 
@@ -101,7 +101,7 @@ function Component() {
       {status === 'running' && <p>Loading</p>}
     </div>
   );
-};
+}
 ```
 
 **Reference**
@@ -125,7 +125,7 @@ useFetch(urlOrOptions: string | UseFetchOptions, wait = false);
 Log how many times the component was rendered.   
 Useful to debug optimizations.
 
-```typescript
+```tsx
 import React from 'react';
 import { useRenderCount } from '@gilbarbara/hooks';
 
@@ -135,7 +135,7 @@ function Component() {
   return (
     <div>Something</div>
   );
-};
+}
 ```
 
 **Reference**
@@ -144,10 +144,42 @@ function Component() {
 useRenderCount(name?: string);
 ```
 
-### useResponsive
-Get responsive breakpoints
+### useResize
+Execute the callback on mount and when the window is resized.
+
+```tsx
+import React from 'react';
+import { useResize } from '@gilbarbara/hooks';
+
+function Component() {
+  const [isLarge, setLarge] = useState(false);
+  
+  useResize(width => {
+    setLarge(width >= 1024);
+  });
+
+  return <div>{isLarge ? 'Large Screen' : 'Small Screen'}</div>;
+}
+```
+
+**Reference**
 
 ```typescript
+type Callback = (width: number) => void;
+
+interface UseResizeOptions {
+  callback?: Callback;
+  debounce?: number;
+}
+
+export function useResize(callbackOrOptions: Callback | UseResizeOptions): void
+```
+
+### useResponsive
+
+Get responsive breakpoints
+
+```tsx
 import React from 'react';
 import { useResponsive } from '@gilbarbara/hooks';
 
@@ -195,7 +227,7 @@ useResponsive<T extends Record<string, number> | typeof defaultBreakpoints>(
 Create a script tag and append it to the `document.body`.  
 Returns an array with `loaded` and `error` properties.
 
-```typescript
+```tsx
 import React from 'react';
 import { useScript } from '@gilbarbara/hooks';
 
@@ -211,7 +243,7 @@ function Component() {
       {error && <span>error</span>}
     </div>
   );
-};
+}
 ```
 
 **Reference**
@@ -231,7 +263,7 @@ useScript(src: string, idOrOptions: string | UseScriptOptions = {});
 Run the code just once, before the render.  
 Similar to constructors in classes.
 
-```typescript
+```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useSingleton } from '@gilbarbara/hooks';
@@ -257,12 +289,11 @@ function Component() {
 useSingleton(cb: () => void);
 ```
 
-
 ### useThrottle
 Return a throttled function that only invokes `fn` once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
-```typescript
+```tsx
 import React from 'react';
 import { useThrottle } from '@gilbarbara/hooks';
 
@@ -289,13 +320,11 @@ interface UseThrottleOptions {
 useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions):
 ```
 
-
-
 ### useThrottleValue
 Return a throttled value that only changes once per every `ms`.  
 *Unless you set the `trailing` option that will call it again when the timer runs out.*
 
-```typescript
+```tsx
 import React, { useCallback, useEffect, useState } from 'react';
 import { useThrottleValue } from '@gilbarbara/hooks';
 
@@ -316,7 +345,7 @@ function Component() {
       <p>Throttle value: {throttledText}</p>
     </div>
   );
-};
+}
 ```
 
 **Reference**
@@ -333,14 +362,14 @@ useThrottleValue(value: string, ms = 500, options?: UseThrottleOptions):
 ### useWhyDidYouUpdate
 Get which prop changes are causing a component to re-render.
 
-```typescript
-const Component = (props: any) => {
+```tsx
+function Component(props: any) {
   const changes = useWhyDidYouUpdate(props, { skipLog: true });
   // Or just log the changes
   // useWhyDidYouUpdate(props, 'Component');
 
   return <div>{!!changes && JSON.stringify(changes, null, 2)}</div>;
-};
+}
 ```
 
 **Reference**
