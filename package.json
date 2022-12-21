@@ -16,19 +16,23 @@
     "url": "https://github.com/gilbarbara/hooks/issues"
   },
   "homepage": "https://github.com/gilbarbara/hooks#readme",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "files": [
-    "esm",
-    "lib",
+    "dist",
     "src"
   ],
-  "types": "./lib",
+  "types": "dist",
   "sideEffects": false,
   "peerDependencies": {
     "react": "16.8 - 18"
   },
   "devDependencies": {
+    "@gilbarbara/esbuilder": "^0.1.0",
     "@gilbarbara/eslint-config": "^0.3.7",
     "@gilbarbara/prettier-config": "^0.1.0",
     "@gilbarbara/tsconfig": "^0.1.1",
@@ -59,16 +63,15 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -m es6 --outDir esm",
-    "clean": "del lib/* && del esm/*",
+    "build": "npm run clean && esbuilder --cjs --esm && npm run build:types",
+    "build:types": "tsc",
+    "clean": "del dist/*",
     "watch:cjs": "npm run build:cjs -- -w",
     "watch:esm": "npm run build:esm -- -w",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watchAll --verbose",
-    "lint": "eslint --ext .ts,.tsx src test",
+    "lint": "eslint --fix src test",
     "typecheck": "tsc --noEmit",
     "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
     "validate": "npm run lint && npm run test:coverage && npm run build && npm run size",
@@ -96,13 +99,13 @@
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [
     {
-      "name": "lib",
-      "path": "./lib/index.js",
+      "name": "commonjs",
+      "path": "./dist/index.js",
       "limit": "4 kB"
     },
     {
       "name": "esm",
-      "path": "./esm/index.js",
+      "path": "./dist/index.mjs",
       "limit": "4 kB"
     }
   ]
