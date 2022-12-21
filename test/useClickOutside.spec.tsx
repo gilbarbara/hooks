@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import useClickOutside from '../src/use-click-outside';
+import { useClickOutside } from '../src/useClickOutside';
 
 const mockFn = jest.fn();
 

@@ -5,7 +5,7 @@
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import useResponsive from '../src/use-responsive';
+import { useResponsive } from '../src/useResponsive';
 
 function Component({ height, width }: any) {
   const { max, min, orientation, size } = useResponsive(undefined, width, height);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { act, render } from '@testing-library/react';
 
-import useScript from '../src/use-script';
+import { useScript } from '../src/useScript';
 
 function Component() {
   const [loaded, error] = useScript(

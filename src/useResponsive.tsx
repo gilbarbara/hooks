@@ -85,7 +85,7 @@ function useResponsiveBase<T extends Record<string, number>>(
   return screen;
 }
 
-export default function useResponsive<T extends Record<string, number> | Breakpoints>(
+export function useResponsive<T extends Record<string, number> | Breakpoints>(
   breakpoints?: T,
   initialWidth?: number,
   initialHeight?: number,

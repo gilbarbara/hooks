@@ -9,7 +9,7 @@ interface UseScriptOptions {
   type?: string;
 }
 
-export default function useScript(
+export function useScript(
   src: string,
   idOrOptions: string | UseScriptOptions = {},
 ): [loaded: boolean, error: boolean] {

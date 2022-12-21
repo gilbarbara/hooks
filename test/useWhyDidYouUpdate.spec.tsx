@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import useWhyDidYouUpdate from '../src/use-why-did-you-update';
+import { useWhyDidYouUpdate } from '../src/useWhyDidYouUpdate';
 
 let name: string;
 let skipLog: boolean;

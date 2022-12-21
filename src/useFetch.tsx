@@ -10,7 +10,7 @@ interface ResponseError extends Error {
   status?: number;
 }
 
-interface useFetchOptions {
+interface UseFetchOptions {
   body?: BodyInit;
   headers?: PlainObject;
   method?: string;
@@ -19,13 +19,13 @@ interface useFetchOptions {
   url: string;
 }
 
-interface useFetchResponse<T> {
+interface UseFetchResponse<T> {
   data?: T;
   error?: ResponseError;
   status: FetchStatus;
 }
 
-async function request(options: useFetchOptions): Promise<any> {
+async function request(options: UseFetchOptions): Promise<any> {
   const {
     headers = {},
     method = 'GET',
@@ -78,12 +78,12 @@ async function request(options: useFetchOptions): Promise<any> {
   });
 }
 
-export default function useFetch<T = any>(
-  urlOrOptions: string | useFetchOptions,
+export function useFetch<T = any>(
+  urlOrOptions: string | UseFetchOptions,
   shouldWait = false,
-): useFetchResponse<T> {
+): UseFetchResponse<T> {
   const isActive = useRef(false);
-  const [state, setState] = useState<useFetchResponse<T>>({
+  const [state, setState] = useState<UseFetchResponse<T>>({
     data: undefined,
     error: undefined,
     status: 'idle',

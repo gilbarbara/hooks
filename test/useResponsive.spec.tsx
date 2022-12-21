@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { act, render } from '@testing-library/react';
 
-import useResponsive, { Breakpoints, Orientation } from '../src/use-responsive';
+import { Breakpoints, Orientation, useResponsive } from '../src/useResponsive';
 
 declare let window: any;
 

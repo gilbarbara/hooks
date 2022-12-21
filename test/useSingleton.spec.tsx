@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import useSingleton from '../src/use-singleton';
+import { useSingleton } from '../src/useSingleton';
 
 const mockFn = jest.fn();
 
