@@ -26,7 +26,6 @@ checks:
       threshold: 100
 exclude_patterns:
   - coverage/**/*
-  - esm/**/*
-  - lib/**/*
+  - dist/**/*
   - node_modules/**/*
   - test/**/*
