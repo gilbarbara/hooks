@@ -121,6 +121,48 @@ interface UseFetchOptions {
 useFetch(urlOrOptions: string | UseFetchOptions, wait = false);
 ```
 
+### useLatest
+Get a ref with the most recent value.
+Returns a `React.MutableRefObject` with the same type as the input.
+
+```tsx
+import React from 'react';
+import { useLatest } from '@gilbarbara/hooks';
+
+function Component({
+  callback,
+  element,
+  name,
+}: {
+  callback: (e: Event) => void;
+  element: HTMLElement;
+  name: string;
+}) {
+  const callbackRef = useLatest(callback);
+  const elementRef = useLatest(element);
+
+  React.useEffect(() => {
+    const currentElement = elementRef.current;
+    const listen = (e: Event) => callbackRef.current(e);
+
+    currentElement.addEventListener(name, listen);
+
+    return () => currentElement.removeEventListener(name, listen);
+  }, [name]);
+  // The ESLint "react-hooks/exhaustive-deps" will warn about the refs
+  // being required in dependencies, but the refs are stable, so they
+  // won't trigger an update.
+
+  return <div>Something, something...</div>;
+}
+```
+
+**Reference**
+
+```typescript
+useLatest<T>(value: T): React.MutableRefObject<T>;
+```
+
 ### useMediaQuery
 Detect media query changes.  
 Returns a `boolean`.
