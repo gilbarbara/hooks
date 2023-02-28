@@ -1,63 +1,65 @@
-/* eslint-disable class-methods-use-this */
-import * as React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
+import { mockResizeObserver } from 'jsdom-testing-mocks';
+
+import resizeObserverResponse from './__fixtures__/resizeObserverResponse.json';
 
 import { useElementSize } from '../src/useElementSize';
 
-const observe = jest.fn();
-const disconnect = jest.fn();
-
-function Component() {
-  const rect = useElementSize('.test');
-
-  return (
-    <div className="test" data-testid="element">
-      {JSON.stringify(rect, undefined, 2)}
-    </div>
-  );
-}
+const resizeObserver = mockResizeObserver();
 
 describe('useElementSize', () => {
-  let listener: ((rect: any) => void) | undefined;
+  const rootElement = document.createElement('div');
 
-  beforeEach(() => {
-    (window as any).ResizeObserver = class ResizeObserver {
-      constructor(entries: any) {
-        listener = entries;
-      }
+  rootElement.id = 'root';
+  rootElement.innerHTML = 'Hello World';
 
-      observe(element: Element) {
-        observe(element);
-      }
-
-      disconnect() {
-        disconnect();
-      }
-    };
+  beforeAll(() => {
+    document.body.appendChild(rootElement);
   });
 
-  it('should return the measurements', () => {
-    render(<Component />);
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    expect(screen.getByTestId('element')).toMatchSnapshot('before');
+  afterAll(() => {
+    document.body.removeChild(rootElement);
+  });
+
+  it('should return the dimensions', () => {
+    const { rerender, result } = renderHook(() => useElementSize(rootElement));
+
+    expect(result.current).toMatchSnapshot('initial');
+
+    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
 
     act(() => {
-      listener?.([
-        {
-          contentRect: {
-            x: 1,
-            y: 1,
-            width: 1,
-            height: 1,
-            top: 1,
-            bottom: 1,
-            left: 1,
-            right: 1,
-          },
-        },
-      ]);
+      resizeObserver.resize();
     });
 
-    expect(screen.getByTestId('element')).toMatchSnapshot('after');
+    rerender();
+
+    expect(result.current).toMatchSnapshot('after resize');
+  });
+
+  it('should return the dimensions with a string selector', () => {
+    const { rerender, result } = renderHook(() => useElementSize('#root'));
+
+    expect(result.current).toMatchSnapshot();
+
+    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+
+    act(() => {
+      resizeObserver.resize();
+    });
+
+    rerender();
+
+    expect(result.current).toMatchSnapshot();
+  });
+
+  it('should return the default dimensions with an invalid string selector', () => {
+    const { result } = renderHook(() => useElementSize('#app'));
+
+    expect(result.current).toMatchSnapshot();
   });
 });

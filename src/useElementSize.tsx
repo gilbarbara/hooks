@@ -1,50 +1,54 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export type UseElementRect = Omit<DOMRectReadOnly, 'toJSON'>;
+import { Target } from './types';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
+import { useResizeObserver } from './useResizeObserver';
+import { getElement } from './utils';
 
-const defaultState: UseElementRect = {
-  x: 0,
-  y: 0,
-  width: 0,
-  height: 0,
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
+export type ElementSize = Omit<DOMRectReadOnly, 'toJSON'> & {
+  blockSize: number;
+  inlineSize: number;
 };
 
-export function useElementSize(selector: string): UseElementRect {
-  const [element, setElement] = useState<Element | null>();
-  const [rect, setRect] = useState<UseElementRect>(defaultState);
+const defaultState: ElementSize = {
+  blockSize: 0,
+  bottom: 0,
+  height: 0,
+  inlineSize: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+  width: 0,
+  x: 0,
+  y: 0,
+};
+
+export function useElementSize<T extends Element>(target: Target<T>, debounce = 0): ElementSize {
+  const [element, setElement] = useState<Element | null>(null);
+  const [dimensions, setDimensions] = useState<ElementSize>(defaultState);
+
+  const entry = useResizeObserver(element, debounce);
 
   useEffect(() => {
-    setElement(document.querySelector(selector));
-  }, [selector]);
+    const targetElement = getElement(target);
 
-  const observer = useMemo(
-    () =>
-      new window.ResizeObserver(entries => {
-        if (entries[0]) {
-          const { bottom, height, left, right, top, width, x, y } = entries[0].contentRect;
-
-          setRect({ x, y, width, height, top, left, bottom, right });
-        }
-      }),
-    [],
-  );
-
-  useLayoutEffect(() => {
-    if (!element) {
+    if (!targetElement) {
       return;
     }
 
-    observer.observe(element);
+    setElement(targetElement);
+  }, [target]);
 
-    // eslint-disable-next-line consistent-return
-    return () => {
-      observer.disconnect();
-    };
-  }, [observer, element]);
+  useIsomorphicLayoutEffect(() => {
+    if (!entry) {
+      return;
+    }
 
-  return rect;
+    const { bottom, height, left, right, top, width, x, y } = entry.contentRect;
+    const { blockSize, inlineSize } = entry.borderBoxSize[0];
+
+    setDimensions({ blockSize, bottom, height, inlineSize, left, right, top, width, x, y });
+  }, [entry]);
+
+  return dimensions;
 }

@@ -66,19 +66,20 @@ useEffectOnce(effect: EffectCallback): void
 ```
 
 ### useElementSize
-Get element dimensions using a CSS selector.  
-Returns a Rect object.
+Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.   
+Returns an `ElementSize` object.
 
 ```tsx
 import React from 'react';
 import { useElementSize } from '@gilbarbara/hooks';
 
 function Component() {
-  const rect = useElementSize('.test');
+  const ref = React.useRef<HTMLDivElement>(null);
+  const dimensions = useElementSize(ref);
 
   return (
-    <div className="test">
-      {JSON.stringify(rect, undefined, 2)}
+    <div ref={ref}>
+      {JSON.stringify(dimensions, undefined, 2)}
     </div>
   );
 }
@@ -87,9 +88,11 @@ function Component() {
 **Reference**
 
 ```typescript
-interface UseElementRect {
+interface ElementSize {
   bottom: number;
+  blockSize: number;
   height: number;
+  inlineSize: number;
   left: number;
   right: number;
   top: number;
@@ -98,7 +101,10 @@ interface UseElementRect {
   y: number;
 }
 
-useElementSize(selector: string);
+useElementSize<T extends Element>(
+  target: RefObject<T> | T | null | string,
+  debounce = 0,
+): ElementSize;
 ```
 
 > This hook uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver), so if you want to support
