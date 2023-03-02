@@ -5,6 +5,7 @@ export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
+export { useMergeRefs } from './useMergeRefs';
 export { useRenderCount } from './useRenderCount';
 export { useResize } from './useResize';
 export { useResizeObserver } from './useResizeObserver';
