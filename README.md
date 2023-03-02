@@ -149,7 +149,13 @@ interface UseFetchOptions {
   url: string;
 }
 
-useFetch(urlOrOptions: string | UseFetchOptions, wait = false);
+interface UseFetchResponse<T> {
+  data?: T;
+  error?: ResponseError;
+  status: FetchStatus;
+}
+
+useFetch<T = unknown>(urlOrOptions: string | UseFetchOptions, wait = false): UseFetchResponse<T>;
 ```
 
 ### useIntersectionObserver

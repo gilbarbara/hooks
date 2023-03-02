@@ -8,8 +8,8 @@ import { useFetch } from '../src/useFetch';
 
 const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 
-function Component({ fetchOptions, shouldWait }: any) {
-  const { data, error, status } = useFetch<PlainObject<any>[]>(fetchOptions, shouldWait);
+function Component({ fetchOptions, skip }: any) {
+  const { data, error, status } = useFetch<PlainObject<any>[]>(fetchOptions, skip);
 
   return (
     <div data-testid="content">
@@ -141,8 +141,8 @@ describe('useFetch', () => {
     expect(screen.getByTestId('failure')).toMatchSnapshot();
   });
 
-  it('should handle "shouldWait"', async () => {
-    render(<Component fetchOptions={url} shouldWait />);
+  it('should handle "skip"', async () => {
+    render(<Component fetchOptions={url} skip />);
 
     expect(fetchMock).toHaveBeenCalledTimes(0);
 
