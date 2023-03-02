@@ -78,9 +78,9 @@ async function request(options: UseFetchOptions): Promise<any> {
   });
 }
 
-export function useFetch<T = any>(
+export function useFetch<T = unknown>(
   urlOrOptions: string | UseFetchOptions,
-  shouldWait = false,
+  skip = false,
 ): UseFetchResponse<T> {
   const isActive = useRef(false);
   const [state, setState] = useState<UseFetchResponse<T>>({
@@ -102,7 +102,7 @@ export function useFetch<T = any>(
   }, []);
 
   useEffect(() => {
-    if (state.status === 'idle' && !shouldWait) {
+    if (state.status === 'idle' && !skip) {
       setState(s => ({
         ...s,
         status: 'running',
@@ -137,7 +137,7 @@ export function useFetch<T = any>(
           }
         });
     }
-  }, [state, urlOrOptions, shouldWait]);
+  }, [state, urlOrOptions, skip]);
 
   return state;
 }
