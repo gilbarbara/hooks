@@ -7,6 +7,7 @@ export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
 export { useRenderCount } from './useRenderCount';
 export { useResize } from './useResize';
+export { useResizeObserver } from './useResizeObserver';
 export { useResponsive } from './useResponsive';
 export { useScript } from './useScript';
 export { useSingleton } from './useSingleton';

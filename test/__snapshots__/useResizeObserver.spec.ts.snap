@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useResizeObserver should initialize with a string selector and "debounce": first 1`] = `
+{
+  "borderBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentRect": {
+    "bottom": 200,
+    "height": 200,
+    "left": 0,
+    "right": 200,
+    "top": 0,
+    "width": 200,
+    "x": 0,
+    "y": 0,
+  },
+  "devicePixelContentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "target": <div
+    id="root"
+  >
+    Hello World
+  </div>,
+}
+`;
+
+exports[`useResizeObserver should initialize with a string selector and "debounce": second 1`] = `
+{
+  "borderBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentRect": {
+    "bottom": 200,
+    "height": 200,
+    "left": 0,
+    "right": 200,
+    "top": 0,
+    "width": 200,
+    "x": 0,
+    "y": 0,
+  },
+  "devicePixelContentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "target": <div
+    id="root"
+  >
+    Hello World
+  </div>,
+}
+`;
+
+exports[`useResizeObserver should initialize with an element 1`] = `
+{
+  "borderBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "contentRect": {
+    "bottom": 200,
+    "height": 200,
+    "left": 0,
+    "right": 200,
+    "top": 0,
+    "width": 200,
+    "x": 0,
+    "y": 0,
+  },
+  "devicePixelContentBoxSize": [
+    {
+      "blockSize": 200,
+      "inlineSize": 200,
+    },
+  ],
+  "target": <div
+    id="root"
+  >
+    Hello World
+  </div>,
+}
+`;
