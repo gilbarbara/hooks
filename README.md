@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40gilbarbara%2Fhooks.svg)](https://badge.fury.io/js/%40gilbarbara%2Fhooks) [![CI](https://github.com/gilbarbara/hooks/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/hooks/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/0bface079acbe392459c/maintainability)](https://codeclimate.com/github/gilbarbara/hooks/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/0bface079acbe392459c/test_coverage)](https://codeclimate.com/github/gilbarbara/hooks/test_coverage)
 
-Useful React hooks
+Useful React hooks.
 
 ## Setup
 
@@ -12,8 +12,33 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
+| Name                                                    | Description                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| [useClickOutside](#useclickoutside)                     | Handle clicks outside a specific DOM element.                |
+| [useEffectOnce](#useeffectonce)                         | Custom useEffect that's executed only once.                  |
+| [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
+| [useFetch](#usefetch)                                   | Make a request with fetch.                                   |
+| [useIntersectionObserver](#useintersectionobserver)     | Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API. |
+| [useIsMounted](#useismounted)                           | Check if the component is still mounted before changing the state. |
+| [useIsomorphicLayoutEffect](#useisomorphiclayouteffect) | Returns `useLayoutEffect` in the client or `useEffect` on the server. |
+| [useLatest](#uselatest)                                 | Get a ref with the most recent value.                        |
+| [useMediaQuery](#usemediaquery)                         | Detect media query changes.                                  |
+| [useMergeRefs](#usemergerefs)                           | Merge multiple refs into one.                                |
+| [useRenderCount](#userendercount)                       | Log how many times the component was rendered.               |
+| [useResizeObserver](#useresizeobserver)                 | Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
+| [useResponsive](#useresponsive)                         | Get responsive breakpoints.                                  |
+| [useScript](#usescript)                                 | Create a script tag and append it to the `document.body`.    |
+| [useSingleton](#usesingleton)                           | Run the code just once before the render.                    |
+| [useThrottle](#usethrottle)                             | Return a throttled function that only invokes `fn` once per every `ms`. |
+| [useThrottleValue](#usethrottlevalue)                   | Return a throttled value that only changes once per every `ms`. |
+| [useWhyDidYouUpdate](#usewhydidyouupdate)               | Get which prop changes are causing a component to re-render. |
+| [useWindowSize](#usewindowsize)                         | Get the window dimensions. Updates on resize.                |
+
+## API
+
 ### useClickOutside
-Handles click events outside a specific DOM element.
+
+Handle clicks outside a specific DOM element.
 
 ```tsx
 import React from 'react';
@@ -37,7 +62,7 @@ function Component() {
 **Reference**
 
 ```typescript
-useClickOutside(ref: RefObject<HTMLElement>, callback: () => void)
+useClickOutside(ref: RefObject<HTMLElement>, callback: () => void): void
 ```
 
 ### useEffectOnce
@@ -113,7 +138,7 @@ legacy browsers, install the [resize-observer-polyfill](https://www.npmjs.com/pa
 
 ### useFetch
 Make a request with fetch.  
-Returns an object with  `data`, `error` and `status`.
+Returns an object with  `data`, `error`,  and `status`.
 
 ```tsx
 import React from 'react';
@@ -250,7 +275,7 @@ useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
 ```
 
 ### useLatest
-Get a ref with the most recent value.
+Get a ref with the most recent value.  
 Returns a `React.MutableRefObject` with the same type as the input.
 
 ```tsx
@@ -402,7 +427,8 @@ legacy browsers, install the [resize-observer-polyfill](https://www.npmjs.com/pa
 
 ### useResponsive
 
-Get responsive breakpoints
+Get responsive breakpoints.  
+Returns a `Responsive<T>` object.
 
 ```tsx
 import React from 'react';
@@ -414,7 +440,7 @@ function Component() {
   return (
     <div>
       {max('sm', 'landscape') && <h1>Extra Small</h1>}
-      {between('sm', 'lg') && <h1>Small to Large</h1>}
+      {between('sm', 'lg') && <h1>Between small and large</h1>}
       <p>Extra Small {min('xs') ? '✔' : '✖️'}</p>
       <p>Small {min('sm') ? '✔' : '✖️'}</p>
       <p>Medium {min('md') ? '✔' : '✖️'}</p>
@@ -485,7 +511,7 @@ useScript(src: string, idOrOptions: string | UseScriptOptions = {});
 ```
 
 ### useSingleton
-Run the code just once, before the render.  
+Run the code just once before the render.  
 Similar to constructors in classes.
 
 ```tsx
