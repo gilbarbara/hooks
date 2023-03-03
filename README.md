@@ -121,6 +121,30 @@ interface UseFetchOptions {
 useFetch(urlOrOptions: string | UseFetchOptions, wait = false);
 ```
 
+### useIsomorphicLayoutEffect
+Returns `useLayoutEffect` in the client or `useEffect` on the server.
+
+```tsx
+import React from 'react';
+import { useIsomorphicLayoutEffect } from '@gilbarbara/hooks';
+
+function Component() {
+  useIsomorphicLayoutEffect(() => {
+    // effect code
+  }, []);
+
+  return (
+    <div>Something, something...</div>
+  );
+}
+```
+
+**Reference**
+
+```typescript
+useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+```
+
 ### useLatest
 Get a ref with the most recent value.
 Returns a `React.MutableRefObject` with the same type as the input.
