@@ -114,16 +114,10 @@ function Component() {
 
 ```typescript
 interface ElementSize {
-  bottom: number;
-  blockSize: number;
   height: number;
-  inlineSize: number;
-  left: number;
-  right: number;
-  top: number;
+  innerHeight: number;
+  innerWidth: number;
   width: number;
-  x: number;
-  y: number;
 }
 
 useElementSize<T extends Element>(
