@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useIntersectionObserver-ssr should work without a DOM 1`] = `
+<div>
+</div>
+`;

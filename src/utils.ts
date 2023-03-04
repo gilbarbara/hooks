@@ -1,7 +1,19 @@
-import { PlainObject } from './types';
+import { PlainObject, Target } from './types';
 
 export const canUseDOM =
   typeof window !== 'undefined' && !!window.document && !!window.document.createElement;
+
+export function getElement<T extends Element>(target: Target<T>) {
+  let targetEl: Element | null;
+
+  if (typeof target === 'string') {
+    targetEl = document.querySelector(target);
+  } else {
+    targetEl = target && 'current' in target ? target.current : target;
+  }
+
+  return targetEl;
+}
 
 export function isPlainObject(value: unknown): value is PlainObject {
   if (Object.prototype.toString.call(value) !== '[object Object]') {
