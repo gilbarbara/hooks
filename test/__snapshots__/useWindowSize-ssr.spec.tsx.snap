@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useWindowSize-ssr should work without a DOM 1`] = `
+<div>
+  0
+  x
+  0
+</div>
+`;

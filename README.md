@@ -369,37 +369,6 @@ function Component() {
 useRenderCount(name?: string);
 ```
 
-### useResize
-Execute the callback on mount and when the window is resized.
-
-```tsx
-import React from 'react';
-import { useResize } from '@gilbarbara/hooks';
-
-function Component() {
-  const [isLarge, setLarge] = useState(false);
-  
-  useResize(width => {
-    setLarge(width >= 1024);
-  });
-
-  return <div>{isLarge ? 'Large Screen' : 'Small Screen'}</div>;
-}
-```
-
-**Reference**
-
-```typescript
-type Callback = (width: number) => void;
-
-interface UseResizeOptions {
-  callback?: Callback;
-  debounce?: number;
-}
-
-export function useResize(callbackOrOptions: Callback | UseResizeOptions): void
-```
-
 ### useResizeObserver
 Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
 Returns a `ResizeObserverEntry`.
@@ -643,6 +612,33 @@ useWhyDidYouUpdate<T extends PlainObject>(
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
 );
 ```
+
+### useWindowSize
+Get the window dimensions. Updates on resize.  
+Returns a `WindowSize` object.
+
+```tsx
+import React from 'react';
+import { useWindowSize } from '@gilbarbara/hooks';
+
+function Component() {
+  const { width } = useWindowSize();
+
+  return <div>{width >= 1024 ? 'Large Screen' : 'Small Screen'}</div>;
+}
+```
+
+**Reference**
+
+```typescript
+interface WindowSize {
+  height: number;
+  width: number;
+}
+
+useWindowSize(debounce?: number): WindowSize;
+```
+
 ## License
 
 MIT
