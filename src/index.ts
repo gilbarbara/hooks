@@ -1,6 +1,7 @@
 export { useClickOutside } from './useClickOutside';
 export { useElementSize } from './useElementSize';
 export { useFetch, FetchStatus } from './useFetch';
+export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
