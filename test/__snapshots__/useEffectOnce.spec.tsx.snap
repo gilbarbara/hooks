@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useEffectOnce should run the effect only once: first 1`] = `
+<div
+  data-testid="main"
+>
+  1
+</div>
+`;
+
+exports[`useEffectOnce should run the effect only once: second 1`] = `
+<div
+  data-testid="main"
+>
+  1
+</div>
+`;

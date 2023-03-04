@@ -1,4 +1,5 @@
 export { useClickOutside } from './useClickOutside';
+export { useEffectOnce, useMount } from './useEffectOnce';
 export { useElementSize } from './useElementSize';
 export { useFetch, FetchStatus } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';

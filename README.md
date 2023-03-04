@@ -40,6 +40,31 @@ function Component() {
 useClickOutside(ref: RefObject<HTMLElement>, callback: () => void)
 ```
 
+### useEffectOnce
+Custom useEffect that's executed only once.  
+This is also exported as `useMount` for convenience.
+
+```tsx
+import React from 'react';
+import { useEffectOnce } from '@gilbarbara/hooks';
+
+function Component() {
+  const [value, setValue] = React.useState(0);
+
+  useEffectOnce(() => {
+    setValue(1);
+  });
+
+  return <div data-testid="main">{value}</div>;
+}
+```
+
+**Reference**
+
+```typescript
+useEffectOnce(effect: EffectCallback): void
+```
+
 ### useElementSize
 Get element dimensions using a CSS selector.  
 Returns a Rect object.
