@@ -4,6 +4,7 @@ export { useElementSize, ElementSize } from './useElementSize';
 export { useFetch, FetchStatus } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsMounted } from './useIsMounted';
+export { useIsFirstRender } from './useIsFirstRender';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
