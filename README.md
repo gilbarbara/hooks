@@ -15,7 +15,7 @@ npm i @gilbarbara/hooks
 | Name                                                    | Description                                                  |
 | ------------------------------------------------------- | ------------------------------------------------------------ |
 | [useClickOutside](#useclickoutside)                     | Handle clicks outside a specific DOM element.                |
-| [useEffectOnce](#useeffectonce)                         | Custom useEffect that's executed only once.                  |
+| [useEffectOnce](#useeffectonce)                         | Run an effect only once.                                     |
 | [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
 | [useFetch](#usefetch)                                   | Make a request with fetch.                                   |
 | [useIntersectionObserver](#useintersectionobserver)     | Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API. |
@@ -24,6 +24,7 @@ npm i @gilbarbara/hooks
 | [useLatest](#uselatest)                                 | Get a ref with the most recent value.                        |
 | [useMediaQuery](#usemediaquery)                         | Detect media query changes.                                  |
 | [useMergeRefs](#usemergerefs)                           | Merge multiple refs into one.                                |
+| [useMount](#usemount)                                   | Run a function after the component is mounted.               |
 | [useRenderCount](#userendercount)                       | Log how many times the component was rendered.               |
 | [useResizeObserver](#useresizeobserver)                 | Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
 | [useResponsive](#useresponsive)                         | Get responsive breakpoints.                                  |
@@ -66,8 +67,7 @@ useClickOutside(ref: RefObject<HTMLElement>, callback: () => void): void
 ```
 
 ### useEffectOnce
-Custom useEffect that's executed only once.  
-This is also exported as `useMount` for convenience.
+Run an effect only once.
 
 ```tsx
 import React from 'react';
@@ -363,6 +363,28 @@ function Component() {
 
 ```typescript
 useMergeRefs<T>(...refs: Ref<T>[]): RefCallback<T>
+```
+
+### useMount
+Run a function after the component is mounted.
+
+```tsx
+import React from 'react';
+import { useMount } from '@gilbarbara/hooks';
+
+function Component() {
+  useMount(() => {
+    pageView('Home');
+  });
+
+  return <div>Some content...</div>;
+}
+```
+
+**Reference**
+
+```typescript
+useMount(fn: () => void): void;
 ```
 
 ### useRenderCount

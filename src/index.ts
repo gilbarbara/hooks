@@ -1,5 +1,5 @@
 export { useClickOutside } from './useClickOutside';
-export { useEffectOnce, useMount } from './useEffectOnce';
+export { useEffectOnce } from './useEffectOnce';
 export { useElementSize, ElementSize } from './useElementSize';
 export { useFetch, FetchStatus } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
@@ -8,6 +8,7 @@ export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
+export { useMount } from './useMount';
 export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';
 export { useResponsive } from './useResponsive';
