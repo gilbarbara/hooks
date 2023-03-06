@@ -1,4 +1,4 @@
 {
-  "node": "14",
-  "sandboxes": ["new", "react-ts"]
+  "node": "18",
+  "sandboxes": ["/demo"]
 }
