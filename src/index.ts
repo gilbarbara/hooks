@@ -16,5 +16,6 @@ export { useScript } from './useScript';
 export { useSingleton } from './useSingleton';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
+export { useUnmount } from './useUnmount';
 export { useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 export { useWindowSize, WindowSize } from './useWindowSize';

@@ -32,6 +32,7 @@ npm i @gilbarbara/hooks
 | [useSingleton](#usesingleton)                           | Run the code just once before the render.                    |
 | [useThrottle](#usethrottle)                             | Return a throttled function that only invokes `fn` once per every `ms`. |
 | [useThrottleValue](#usethrottlevalue)                   | Return a throttled value that only changes once per every `ms`. |
+| [useUnmount](#useunmount)                               | Run a function when the component unmounts.                  |
 | [useWhyDidYouUpdate](#usewhydidyouupdate)               | Get which prop changes are causing a component to re-render. |
 | [useWindowSize](#usewindowsize)                         | Get the window dimensions. Updates on resize.                |
 
@@ -624,6 +625,28 @@ interface UseThrottleOptions {
 }
 
 useThrottleValue(value: string, ms = 500, options?: UseThrottleOptions):
+```
+
+### useUnmount
+Run a function when the component unmounts.
+
+```tsx
+import React from 'react';
+import { useUnmount } from '@gilbarbara/hooks';
+
+function Component() {
+  useUnmount(() => {
+    // cleanup the listener
+  });
+
+  return <div>Some content...</div>;
+}
+```
+
+**Reference**
+
+```typescript
+useUnmount(fn: () => void): void;
 ```
 
 ### useWhyDidYouUpdate
