@@ -19,6 +19,7 @@ npm i @gilbarbara/hooks
 | [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
 | [useFetch](#usefetch)                                   | Make a request with fetch.                                   |
 | [useIntersectionObserver](#useintersectionobserver)     | Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API. |
+| [useFirstRender](#useisfirstrender)                     | Detect if it is the first component render.                  |
 | [useIsMounted](#useismounted)                           | Check if the component is still mounted before changing the state. |
 | [useIsomorphicLayoutEffect](#useisomorphiclayouteffect) | Returns `useLayoutEffect` in the client or `useEffect` on the server. |
 | [useLatest](#uselatest)                                 | Get a ref with the most recent value.                        |
@@ -213,6 +214,27 @@ useIntersectionObserver<T extends Element>(
   target: RefObject<T> | T | null | string,
   options?: UseIntersectionObserverOptions,
 ): IntersectionObserverEntry
+```
+
+### useIsFirstRender
+Detect if it is the first component render.  
+Returns a `boolean`.
+
+```tsx
+import React from 'react';
+import { useIsFirstRender } from '@gilbarbara/hooks';
+
+function Component() {
+  const isFirstRender = useIsFirstRender();
+
+  return <div>Is first render: {isFirstRender ? 'yes' : 'no'}</div>;
+}
+```
+
+**Reference**
+
+```typescript
+useIsFirstRender(): boolean;
 ```
 
 ### useIsMounted
