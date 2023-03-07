@@ -1,6 +1,6 @@
 {
   "name": "@gilbarbara/hooks",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Collection of useful React hooks",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "keywords": [
@@ -97,7 +97,9 @@
       }
     ],
     "settings": {
-      "testing-library/custom-renders": ["isFirstRender"]
+      "testing-library/custom-renders": [
+        "isFirstRender"
+      ]
     }
   },
   "prettier": "@gilbarbara/prettier-config",
