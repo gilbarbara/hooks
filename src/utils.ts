@@ -4,6 +4,10 @@ export const canUseDOM =
   typeof window !== 'undefined' && !!window.document && !!window.document.createElement;
 
 export function getElement<T extends Element>(target: Target<T>) {
+  if (!canUseDOM) {
+    return null;
+  }
+
   let targetEl: Element | null;
 
   if (typeof target === 'string') {

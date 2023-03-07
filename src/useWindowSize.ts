@@ -9,8 +9,8 @@ export interface WindowSize {
 
 export function useWindowSize(debounce = 0) {
   const [size, setSize] = useState<WindowSize>({
-    height: 0,
-    width: 0,
+    height: canUseDOM ? window.innerHeight : 0,
+    width: canUseDOM ? window.innerWidth : 0,
   });
   const timeoutRef = useRef<number>(0);
 
