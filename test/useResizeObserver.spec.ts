@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
@@ -10,6 +11,7 @@ const resizeObserver = mockResizeObserver();
 jest.useFakeTimers();
 
 describe('useResizeObserver', () => {
+  const ref = { current: null } as MutableRefObject<Element | null>;
   const rootElement = document.createElement('div');
 
   rootElement.id = 'root';
@@ -39,6 +41,18 @@ describe('useResizeObserver', () => {
     expect(result.current).toMatchSnapshot();
   });
 
+  it('should initialize with a ref', () => {
+    const { result } = renderHook(() => useResizeObserver(ref));
+
+    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+
+    act(() => {
+      resizeObserver.resize();
+    });
+
+    expect(result.current).toMatchSnapshot();
+  });
+
   it('should initialize with a string selector and "debounce"', async () => {
     const { rerender, result } = renderHook(() => useResizeObserver('#root', 100));
 
@@ -58,8 +72,6 @@ describe('useResizeObserver', () => {
     });
 
     rerender();
-
-    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
 
     act(() => {
       resizeObserver.resize(rootElement);

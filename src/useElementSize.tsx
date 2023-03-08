@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Target } from './types';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
@@ -60,10 +60,17 @@ function getElementSize(element: Element | null): ElementSize {
 }
 
 export function useElementSize<T extends Element>(target: Target<T>, debounce = 0): ElementSize {
-  const element = useMemo(() => getElement(target), [target]);
+  const [element, setElement] = useState(getElement(target));
   const [dimensions, setDimensions] = useState<ElementSize>(getElementSize(element));
 
   const entry = useResizeObserver(element, debounce);
+
+  useIsomorphicLayoutEffect(() => {
+    const nextElement = getElement(target);
+
+    setElement(nextElement);
+    setDimensions(getElementSize(nextElement));
+  }, [target]);
 
   useIsomorphicLayoutEffect(() => {
     if (!entry) {

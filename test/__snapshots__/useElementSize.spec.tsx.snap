@@ -1,24 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useElementSize should return the default dimensions with an invalid string selector 1`] = `
-{
-  "height": 0,
-  "innerHeight": 0,
-  "innerWidth": 0,
-  "width": 0,
-}
-`;
-
-exports[`useElementSize should return the dimensions with a string selector 1`] = `
-{
-  "height": 0,
-  "innerHeight": 0,
-  "innerWidth": 0,
-  "width": 0,
-}
-`;
-
-exports[`useElementSize should return the dimensions with a string selector 2`] = `
+exports[`useElementSize should re-initialize if target changes: after render 1`] = `
 {
   "height": 200,
   "innerHeight": 200,
@@ -27,7 +9,34 @@ exports[`useElementSize should return the dimensions with a string selector 2`] 
 }
 `;
 
-exports[`useElementSize should return the dimensions: after resize 1`] = `
+exports[`useElementSize should re-initialize if target changes: initial 1`] = `
+{
+  "height": 0,
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "width": 0,
+}
+`;
+
+exports[`useElementSize should return the default dimensions with an invalid string selector: after render 1`] = `
+{
+  "height": 0,
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "width": 0,
+}
+`;
+
+exports[`useElementSize should return the default dimensions with an invalid string selector: initial 1`] = `
+{
+  "height": 0,
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "width": 0,
+}
+`;
+
+exports[`useElementSize should return the dimensions with a "#root" target: after resize 1`] = `
 {
   "height": 200,
   "innerHeight": 200,
@@ -36,7 +45,43 @@ exports[`useElementSize should return the dimensions: after resize 1`] = `
 }
 `;
 
-exports[`useElementSize should return the dimensions: initial 1`] = `
+exports[`useElementSize should return the dimensions with a "#root" target: initial 1`] = `
+{
+  "height": 0,
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "width": 0,
+}
+`;
+
+exports[`useElementSize should return the dimensions with a "element" target: after resize 1`] = `
+{
+  "height": 200,
+  "innerHeight": 200,
+  "innerWidth": 200,
+  "width": 200,
+}
+`;
+
+exports[`useElementSize should return the dimensions with a "element" target: initial 1`] = `
+{
+  "height": 0,
+  "innerHeight": 0,
+  "innerWidth": 0,
+  "width": 0,
+}
+`;
+
+exports[`useElementSize should return the dimensions with a "ref" target: after resize 1`] = `
+{
+  "height": 200,
+  "innerHeight": 200,
+  "innerWidth": 200,
+  "width": 200,
+}
+`;
+
+exports[`useElementSize should return the dimensions with a "ref" target: initial 1`] = `
 {
   "height": 0,
   "innerHeight": 0,

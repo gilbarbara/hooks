@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { canUseDOM, getElement } from './utils';
 
 export function useResizeObserver<T extends Element>(target: Target<T>, debounce: number = 0) {
+  const [element, setElement] = useState(getElement(target));
   const [value, setValue] = useState<ResizeObserverEntry>();
   const timeoutRef = useRef<number | null>(null);
 
@@ -34,11 +35,13 @@ export function useResizeObserver<T extends Element>(target: Target<T>, debounce
   }, [debounce]);
 
   useIsomorphicLayoutEffect(() => {
+    setElement(getElement(target));
+  }, [target]);
+
+  useIsomorphicLayoutEffect(() => {
     if (!canUseDOM || !(observer instanceof ResizeObserver)) {
       return () => undefined;
     }
-
-    const element = getElement(target);
 
     if (!element) {
       return () => undefined;
@@ -49,7 +52,7 @@ export function useResizeObserver<T extends Element>(target: Target<T>, debounce
     return () => {
       observer.disconnect();
     };
-  }, [observer, target]);
+  }, [element, observer]);
 
   return value;
 }
