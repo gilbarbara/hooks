@@ -95,12 +95,7 @@
           "testing-library/no-node-access": "off"
         }
       }
-    ],
-    "settings": {
-      "testing-library/custom-renders": [
-        "isFirstRender"
-      ]
-    }
+    ]
   },
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [

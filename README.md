@@ -12,30 +12,30 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
-| Name                                                    | Description                                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------ |
-| [useClickOutside](#useclickoutside)                     | Handle clicks outside a specific DOM element.                |
-| [useEffectOnce](#useeffectonce)                         | Run an effect only once.                                     |
-| [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
-| [useFetch](#usefetch)                                   | Make a request with fetch.                                   |
+| Name                                                    | Description                                                                                                                                                            |
+| ------------------------------------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [useClickOutside](#useclickoutside)                     | Handle clicks outside a specific DOM element.                                                                                                                          |
+| [useEffectOnce](#useeffectonce)                         | Run an effect only once.                                                                                                                                               |
+| [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.                                                |
+| [useFetch](#usefetch)                                   | Make a request with fetch.                                                                                                                                             |
 | [useIntersectionObserver](#useintersectionobserver)     | Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API. |
-| [useFirstRender](#useisfirstrender)                     | Detect if it is the first component render.                  |
-| [useIsMounted](#useismounted)                           | Check if the component is still mounted before changing the state. |
-| [useIsomorphicLayoutEffect](#useisomorphiclayouteffect) | Returns `useLayoutEffect` in the client or `useEffect` on the server. |
-| [useLatest](#uselatest)                                 | Get a ref with the most recent value.                        |
-| [useMediaQuery](#usemediaquery)                         | Detect media query changes.                                  |
-| [useMergeRefs](#usemergerefs)                           | Merge multiple refs into one.                                |
-| [useMount](#usemount)                                   | Run a function after the component is mounted.               |
-| [useRenderCount](#userendercount)                       | Log how many times the component was rendered.               |
-| [useResizeObserver](#useresizeobserver)                 | Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API. |
-| [useResponsive](#useresponsive)                         | Get responsive breakpoints.                                  |
-| [useScript](#usescript)                                 | Create a script tag and append it to the `document.body`.    |
-| [useSingleton](#usesingleton)                           | Run the code just once before the render.                    |
-| [useThrottle](#usethrottle)                             | Return a throttled function that only invokes `fn` once per every `ms`. |
-| [useThrottleValue](#usethrottlevalue)                   | Return a throttled value that only changes once per every `ms`. |
-| [useUnmount](#useunmount)                               | Run a function when the component unmounts.                  |
-| [useWhyDidYouUpdate](#usewhydidyouupdate)               | Get which prop changes are causing a component to re-render. |
-| [useWindowSize](#usewindowsize)                         | Get the window dimensions. Updates on resize.                |
+| [useIsFirstRun](#useIsFirstRun)                     | Detect if it is the first execution.                                                                                                                                   |
+| [useIsMounted](#useismounted)                           | Check if the component is still mounted before changing the state.                                                                                                     |
+| [useIsomorphicLayoutEffect](#useisomorphiclayouteffect) | Returns `useLayoutEffect` in the client or `useEffect` on the server.                                                                                                  |
+| [useLatest](#uselatest)                                 | Get a ref with the most recent value.                                                                                                                                  |
+| [useMediaQuery](#usemediaquery)                         | Detect media query changes.                                                                                                                                            |
+| [useMergeRefs](#usemergerefs)                           | Merge multiple refs into one.                                                                                                                                          |
+| [useMount](#usemount)                                   | Run a function after the component is mounted.                                                                                                                         |
+| [useRenderCount](#userendercount)                       | Log how many times the component was rendered.                                                                                                                         |
+| [useResizeObserver](#useresizeobserver)                 | Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.                               |
+| [useResponsive](#useresponsive)                         | Get responsive breakpoints.                                                                                                                                            |
+| [useScript](#usescript)                                 | Create a script tag and append it to the `document.body`.                                                                                                              |
+| [useSingleton](#usesingleton)                           | Run the code just once before the render.                                                                                                                              |
+| [useThrottle](#usethrottle)                             | Return a throttled function that only invokes `fn` once per every `ms`.                                                                                                |
+| [useThrottleValue](#usethrottlevalue)                   | Return a throttled value that only changes once per every `ms`.                                                                                                        |
+| [useUnmount](#useunmount)                               | Run a function when the component unmounts.                                                                                                                            |
+| [useWhyDidYouUpdate](#usewhydidyouupdate)               | Get which prop changes are causing a component to re-render.                                                                                                           |
+| [useWindowSize](#usewindowsize)                         | Get the window dimensions. Updates on resize.                                                                                                                          |
 
 ## API
 
@@ -216,25 +216,25 @@ useIntersectionObserver<T extends Element>(
 ): IntersectionObserverEntry
 ```
 
-### useIsFirstRender
-Detect if it is the first component render.  
+### useIsFirstRun
+Detect if it is the first execution.  
 Returns a `boolean`.
 
 ```tsx
 import React from 'react';
-import { useIsFirstRender } from '@gilbarbara/hooks';
+import { useIsFirstRun } from '@gilbarbara/hooks';
 
 function Component() {
-  const isFirstRender = useIsFirstRender();
+  const isFirstRun = useIsFirstRun();
 
-  return <div>Is first render: {isFirstRender ? 'yes' : 'no'}</div>;
+  return <div>Is first render: {isFirstRun ? 'yes' : 'no'}</div>;
 }
 ```
 
 **Reference**
 
 ```typescript
-useIsFirstRender(): boolean;
+useIsFirstRun(): boolean;
 ```
 
 ### useIsMounted
