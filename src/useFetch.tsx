@@ -27,10 +27,10 @@ interface UseFetchResponse<T> {
 
 async function request(options: UseFetchOptions): Promise<any> {
   const {
+    body = undefined,
     headers = {},
     method = 'GET',
     mode = 'cors',
-    body = undefined,
     type = 'json',
     url = '',
   } = options;
