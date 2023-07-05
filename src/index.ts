@@ -1,7 +1,7 @@
 export { useClickOutside } from './useClickOutside';
 export { useEffectOnce } from './useEffectOnce';
-export { useElementSize, ElementSize } from './useElementSize';
-export { useFetch, FetchStatus } from './useFetch';
+export { useElementSize, type ElementSize } from './useElementSize';
+export { useFetch, type FetchStatus } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsFirstRun } from './useIsFirstRun';
 export { useIsMounted } from './useIsMounted';
@@ -19,4 +19,4 @@ export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useUnmount } from './useUnmount';
 export { useWhyDidYouUpdate } from './useWhyDidYouUpdate';
-export { useWindowSize, WindowSize } from './useWindowSize';
+export { useWindowSize, type WindowSize } from './useWindowSize';
