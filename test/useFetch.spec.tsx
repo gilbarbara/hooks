@@ -15,11 +15,7 @@ function Component({ fetchOptions, skip }: any) {
     <div data-testid="content">
       {status === 'failure' && <p data-testid="failure">{error?.toString()}</p>}
       {status === 'success' && (
-        <ul data-testid="success">
-          {data?.map(d => (
-            <li key={d.id}>{d.full_name}</li>
-          ))}
-        </ul>
+        <ul data-testid="success">{data?.map(d => <li key={d.id}>{d.full_name}</li>)}</ul>
       )}
       {status === 'running' && <p data-testid="running">Loading</p>}
     </div>
