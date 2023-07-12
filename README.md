@@ -204,9 +204,9 @@ function Component() {
 
 ```typescript
 interface UseIntersectionObserverOptions extends IntersectionObserverInit {
-  /**
-   * Trigger the observer only once.
-   */
+  /** Delay the response update. */
+  delay?: number;
+  /** Trigger the observer only once. */
   once?: boolean;
 }
 
