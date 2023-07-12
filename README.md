@@ -13,19 +13,20 @@ npm i @gilbarbara/hooks
 ## Hooks
 
 | Name                                                    | Description                                                                                                                                                            |
-| ------------------------------------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|---------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [useClickOutside](#useclickoutside)                     | Handle clicks outside a specific DOM element.                                                                                                                          |
 | [useEffectOnce](#useeffectonce)                         | Run an effect only once.                                                                                                                                               |
 | [useElementSize](#useelementsize)                       | Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.                                                |
 | [useFetch](#usefetch)                                   | Make a request with fetch.                                                                                                                                             |
 | [useIntersectionObserver](#useintersectionobserver)     | Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API. |
-| [useIsFirstRun](#useIsFirstRun)                     | Detect if it is the first execution.                                                                                                                                   |
+| [useIsFirstRun](#useIsFirstRun)                         | Detect if it is the first execution.                                                                                                                                   |
 | [useIsMounted](#useismounted)                           | Check if the component is still mounted before changing the state.                                                                                                     |
 | [useIsomorphicLayoutEffect](#useisomorphiclayouteffect) | Returns `useLayoutEffect` in the client or `useEffect` on the server.                                                                                                  |
 | [useLatest](#uselatest)                                 | Get a ref with the most recent value.                                                                                                                                  |
 | [useMediaQuery](#usemediaquery)                         | Detect media query changes.                                                                                                                                            |
 | [useMergeRefs](#usemergerefs)                           | Merge multiple refs into one.                                                                                                                                          |
 | [useMount](#usemount)                                   | Run a function after the component is mounted.                                                                                                                         |
+| [usePrevious](#useprevious)                             | Return the previous value.                                                                                                                                             |
 | [useRenderCount](#userendercount)                       | Log how many times the component was rendered.                                                                                                                         |
 | [useResizeObserver](#useresizeobserver)                 | Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.                               |
 | [useResponsive](#useresponsive)                         | Get responsive breakpoints.                                                                                                                                            |
@@ -408,6 +409,27 @@ function Component() {
 
 ```typescript
 useMount(fn: () => void): void;
+```
+
+### usePrevious
+Return the previous value.
+
+```tsx
+import React from 'react';
+import { usePrevious } from '@gilbarbara/hooks';
+
+function Component() {
+  const [count, setCount] = React.useState(0);
+  const prevCount = usePrevious(count);
+
+  return <div>Now: {count}, before: {prevCount}</div>;
+}
+```
+
+**Reference**
+
+```typescript
+usePrevious<T>(value: T): T;
 ```
 
 ### useRenderCount
