@@ -10,6 +10,7 @@ export { useLatest } from './useLatest';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';
+export { usePrevious } from './usePrevious';
 export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';
 export { useResponsive } from './useResponsive';
