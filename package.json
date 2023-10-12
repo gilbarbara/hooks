@@ -16,23 +16,24 @@
     "url": "https://github.com/gilbarbara/hooks/issues"
   },
   "homepage": "https://github.com/gilbarbara/hooks#readme",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "files": [
     "dist",
     "src"
   ],
-  "types": "dist",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
     "react": "16.8 - 18"
   },
   "devDependencies": {
-    "@gilbarbara/esbuilder": "^0.2.0",
     "@gilbarbara/eslint-config": "^0.5.4",
     "@gilbarbara/prettier-config": "^1.0.0",
     "@gilbarbara/tsconfig": "^0.2.3",
@@ -61,24 +62,35 @@
     "size-limit": "^9.0.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "build": "npm run clean && esbuilder --cjs --esm && npm run build:types",
-    "build:types": "tsc",
+    "build": "npm run clean && tsup",
+    "watch": "tsup --watch",
     "clean": "del dist/*",
-    "watch:cjs": "npm run build:cjs -- -w",
-    "watch:esm": "npm run build:esm -- -w",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watchAll --verbose",
     "lint": "eslint --fix src test",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
     "validate": "npm run lint && npm run test:coverage && npm run build && npm run size",
     "size": "size-limit",
     "prepublishOnly": "npm run validate",
     "prepare": "husky install"
+  },
+  "tsup": {
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "sourcemap": true,
+    "splitting": false
   },
   "eslintConfig": {
     "extends": [
