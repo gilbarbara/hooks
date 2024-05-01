@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useSingleton should call the singleton just once 1`] = `
+exports[`useSingleton > should call the singleton just once 1`] = `
 <button
   type="button"
 >

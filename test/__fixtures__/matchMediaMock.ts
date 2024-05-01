@@ -1,13 +1,17 @@
+function callback(returnType: any = undefined) {
+  return () => returnType;
+}
+
 export default function matchMediaMock(query: string, matches = true) {
   return {
-    addListener: jest.fn(),
-    addEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: callback(),
+    addEventListener: callback(),
+    dispatchEvent: callback(),
     listeners: {},
     matches,
     media: query,
     onchange: null,
-    removeEventListener: jest.fn(),
-    removeListener: jest.fn(),
+    removeEventListener: callback(),
+    removeListener: callback(),
   };
 }

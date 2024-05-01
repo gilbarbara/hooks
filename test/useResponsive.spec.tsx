@@ -36,7 +36,7 @@ function Component({ breakpoints, maximum, minimum, orientation }: Props) {
 }
 
 describe('useResponsive', () => {
-  const spy = jest.spyOn(console, 'warn').mockImplementation();
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
   afterAll(() => {
     spy.mockRestore();

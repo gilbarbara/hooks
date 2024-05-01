@@ -4,7 +4,7 @@ import { canUseDOM } from './utils';
 
 export function useMediaQuery(input: string): boolean {
   const getMatches = (query: string): boolean => {
-    if (!canUseDOM) {
+    if (!canUseDOM()) {
       return false;
     }
 
@@ -26,8 +26,8 @@ export function useMediaQuery(input: string): boolean {
     try {
       matchMedia.addEventListener('change', handleChange);
     } catch {
+      /* c8 ignore next 3 */
       // Safari isn't supporting matchMedia.addEventListener
-      /* istanbul ignore next */
       matchMedia.addListener(handleChange);
     }
 
@@ -35,8 +35,8 @@ export function useMediaQuery(input: string): boolean {
       try {
         matchMedia.removeEventListener('change', handleChange);
       } catch {
+        /* c8 ignore next 3 */
         // Safari isn't supporting matchMedia.removeEventListener
-        /* istanbul ignore next */
         matchMedia.removeListener(handleChange);
       }
     };

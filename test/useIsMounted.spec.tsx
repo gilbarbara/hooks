@@ -3,10 +3,8 @@ import { act, render, waitFor } from '@testing-library/react';
 
 import { useIsMounted } from '../src/useIsMounted';
 
-jest.useFakeTimers();
-
-const callbackMock = jest.fn();
-const delayMock = jest.fn();
+const callbackMock = vi.fn();
+const delayMock = vi.fn();
 
 const delay = (ms: number) =>
   new Promise(resolve => {
@@ -32,7 +30,15 @@ function Component() {
   return <div />;
 }
 
-describe('useEffectOnce', () => {
+describe('useIsMounted', () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   it('should run the effect only once', async () => {
     const { unmount } = render(<Component />);
 
@@ -41,7 +47,7 @@ describe('useEffectOnce', () => {
     unmount();
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimersAsync();
     });
 
     await waitFor(() => {

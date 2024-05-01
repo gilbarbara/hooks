@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Target } from './types';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useResizeObserver } from './useResizeObserver';
-import { getElement } from './utils';
+import { canUseDOM, getElement } from './utils';
 
 export interface ElementSize {
   height: number;
@@ -19,7 +19,7 @@ function parseFloatValue(value: string) {
 }
 
 function getElementSize(element: Element | null): ElementSize {
-  if (!element) {
+  if (!canUseDOM() || !element) {
     return {
       height: 0,
       innerHeight: 0,

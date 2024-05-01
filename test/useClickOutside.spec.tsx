@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import { useClickOutside } from '../src/useClickOutside';
 
-const mockFn = jest.fn();
+const mockFn = vi.fn();
 
 function Component() {
   const ref = React.useRef<HTMLDivElement>(null);

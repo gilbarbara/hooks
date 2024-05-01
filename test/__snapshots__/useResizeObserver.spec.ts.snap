@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useResizeObserver should initialize with a ref 1`] = `undefined`;
+exports[`useResizeObserver > should initialize with a ref 1`] = `undefined`;
 
-exports[`useResizeObserver should initialize with a string selector and "debounce": first 1`] = `
+exports[`useResizeObserver > should initialize with a string selector and "debounce" > first 1`] = `
 {
   "borderBoxSize": [
     {
@@ -40,7 +40,7 @@ exports[`useResizeObserver should initialize with a string selector and "debounc
 }
 `;
 
-exports[`useResizeObserver should initialize with a string selector and "debounce": second 1`] = `
+exports[`useResizeObserver > should initialize with a string selector and "debounce" > second 1`] = `
 {
   "borderBoxSize": [
     {
@@ -78,7 +78,7 @@ exports[`useResizeObserver should initialize with a string selector and "debounc
 }
 `;
 
-exports[`useResizeObserver should initialize with an element 1`] = `
+exports[`useResizeObserver > should initialize with an element 1`] = `
 {
   "borderBoxSize": [
     {

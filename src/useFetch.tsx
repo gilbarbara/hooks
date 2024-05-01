@@ -117,7 +117,6 @@ export function useFetch<T = unknown>(
           : urlOrOptions,
       )
         .then(data => {
-          /* istanbul ignore else */
           if (isActive.current) {
             setState(s => ({
               ...s,
@@ -127,7 +126,6 @@ export function useFetch<T = unknown>(
           }
         })
         .catch(error => {
-          /* istanbul ignore else */
           if (isActive.current) {
             setState(s => ({
               ...s,

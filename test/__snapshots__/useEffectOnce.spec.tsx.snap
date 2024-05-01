@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useEffectOnce should run the effect only once: first 1`] = `
+exports[`useEffectOnce > should run the effect only once > first 1`] = `
 <div
   data-testid="main"
 >
@@ -8,7 +8,7 @@ exports[`useEffectOnce should run the effect only once: first 1`] = `
 </div>
 `;
 
-exports[`useEffectOnce should run the effect only once: second 1`] = `
+exports[`useEffectOnce > should run the effect only once > second 1`] = `
 <div
   data-testid="main"
 >

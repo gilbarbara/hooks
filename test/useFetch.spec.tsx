@@ -24,16 +24,16 @@ function Component({ fetchOptions, skip }: any) {
 
 describe('useFetch', () => {
   beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    fetchMock.mockClear();
   });
 
   afterAll(() => {
     // @ts-ignore
     console.error.mockRestore();
-  });
-
-  afterEach(() => {
-    fetchMock.mockClear();
   });
 
   it('should handle success', async () => {

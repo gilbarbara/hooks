@@ -1,10 +1,11 @@
 import { PlainObject, Target } from './types';
 
-export const canUseDOM =
-  typeof window !== 'undefined' && !!window.document && !!window.document.createElement;
+export function canUseDOM() {
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+}
 
 export function getElement<T extends Element>(target: Target<T>) {
-  if (!canUseDOM) {
+  if (!canUseDOM()) {
     return null;
   }
 

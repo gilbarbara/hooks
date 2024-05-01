@@ -25,7 +25,6 @@ function useResponsiveBase<T extends Record<string, number>>(
   const smallestBreakpoint = sizes[sizes.length - 1];
 
   if (smallestBreakpoint[1] !== 0) {
-    /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
       console.warn(`The "${smallestBreakpoint[0]}" breakpoint should be 0`);
@@ -35,8 +34,8 @@ function useResponsiveBase<T extends Record<string, number>>(
   }
 
   const getScreen = useCallback((): Responsive<T> => {
-    const height = canUseDOM ? window.innerHeight : initialHeight;
-    const width = canUseDOM ? window.innerWidth : initialWidth;
+    const height = canUseDOM() ? window.innerHeight : initialHeight;
+    const width = canUseDOM() ? window.innerWidth : initialWidth;
     const size = sizes.find(([, s]) => s <= width) || sizes[0];
     const orientation = width > height ? 'landscape' : 'portrait';
 
@@ -69,7 +68,6 @@ function useResponsiveBase<T extends Record<string, number>>(
     const onResize = () => {
       const current = getScreen();
 
-      /* istanbul ignore else */
       if (current.size !== screen.size || current.orientation !== screen.orientation) {
         setScreen(current);
       }

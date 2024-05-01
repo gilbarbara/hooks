@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { useSingleton } from '../src/useSingleton';
 
-const mockFn = jest.fn();
+const mockFn = vi.fn();
 
 function Component() {
   const [count, setCount] = React.useState(0);

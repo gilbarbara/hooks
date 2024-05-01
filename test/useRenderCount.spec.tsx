@@ -10,19 +10,19 @@ function Component({ name, version }: any) {
 }
 
 describe('useRenderCount', () => {
-  const spy = jest.spyOn(console, 'log');
+  const spy = vi.spyOn(console, 'log');
 
   beforeAll(() => {
-    console.log = jest.fn();
-  });
-
-  afterAll(() => {
-    spy.mockRestore();
+    vi.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
     // @ts-ignore
     console.log.mockClear();
+  });
+
+  afterAll(() => {
+    spy.mockRestore();
   });
 
   it('should log all the changes', () => {

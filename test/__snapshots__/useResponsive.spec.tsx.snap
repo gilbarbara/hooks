@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useResponsive between should render properly for 320 between xs/sm 1`] = `
+exports[`useResponsive > between > should render properly for %p between 320/xs sm 1`] = `
 <div>
   <h1>
     xs
@@ -8,7 +8,7 @@ exports[`useResponsive between should render properly for 320 between xs/sm 1`] 
 </div>
 `;
 
-exports[`useResponsive between should render properly for 400 between sm/md 1`] = `
+exports[`useResponsive > between > should render properly for %p between 400/sm md 1`] = `
 <div>
   <h1>
     sm
@@ -16,7 +16,7 @@ exports[`useResponsive between should render properly for 400 between sm/md 1`] 
 </div>
 `;
 
-exports[`useResponsive between should render properly for 568 between sm/md 1`] = `
+exports[`useResponsive > between > should render properly for %p between 568/sm md 1`] = `
 <div>
   <h1>
     sm
@@ -24,7 +24,7 @@ exports[`useResponsive between should render properly for 568 between sm/md 1`] 
 </div>
 `;
 
-exports[`useResponsive between should render properly for 768 between md/lg 1`] = `
+exports[`useResponsive > between > should render properly for %p between 768/md lg 1`] = `
 <div>
   <h1>
     md
@@ -32,7 +32,7 @@ exports[`useResponsive between should render properly for 768 between md/lg 1`] 
 </div>
 `;
 
-exports[`useResponsive between should render properly for 1024 between lg/xl 1`] = `
+exports[`useResponsive > between > should render properly for %p between 1024/lg xl 1`] = `
 <div>
   <h1>
     lg
@@ -40,7 +40,7 @@ exports[`useResponsive between should render properly for 1024 between lg/xl 1`]
 </div>
 `;
 
-exports[`useResponsive custom breakpoints should render properly for 320 between small/medium 1`] = `
+exports[`useResponsive > custom breakpoints > should render properly for %p between 320/small medium 1`] = `
 <div>
   <h1>
     small
@@ -48,7 +48,7 @@ exports[`useResponsive custom breakpoints should render properly for 320 between
 </div>
 `;
 
-exports[`useResponsive custom breakpoints should render properly for 568 between small/medium 1`] = `
+exports[`useResponsive > custom breakpoints > should render properly for %p between 568/small medium 1`] = `
 <div>
   <h1>
     small
@@ -56,7 +56,7 @@ exports[`useResponsive custom breakpoints should render properly for 568 between
 </div>
 `;
 
-exports[`useResponsive custom breakpoints should render properly for 768 between medium/large 1`] = `
+exports[`useResponsive > custom breakpoints > should render properly for %p between 768/medium large 1`] = `
 <div>
   <h1>
     medium
@@ -64,7 +64,7 @@ exports[`useResponsive custom breakpoints should render properly for 768 between
 </div>
 `;
 
-exports[`useResponsive custom breakpoints should render properly for 1024 between medium/large 1`] = `
+exports[`useResponsive > custom breakpoints > should render properly for %p between 1024/medium large 1`] = `
 <div>
   <h1>
     medium
@@ -72,9 +72,9 @@ exports[`useResponsive custom breakpoints should render properly for 1024 betwee
 </div>
 `;
 
-exports[`useResponsive custom breakpoints should render properly for 1280 between medium/large 1`] = `null`;
+exports[`useResponsive > custom breakpoints > should render properly for %p between 1280/medium large 1`] = `null`;
 
-exports[`useResponsive max should render properly for 360 with "sm" 1`] = `
+exports[`useResponsive > max > should render properly for %p with %p 360 sm 1`] = `
 <div>
   <h1>
     xs
@@ -82,7 +82,7 @@ exports[`useResponsive max should render properly for 360 with "sm" 1`] = `
 </div>
 `;
 
-exports[`useResponsive max should render properly for 568 with "md" 1`] = `
+exports[`useResponsive > max > should render properly for %p with %p 568 md 1`] = `
 <div>
   <h1>
     sm
@@ -90,9 +90,9 @@ exports[`useResponsive max should render properly for 568 with "md" 1`] = `
 </div>
 `;
 
-exports[`useResponsive max should render properly for 568 with "sm" 1`] = `null`;
+exports[`useResponsive > max > should render properly for %p with %p 568 sm 1`] = `null`;
 
-exports[`useResponsive max should render properly for 800 with "lg" 1`] = `
+exports[`useResponsive > max > should render properly for %p with %p 800 lg 1`] = `
 <div>
   <h1>
     md
@@ -100,11 +100,11 @@ exports[`useResponsive max should render properly for 800 with "lg" 1`] = `
 </div>
 `;
 
-exports[`useResponsive max should render properly for 800 with "md" 1`] = `null`;
+exports[`useResponsive > max > should render properly for %p with %p 800 md 1`] = `null`;
 
-exports[`useResponsive max should render properly for 1100 with "lg" 1`] = `null`;
+exports[`useResponsive > max > should render properly for %p with %p 1100 lg 1`] = `null`;
 
-exports[`useResponsive max should render properly for 1100 with "xl" 1`] = `
+exports[`useResponsive > max > should render properly for %p with %p 1100 xl 1`] = `
 <div>
   <h1>
     lg
@@ -112,11 +112,11 @@ exports[`useResponsive max should render properly for 1100 with "xl" 1`] = `
 </div>
 `;
 
-exports[`useResponsive max should render properly for 1280 with "xl" 1`] = `null`;
+exports[`useResponsive > max > should render properly for %p with %p 1280 xl 1`] = `null`;
 
-exports[`useResponsive min should render properly for 320 with "xs" and "landscape" 1`] = `null`;
+exports[`useResponsive > min > should render properly for %p with %p and %p 320 xs landscape 1`] = `null`;
 
-exports[`useResponsive min should render properly for 320 with "xs" and "portrait" 1`] = `
+exports[`useResponsive > min > should render properly for %p with %p and %p 320 xs portrait 1`] = `
 <div>
   <h1>
     xs
@@ -124,9 +124,9 @@ exports[`useResponsive min should render properly for 320 with "xs" and "portrai
 </div>
 `;
 
-exports[`useResponsive min should render properly for 400 with "sm" and "landscape" 1`] = `null`;
+exports[`useResponsive > min > should render properly for %p with %p and %p 400 sm landscape 1`] = `null`;
 
-exports[`useResponsive min should render properly for 400 with "sm" and "portrait" 1`] = `
+exports[`useResponsive > min > should render properly for %p with %p and %p 400 sm portrait 1`] = `
 <div>
   <h1>
     sm
@@ -134,9 +134,9 @@ exports[`useResponsive min should render properly for 400 with "sm" and "portrai
 </div>
 `;
 
-exports[`useResponsive min should render properly for 768 with "md" and "landscape" 1`] = `null`;
+exports[`useResponsive > min > should render properly for %p with %p and %p 768 md landscape 1`] = `null`;
 
-exports[`useResponsive min should render properly for 768 with "md" and "portrait" 1`] = `
+exports[`useResponsive > min > should render properly for %p with %p and %p 768 md portrait 1`] = `
 <div>
   <h1>
     md
@@ -144,7 +144,7 @@ exports[`useResponsive min should render properly for 768 with "md" and "portrai
 </div>
 `;
 
-exports[`useResponsive min should render properly for 1024 with "lg" and "landscape" 1`] = `
+exports[`useResponsive > min > should render properly for %p with %p and %p 1024 lg landscape 1`] = `
 <div>
   <h1>
     lg
@@ -152,9 +152,9 @@ exports[`useResponsive min should render properly for 1024 with "lg" and "landsc
 </div>
 `;
 
-exports[`useResponsive min should render properly for 1024 with "lg" and "portrait" 1`] = `null`;
+exports[`useResponsive > min > should render properly for %p with %p and %p 1024 lg portrait 1`] = `null`;
 
-exports[`useResponsive min should render properly for 1280 with "xl" and "landscape" 1`] = `
+exports[`useResponsive > min > should render properly for %p with %p and %p 1280 xl landscape 1`] = `
 <div>
   <h1>
     xl
@@ -162,9 +162,9 @@ exports[`useResponsive min should render properly for 1280 with "xl" and "landsc
 </div>
 `;
 
-exports[`useResponsive min should render properly for 1280 with "xl" and "portrait" 1`] = `null`;
+exports[`useResponsive > min > should render properly for %p with %p and %p 1280 xl portrait 1`] = `null`;
 
-exports[`useResponsive resize should update the matcher with a window.resize 1`] = `
+exports[`useResponsive > resize > should update the matcher with a window.resize 1`] = `
 <div>
   <h1>
     lg
@@ -172,7 +172,7 @@ exports[`useResponsive resize should update the matcher with a window.resize 1`]
 </div>
 `;
 
-exports[`useResponsive resize should update the matcher with a window.resize 2`] = `
+exports[`useResponsive > resize > should update the matcher with a window.resize 2`] = `
 <div>
   <h1>
     md

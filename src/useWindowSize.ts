@@ -9,8 +9,8 @@ export interface WindowSize {
 
 export function useWindowSize(debounce = 0) {
   const [size, setSize] = useState<WindowSize>({
-    height: canUseDOM ? window.innerHeight : 0,
-    width: canUseDOM ? window.innerWidth : 0,
+    height: canUseDOM() ? window.innerHeight : 0,
+    width: canUseDOM() ? window.innerWidth : 0,
   });
   const timeoutRef = useRef<number>(0);
 
@@ -26,8 +26,8 @@ export function useWindowSize(debounce = 0) {
   });
 
   useEffect(() => {
-    /* istanbul ignore next */
-    if (!canUseDOM) {
+    /* c8 ignore next 3 */
+    if (!canUseDOM()) {
       return () => undefined;
     }
 

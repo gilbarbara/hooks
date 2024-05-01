@@ -8,9 +8,15 @@ import { useResizeObserver } from '../src/useResizeObserver';
 
 const resizeObserver = mockResizeObserver();
 
-jest.useFakeTimers();
-
 describe('useResizeObserver', () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   const ref = { current: null } as MutableRefObject<Element | null>;
   const rootElement = document.createElement('div');
 
@@ -22,7 +28,7 @@ describe('useResizeObserver', () => {
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
@@ -68,14 +74,14 @@ describe('useResizeObserver', () => {
 
     act(() => {
       resizeObserver.resize(rootElement);
-      jest.advanceTimersByTime(50);
+      vi.advanceTimersByTime(50);
     });
 
     rerender();
 
     act(() => {
       resizeObserver.resize(rootElement);
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(result.current).toMatchSnapshot('second');
