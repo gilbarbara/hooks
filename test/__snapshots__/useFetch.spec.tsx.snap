@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useFetch should handle "skip" 1`] = `
+exports[`useFetch > should handle "skip" 1`] = `
 <div
   data-testid="content"
 />
 `;
 
-exports[`useFetch should handle hard failure 1`] = `
+exports[`useFetch > should handle hard failure 1`] = `
 <p
   data-testid="failure"
 >
@@ -14,7 +14,7 @@ exports[`useFetch should handle hard failure 1`] = `
 </p>
 `;
 
-exports[`useFetch should handle soft failure 1`] = `
+exports[`useFetch > should handle soft failure 1`] = `
 <p
   data-testid="failure"
 >
@@ -22,7 +22,7 @@ exports[`useFetch should handle soft failure 1`] = `
 </p>
 `;
 
-exports[`useFetch should handle success 1`] = `
+exports[`useFetch > should handle success 1`] = `
 <p
   data-testid="running"
 >
@@ -30,7 +30,7 @@ exports[`useFetch should handle success 1`] = `
 </p>
 `;
 
-exports[`useFetch should handle success 2`] = `
+exports[`useFetch > should handle success 2`] = `
 <ul
   data-testid="success"
 >

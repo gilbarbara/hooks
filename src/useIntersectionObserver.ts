@@ -24,7 +24,7 @@ export function useIntersectionObserver<T extends Element>(
   const disabled = value?.isIntersecting && once;
 
   const observer = useMemo(() => {
-    if (!canUseDOM) {
+    if (!canUseDOM()) {
       return {};
     }
 
@@ -43,7 +43,7 @@ export function useIntersectionObserver<T extends Element>(
   }, [delay, root, rootMargin, threshold]);
 
   useEffect(() => {
-    if (!canUseDOM || !(observer instanceof IntersectionObserver) || disabled) {
+    if (!canUseDOM() || !(observer instanceof IntersectionObserver) || disabled) {
       return () => undefined;
     }
 

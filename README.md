@@ -289,7 +289,7 @@ function Component() {
 **Reference**
 
 ```typescript
-useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+useIsomorphicLayoutEffect = canUseDOM() ? useLayoutEffect : useEffect;
 ```
 
 ### useLatest

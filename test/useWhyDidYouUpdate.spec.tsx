@@ -16,16 +16,16 @@ describe('useWhyDidYouUpdate', () => {
   const { log } = console;
 
   beforeAll(() => {
-    console.log = jest.fn();
-  });
-
-  afterAll(() => {
-    console.log = log;
+    vi.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
     // @ts-ignore
     console.log.mockReset();
+  });
+
+  afterAll(() => {
+    console.log = log;
   });
 
   it('should show the changes', () => {

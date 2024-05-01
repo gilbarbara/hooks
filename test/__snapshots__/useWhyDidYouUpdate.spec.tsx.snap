@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useWhyDidYouUpdate should show the changes 1`] = `<div />`;
+exports[`useWhyDidYouUpdate > should show the changes 1`] = `<div />`;
 
-exports[`useWhyDidYouUpdate should show the changes 2`] = `
+exports[`useWhyDidYouUpdate > should show the changes 2`] = `
 <div>
   {
   "version": {
@@ -13,4 +13,4 @@ exports[`useWhyDidYouUpdate should show the changes 2`] = `
 </div>
 `;
 
-exports[`useWhyDidYouUpdate should show the changes 3`] = `<div />`;
+exports[`useWhyDidYouUpdate > should show the changes 3`] = `<div />`;

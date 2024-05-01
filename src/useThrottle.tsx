@@ -35,7 +35,6 @@ export function useThrottle(
     }
 
     if (!timer.current) {
-      /* istanbul ignore else */
       if (leading) {
         fn();
       }

@@ -31,7 +31,6 @@ export function useScript(
   }, []);
 
   const onError = useCallback(() => {
-    /* istanbul ignore else */
     if (script.current) {
       script.current.remove();
     }
@@ -44,7 +43,7 @@ export function useScript(
 
   useEffect(
     () => {
-      if (!canUseDOM || script.current) {
+      if (!canUseDOM() || script.current) {
         return undefined;
       }
 

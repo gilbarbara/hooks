@@ -18,8 +18,8 @@ describe('useLatest()', () => {
   });
 
   it('should use the latest value', () => {
-    const fnA = jest.fn();
-    const fnB = jest.fn();
+    const fnA = vi.fn();
+    const fnB = vi.fn();
 
     const { rerender } = renderHook(
       ({ fn }) => {

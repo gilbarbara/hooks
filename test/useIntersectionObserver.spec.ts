@@ -5,8 +5,6 @@ import { useIntersectionObserver } from '../src/useIntersectionObserver';
 
 const intersectionObserver = mockIntersectionObserver();
 
-jest.useFakeTimers();
-
 describe('useIntersectionObserver', () => {
   const rootElement = document.createElement('div');
   const baseOptions = {
@@ -19,15 +17,17 @@ describe('useIntersectionObserver', () => {
   rootElement.innerHTML = 'Hello World';
 
   beforeAll(() => {
+    vi.useFakeTimers();
     document.body.appendChild(rootElement);
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
     document.body.removeChild(rootElement);
+    vi.useRealTimers();
   });
 
   it('should initialize with an element', () => {
@@ -56,7 +56,7 @@ describe('useIntersectionObserver', () => {
 
     act(() => {
       intersectionObserver.enterNode(rootElement);
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(result.current?.isIntersecting).toBe(true);
@@ -68,7 +68,7 @@ describe('useIntersectionObserver', () => {
 
     act(() => {
       intersectionObserver.leaveNode(rootElement);
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
 
     expect(result.current?.isIntersecting).toBe(false);

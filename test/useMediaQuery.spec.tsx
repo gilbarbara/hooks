@@ -1,18 +1,26 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 
 import matchMediaMock from './__fixtures__/matchMediaMock';
 
 import { useMediaQuery } from '../src/useMediaQuery';
 
 describe('useMediaQuery', () => {
-  it('should return a boolean', () => {
-    window.matchMedia = (query: string) => matchMediaMock(query, false);
+  const matches = false;
 
-    const { result } = renderHook(() => useMediaQuery('(min-width: 768px)'));
+  beforeAll(() => {
+    window.matchMedia = (query: string) => matchMediaMock(query, matches);
+  });
 
-    expect(result.current).toBe(false);
-
+  afterAll(() => {
     // @ts-expect-error
     delete window.matchMedia;
+  });
+
+  it('should return a boolean', async () => {
+    const { result } = renderHook(() => useMediaQuery('(min-width: 768px)'));
+
+    await waitFor(() => {
+      expect(result.current).toBe(false);
+    });
   });
 });

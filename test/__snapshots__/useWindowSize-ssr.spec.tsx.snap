@@ -1,9 +1,3 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useWindowSize-ssr should work without a DOM 1`] = `
-<div>
-  0
-  x
-  0
-</div>
-`;
+exports[`useWindowSize-ssr > should work without a DOM 1`] = `"<div>0<!-- -->x<!-- -->0</div>"`;

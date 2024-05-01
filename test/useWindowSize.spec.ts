@@ -2,9 +2,15 @@ import { act, renderHook } from '@testing-library/react';
 
 import { useWindowSize } from '../src/useWindowSize';
 
-jest.useFakeTimers();
-
 describe('useWindowSize', () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   it('should return the size', () => {
     const { result } = renderHook(() => useWindowSize());
 
@@ -20,13 +26,13 @@ describe('useWindowSize', () => {
     window.dispatchEvent(new Event('resize'));
 
     await act(async () => {
-      jest.advanceTimersByTime(50);
+      vi.advanceTimersByTime(50);
     });
 
     expect(result.current).toEqual({ height: 768, width: 1024 });
 
     await act(async () => {
-      jest.runOnlyPendingTimers();
+      vi.runOnlyPendingTimers();
     });
 
     expect(result.current).toEqual({ height: 1024, width: 768 });

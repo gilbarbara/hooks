@@ -3,9 +3,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { useThrottleValue } from '../src/useThrottleValue';
 
-jest.useFakeTimers();
-
-const mockFn = jest.fn();
+const mockFn = vi.fn();
 
 function Component(options: any) {
   const [text, setText] = React.useState('');
@@ -18,15 +16,29 @@ function Component(options: any) {
   return (
     <div>
       <input onChange={event => setText(event.target.value)} type="text" />
-      <p>Actual value: {text}</p>
-      <p>Throttle value: {throttledText}</p>
+      <p>
+        Actual value:
+        {text}
+      </p>
+      <p>
+        Throttle value:
+        {throttledText}
+      </p>
     </div>
   );
 }
 
 describe('useThrottleValue', () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+  });
+
   afterEach(() => {
     mockFn.mockReset();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
   });
 
   it('should throttle the value changes', () => {
@@ -43,7 +55,7 @@ describe('useThrottleValue', () => {
     expect(mockFn).toHaveBeenLastCalledWith('test');
 
     act(() => {
-      jest.advanceTimersByTime(500);
+      vi.advanceTimersByTime(500);
     });
 
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'testing' } });
@@ -68,7 +80,7 @@ describe('useThrottleValue', () => {
     expect(mockFn).toHaveBeenLastCalledWith('test');
 
     act(() => {
-      jest.advanceTimersByTime(500);
+      vi.advanceTimersByTime(500);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(3);
@@ -82,7 +94,7 @@ describe('useThrottleValue', () => {
     expect(mockFn).toHaveBeenLastCalledWith('testing');
 
     act(() => {
-      jest.advanceTimersByTime(500);
+      vi.advanceTimersByTime(500);
     });
 
     expect(mockFn).toHaveBeenCalledTimes(5);

@@ -27,7 +27,6 @@ export function useThrottleValue<T>(value: T, ms: number, options?: UseThrottleO
     }
 
     if (!timer.current && value !== throttledValue) {
-      /* istanbul ignore else */
       if (leading) {
         setThrottledValue(value);
       }

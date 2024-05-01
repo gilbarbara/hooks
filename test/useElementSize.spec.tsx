@@ -30,7 +30,7 @@ const computeStyle = {
   width: '200px',
 };
 
-const mockGetComputedStyle = jest.fn().mockImplementation(() => ({}));
+const mockGetComputedStyle = vi.fn().mockImplementation(() => ({}));
 
 describe('useElementSize', () => {
   const { getComputedStyle } = window;
@@ -44,7 +44,7 @@ describe('useElementSize', () => {
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {

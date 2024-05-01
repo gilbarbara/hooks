@@ -12,7 +12,7 @@ export function useResizeObserver<T extends Element>(target: Target<T>, debounce
   const isFirstCall = useRef(true);
 
   const observer = useMemo(() => {
-    if (!canUseDOM) {
+    if (!canUseDOM()) {
       return {};
     }
 
@@ -39,7 +39,7 @@ export function useResizeObserver<T extends Element>(target: Target<T>, debounce
   }, [target]);
 
   useIsomorphicLayoutEffect(() => {
-    if (!canUseDOM || !(observer instanceof ResizeObserver)) {
+    if (!canUseDOM() || !(observer instanceof ResizeObserver)) {
       return () => undefined;
     }
 
