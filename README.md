@@ -13,7 +13,7 @@ npm i @gilbarbara/hooks
 ## Hooks
 
 
-[useClickOutside](docs/useClickOutside.md) — Handle clicks outside a specific DOM element.
+[useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.
 [useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
 [useElementSize](docs/useElementSize.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
 [useFetch](docs/useFetch.md) — Make a request with fetch.

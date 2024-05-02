@@ -6,9 +6,7 @@ import { useClickOutside } from '../src/useClickOutside';
 const mockFn = vi.fn();
 
 function Component() {
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  useClickOutside(ref, mockFn);
+  const ref = useClickOutside<HTMLDivElement>(mockFn);
 
   return (
     <>
@@ -22,7 +20,7 @@ function Component() {
 }
 
 describe('useClickOutside', () => {
-  it('should call the callback when clicking outside', () => {
+  it('should execute the callback when clicking outside', () => {
     render(<Component />);
 
     screen.getByRole('button', { name: 'Send' }).click();
