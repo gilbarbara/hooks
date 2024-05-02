@@ -1,22 +1,23 @@
 # useEffectOnce
 
-Run an effect only once.
+Run the effect only once.
 
 ## Usage
 
 
 ```tsx
-import React from 'react';
 import { useEffectOnce } from '@gilbarbara/hooks';
 
 function Component() {
-  const [value, setValue] = React.useState(0);
-
   useEffectOnce(() => {
-    setValue(1);
+    console.log('Running effect once on mount')
+
+    return () => {
+      console.log('Running clean-up of effect on unmount')
+    }
   });
 
-  return <div data-testid="main">{value}</div>;
+  return null;
 }
 ```
 
