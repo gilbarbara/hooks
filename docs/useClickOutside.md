@@ -1,23 +1,33 @@
 # useClickOutside
 
-Handle clicks outside a specific DOM element.
+Execute the callback when clicking outside the target element.
 
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useState } from 'react';
 import { useClickOutside } from '@gilbarbara/hooks';
 
 function Component() {
-  const ref = React.useRef<HTMLDivElement>(null);
-  useClickOutside(ref, () => {
+  const [isActive, setActive]= useState(false);
+  const ref = useClickOutside(() => {
     console.log('clicked outside');
+    setActive(false);
   });
+  
+  const handleClick = () => {
+    setActive(true);
+  };
+  
+  const style = {
+    backgroundColor: isActive ? 'rgba(255, 0, 0, 0.3)' : 'transparent',
+    padding: 30
+  };
 
   return (
-    <div ref={ref}>
-      <button type="submit">Send</button>
-      <button type="button">Reset</button>
+    <div ref={ref} style={style}>
+      <button onClick={handleClick} type="submit">Send</button>
+      <button onClick={handleClick} type="button">Reset</button>
     </div>
   );
 }
@@ -26,5 +36,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useClickOutside(ref: RefObject<HTMLElement>, callback: () => void): void
+useClickOutside<T extends Element = HTMLElement>(callback: () => void): RefObject<T>
 ```
