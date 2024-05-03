@@ -10,6 +10,7 @@ export default function UseResizeObserver() {
   const entry = useResizeObserver(ref, 100);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log({ entry });
   }, [entry]);
 

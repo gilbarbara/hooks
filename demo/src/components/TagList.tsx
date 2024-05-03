@@ -31,7 +31,7 @@ export default function TagList({ data, invertTag }: Props): JSX.Element {
     <Spacer distribution="center">
       <Spacer direction="vertical" distribution="end">
         {columns.left.map(row => {
-          const key = <Tag shade="lighter">{row.key}</Tag>;
+          const key = <Tag bg="primary.100">{row.key}</Tag>;
           const value = <Text>{row.value}</Text>;
 
           return (
@@ -45,7 +45,7 @@ export default function TagList({ data, invertTag }: Props): JSX.Element {
       <Spacer direction="vertical">
         {columns.right.map(row => (
           <Spacer key={row.key} gap="xs">
-            <Tag shade="lighter">{row.key}</Tag>
+            <Tag bg="primary.100">{row.key}</Tag>
             <Text>{row.value}</Text>
           </Spacer>
         ))}

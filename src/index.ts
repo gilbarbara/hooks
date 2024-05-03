@@ -1,12 +1,12 @@
 export { useClickOutside } from './useClickOutside';
 export { useEffectOnce } from './useEffectOnce';
-export { useElementSize, type ElementSize } from './useElementSize';
 export { useFetch, type FetchStatus } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsFirstRun } from './useIsFirstRun';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
+export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';

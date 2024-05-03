@@ -2,7 +2,7 @@ import { MutableRefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
-import resizeObserverResponse from './__fixtures__/resizeObserverResponse.json';
+import { mockResizeObserveResponse } from './__fixtures__/data';
 
 import { useResizeObserver } from '../src/useResizeObserver';
 
@@ -38,7 +38,7 @@ describe('useResizeObserver', () => {
   it('should initialize with an element', () => {
     const { result } = renderHook(() => useResizeObserver(rootElement));
 
-    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+    resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 
     act(() => {
       resizeObserver.resize();
@@ -50,7 +50,7 @@ describe('useResizeObserver', () => {
   it('should initialize with a ref', () => {
     const { result } = renderHook(() => useResizeObserver(ref));
 
-    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+    resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 
     act(() => {
       resizeObserver.resize();
@@ -62,7 +62,7 @@ describe('useResizeObserver', () => {
   it('should initialize with a string selector and "debounce"', async () => {
     const { rerender, result } = renderHook(() => useResizeObserver('#root', 100));
 
-    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+    resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 
     act(() => {
       resizeObserver.resize();

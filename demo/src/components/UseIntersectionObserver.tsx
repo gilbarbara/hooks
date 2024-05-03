@@ -7,6 +7,7 @@ export default function UseIntersectionObserver() {
   const intersectionEntry = useIntersectionObserver(ref);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log({ intersectionEntry });
   }, [intersectionEntry]);
 

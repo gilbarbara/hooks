@@ -1,15 +1,14 @@
 import { useState } from 'react';
 
+import { defaultElementDimensions } from './defaults';
 import { Target } from './types';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useResizeObserver } from './useResizeObserver';
 import { canUseDOM, getElement } from './utils';
 
-export interface ElementSize {
-  height: number;
-  innerHeight: number;
-  innerWidth: number;
-  width: number;
+export interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
+  absoluteHeight: number;
+  absoluteWidth: number;
 }
 
 function parseFloatValue(value: string) {
@@ -18,50 +17,51 @@ function parseFloatValue(value: string) {
   return Number.isNaN(parsed) ? 0 : parsed;
 }
 
-function getElementSize(element: Element | null): ElementSize {
+function getElementMeasure(element: Element | null): UseMeasureResult {
   if (!canUseDOM() || !element) {
-    return {
-      height: 0,
-      innerHeight: 0,
-      innerWidth: 0,
-      width: 0,
-    };
+    return defaultElementDimensions;
   }
+
+  const { bottom, height, left, right, top, width, x, y } = element.getBoundingClientRect();
 
   const {
     borderBottom,
     borderLeft,
     borderRight,
     borderTop,
-    height,
     paddingBottom,
     paddingLeft,
     paddingRight,
     paddingTop,
-    width,
   } = getComputedStyle(element);
 
   return {
-    height: parseFloatValue(height),
-    innerHeight:
-      parseFloatValue(height) -
+    absoluteHeight:
+      height -
       parseFloatValue(paddingTop) -
       parseFloatValue(paddingBottom) -
       parseFloatValue(borderTop) -
       parseFloatValue(borderBottom),
-    innerWidth:
-      parseFloatValue(width) -
+    absoluteWidth:
+      width -
       parseFloatValue(paddingLeft) -
       parseFloatValue(paddingRight) -
       parseFloatValue(borderLeft) -
       parseFloatValue(borderRight),
-    width: parseFloatValue(width),
+    bottom,
+    height,
+    left,
+    right,
+    top,
+    width,
+    x,
+    y,
   };
 }
 
-export function useElementSize<T extends Element>(target: Target<T>, debounce = 0): ElementSize {
+export function useMeasure<T extends Element>(target: Target<T>, debounce = 0): UseMeasureResult {
   const [element, setElement] = useState(getElement(target));
-  const [dimensions, setDimensions] = useState<ElementSize>(getElementSize(element));
+  const [dimensions, setDimensions] = useState<UseMeasureResult>(getElementMeasure(element));
 
   const entry = useResizeObserver(element, debounce);
 
@@ -69,7 +69,7 @@ export function useElementSize<T extends Element>(target: Target<T>, debounce = 
     const nextElement = getElement(target);
 
     setElement(nextElement);
-    setDimensions(getElementSize(nextElement));
+    setDimensions(getElementMeasure(nextElement));
   }, [target]);
 
   useIsomorphicLayoutEffect(() => {
@@ -77,10 +77,21 @@ export function useElementSize<T extends Element>(target: Target<T>, debounce = 
       return;
     }
 
-    const { height, width } = entry.contentRect;
+    const { bottom, height, left, right, top, width, x, y } = entry.contentRect;
     const { blockSize, inlineSize } = entry.borderBoxSize[0];
 
-    setDimensions({ height: blockSize, innerHeight: height, innerWidth: width, width: inlineSize });
+    setDimensions({
+      absoluteHeight: blockSize,
+      absoluteWidth: inlineSize,
+      bottom,
+      height,
+      left,
+      right,
+      top,
+      width,
+      x,
+      y,
+    });
   }, [entry]);
 
   return dimensions;

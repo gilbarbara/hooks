@@ -2,9 +2,13 @@ import { MutableRefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
-import resizeObserverResponse from './__fixtures__/resizeObserverResponse.json';
+import {
+  mockGetBoundingClientRectResponse,
+  mockGetComputedStyleResponse,
+  mockResizeObserveResponse,
+} from './__fixtures__/data';
 
-import { ElementSize, useElementSize } from '../src/useElementSize';
+import { useMeasure, UseMeasureResult } from '../src/useMeasure';
 
 const resizeObserver = mockResizeObserver();
 
@@ -17,29 +21,24 @@ function createElement(id = 'root') {
   return rootElement;
 }
 
-const computeStyle = {
-  borderBottom: '0px',
-  borderLeft: '0px',
-  borderRight: '0px',
-  borderTop: '0px',
-  height: '100px',
-  paddingBottom: '0px',
-  paddingLeft: '0px',
-  paddingRight: '0px',
-  paddingTop: '0px',
-  width: '200px',
-};
+const getComputedStyleData = mockGetComputedStyleResponse;
 
-const mockGetComputedStyle = vi.fn().mockImplementation(() => ({}));
+const { getComputedStyle } = window;
 
-describe('useElementSize', () => {
-  const { getComputedStyle } = window;
+vi.spyOn(window, 'getComputedStyle').mockImplementation(el => ({
+  ...getComputedStyle(el),
+  ...getComputedStyleData,
+}));
+
+vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
+  () => mockGetBoundingClientRectResponse,
+);
+
+describe('useMeasure', () => {
   const ref = { current: null } as MutableRefObject<Element | null>;
   const rootElement = createElement();
 
   beforeAll(() => {
-    window.getComputedStyle = mockGetComputedStyle;
-
     document.body.appendChild(rootElement);
   });
 
@@ -48,7 +47,7 @@ describe('useElementSize', () => {
   });
 
   afterAll(() => {
-    window.getComputedStyle = getComputedStyle;
+    vi.restoreAllMocks();
 
     document.body.removeChild(rootElement);
   });
@@ -56,21 +55,21 @@ describe('useElementSize', () => {
   it.each([{ target: 'element' }, { target: '#root' }, { target: 'ref' }])(
     'should return the dimensions with a "$target" target',
     ({ target }) => {
-      let result: MutableRefObject<ElementSize> | null = null;
+      let result: MutableRefObject<UseMeasureResult> | null = null;
       let rerender: () => void;
 
       if (target === 'ref') {
         ref.current = rootElement;
-        ({ rerender, result } = renderHook(() => useElementSize(ref)));
+        ({ rerender, result } = renderHook(() => useMeasure(ref)));
       } else if (target.startsWith('#')) {
-        ({ rerender, result } = renderHook(() => useElementSize(target)));
+        ({ rerender, result } = renderHook(() => useMeasure(target)));
       } else {
-        ({ rerender, result } = renderHook(() => useElementSize(rootElement)));
+        ({ rerender, result } = renderHook(() => useMeasure(rootElement)));
       }
 
       expect(result?.current).toMatchSnapshot('initial');
 
-      resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+      resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 
       act(() => {
         resizeObserver.resize();
@@ -87,11 +86,11 @@ describe('useElementSize', () => {
   );
 
   it('should re-initialize if target changes', async () => {
-    const { rerender, result } = renderHook((target: string = '#app') => useElementSize(target));
+    const { rerender, result } = renderHook((target: string = '#app') => useMeasure(target));
 
     expect(result.current).toMatchSnapshot('initial');
-    mockGetComputedStyle.mockImplementation(() => computeStyle);
-    resizeObserver.mockElementSize(rootElement, resizeObserverResponse);
+    window.getComputedStyle = el => ({ ...getComputedStyle(el), ...getComputedStyleData });
+    resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 
     rerender('#root');
 
@@ -108,7 +107,7 @@ describe('useElementSize', () => {
   });
 
   it('should return the default dimensions with an invalid string selector', () => {
-    const { rerender, result } = renderHook(() => useElementSize('#app'));
+    const { rerender, result } = renderHook(() => useMeasure('#app'));
 
     expect(result.current).toMatchSnapshot('initial');
 

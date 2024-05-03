@@ -8,7 +8,7 @@ export default function UseResponsive() {
     <Box>
       <H2>UseResponsive</H2>
       <Box as="header" mb="md">
-        <H3 variant="primary">
+        <H3 color="primary">
           {size} - {orientation}
         </H3>
       </Box>

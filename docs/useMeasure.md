@@ -1,16 +1,15 @@
-# useElementSize
-Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.   
-Returns an `ElementSize` object.
+# useMeasure
+Get element measurements using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
 
 ## Usage
 
 ```tsx
 import React from 'react';
-import { useElementSize } from '@gilbarbara/hooks';
+import { useMeasure } from '@gilbarbara/hooks';
 
 function Component() {
   const ref = React.useRef<HTMLDivElement>(null);
-  const dimensions = useElementSize(ref);
+  const dimensions = useMeasure(ref);
 
   return (
     <div ref={ref}>
@@ -23,17 +22,15 @@ function Component() {
 ## Reference
 
 ```typescript
-interface ElementSize {
-  height: number;
-  innerHeight: number;
-  innerWidth: number;
-  width: number;
+interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
+  absoluteHeight: number;
+  absoluteWidth: number;
 }
 
-useElementSize<T extends Element>(
+useMeasure<T extends Element>(
   target: RefObject<T> | T | null | string,
   debounce = 0,
-): ElementSize;
+): UseMeasureResult;
 ```
 
 > This hook uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver), so if you want to support

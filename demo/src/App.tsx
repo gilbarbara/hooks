@@ -3,8 +3,8 @@ import './styles.css';
 import { Divider, H1, Page } from '@gilbarbara/components';
 
 import UseClickOutside from './components/UseClickOutside';
-import UseElementSize from './components/UseElementSize';
 import UseIntersectionObserver from './components/UseIntersectionObserver';
+import UseMeasure from './components/UseMeasure';
 import UseMediaQuery from './components/UseMediaQuery';
 import UseResizeObserver from './components/UseResizeObserver';
 import UseResponsive from './components/UseResponsive';
@@ -15,7 +15,7 @@ export default function Hooks(): JSX.Element {
     <Page align="center">
       <H1>@gilbarbara/hooks</H1>
       <div>
-        <UseElementSize />
+        <UseMeasure />
         <Divider my="jumbo" />
         <UseWindowSize />
         <Divider my="jumbo" />
