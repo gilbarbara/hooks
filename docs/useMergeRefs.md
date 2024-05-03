@@ -7,13 +7,13 @@ Returns a `React.RefCallback`.
 
 ```tsx
 import React from 'react';
-import { useElementSize, useMergeRefs, useResizeObserver } from '@gilbarbara/hooks';
+import { UseMeasure, useMergeRefs, useResizeObserver } from '@gilbarbara/hooks';
 
 function Component() {
   const observerRef = React.useRef<HTMLDivElement>(null);
   const sizeRef = React.useRef<HTMLDivElement>(null);
   const ref = useMergeRefs(observerRef, sizeRef);
-  const dimensions = useElementSize(sizeRef, 200);
+  const dimensions = UseMeasure(sizeRef, 200);
 
   useResizeObserver(observerRef, entry => console.log(entry), 200);
 

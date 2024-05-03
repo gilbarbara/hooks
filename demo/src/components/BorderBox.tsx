@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { Box, BoxProps } from '@gilbarbara/components';
+import { Box, Props } from '@gilbarbara/components';
 
-const BorderBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+const BorderBox = forwardRef<HTMLDivElement, Props.BoxProps>((props, ref) => {
   return (
     <Box
       ref={ref}
@@ -10,8 +10,7 @@ const BorderBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
           side: 'all',
           size: 2,
           style: 'dotted',
-          shade: 'mid',
-          variant: 'primary',
+          color: 'primary.500',
         },
       ]}
       mx="auto"

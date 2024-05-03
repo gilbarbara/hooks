@@ -6,30 +6,30 @@ exports[`useResizeObserver > should initialize with a string selector and "debou
 {
   "borderBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentRect": {
-    "bottom": 200,
-    "height": 200,
+    "bottom": 100,
+    "height": 100,
     "left": 0,
-    "right": 200,
+    "right": 640,
     "top": 0,
-    "width": 200,
+    "width": 640,
     "x": 0,
     "y": 0,
   },
   "devicePixelContentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "target": <div
@@ -44,30 +44,30 @@ exports[`useResizeObserver > should initialize with a string selector and "debou
 {
   "borderBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentRect": {
-    "bottom": 200,
-    "height": 200,
+    "bottom": 100,
+    "height": 100,
     "left": 0,
-    "right": 200,
+    "right": 640,
     "top": 0,
-    "width": 200,
+    "width": 640,
     "x": 0,
     "y": 0,
   },
   "devicePixelContentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "target": <div
@@ -82,30 +82,30 @@ exports[`useResizeObserver > should initialize with an element 1`] = `
 {
   "borderBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "contentRect": {
-    "bottom": 200,
-    "height": 200,
+    "bottom": 100,
+    "height": 100,
     "left": 0,
-    "right": 200,
+    "right": 640,
     "top": 0,
-    "width": 200,
+    "width": 640,
     "x": 0,
     "y": 0,
   },
   "devicePixelContentBoxSize": [
     {
-      "blockSize": 200,
-      "inlineSize": 200,
+      "blockSize": 100,
+      "inlineSize": 640,
     },
   ],
   "target": <div
