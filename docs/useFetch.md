@@ -1,24 +1,23 @@
 # useFetch
 Make a request with fetch.  
-Returns an object with  `data`, `error`,  and `status`.
+It supports retries, backoff, and more.
 
 ## Usage
 
 ```tsx
 import React from 'react';
-import { useFetch } from '@gilbarbara/hooks';
+import { useFetch, USE_FETCH_STATUS, UseFetchStatus } from '@gilbarbara/hooks';
 
 function Component() {
-  const { data, error, status } = useFetch(
+  const { data, error, isError, isSuccesss status } = useFetch(
     'https://api.github.com/search/repositories?q=react&sort=stars',
-    true // you can delay the request until something finishes
   );
 
   return (
     <div>
-      {status === 'failure' && <p>{error?.toString()}</p>}
-      {status === 'success' && <p>{data}</p>}
-      {status === 'running' && <p>Loading</p>}
+      {isError() && <p>{error?.toString()}</p>}
+      {isSuccess() && <p>{data}</p>}
+      {status === USE_FETCH_STATUS.PENDING && <p>Loading</p>}
     </div>
   );
 }
@@ -27,22 +26,73 @@ function Component() {
 ## Reference
 
 ```typescript
-type FetchStatus = 'idle' | 'running' | 'success' | 'failure';
+
+const USE_FETCH_STATUS = {
+  IDLE: 'IDLE',
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+} as const;
+
+type UseFetchStatus = keyof typeof USE_FETCH_STATUS;
 
 interface UseFetchOptions {
-  headers?: PlainObject;
-  method?: string;
+  body?: BodyInit | Record<string, any>;
+  headers?: Record<string, string>;
+  /**
+   * HTTP method.
+   * @default: 'GET'
+   */
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'CONNECT' | 'TRACE';
+  /**
+   * Request mode.
+   * @default: 'cors'
+   */
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
-  body?: BodyInit;
+  /**
+   * Number of retries.
+   * @default: 3
+   */
+  retry?: number | false;
+  /**
+   * Time to wait before retrying.
+   * A function like attempt => Math.min(attempt > 1 ? 2 ** attempt * 1000 : 1000, 30 * 1000) applies exponential backoff.
+   * A function like attempt => attempt * 1000 applies linear backoff.
+   * @default: attempt => attempt * 1000
+   */
+  retryDelay?: number | ((attempt: number) => number);
+  /**
+   * Request type.
+   * @default: 'json'
+   */
   type?: 'json' | 'urlencoded';
   url: string;
+  /**
+   * Wait for the user to trigger the request.
+   * @default: false
+   */
+  wait?: boolean;
 }
 
-interface UseFetchResponse<T> {
-  data?: T;
+interface UseFetchError extends Error {
+  response?: unknown;
+  status?: number;
+}
+
+interface UseFetchState<TDataType> {
+  data?: TDataType;
   error?: ResponseError;
   status: FetchStatus;
 }
 
-useFetch<T = unknown>(urlOrOptions: string | UseFetchOptions, wait = false): UseFetchResponse<T>;
+interface UseFetchResult<TDataType> extends UseFetchState<TDataType> {
+  isError: () => boolean;
+  isFetched: () => boolean;
+  isLoading: () => boolean;
+  isPaused: () => boolean;
+  isSuccess: () => boolean;
+  refetch: (eraseData?: boolean) => void;
+}
+
+useFetch<TDataType = unknown>(urlOrOptions: string | UseFetchOptions): UseFetchResult<TDataType>;
 ```

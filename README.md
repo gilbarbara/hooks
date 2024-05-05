@@ -15,7 +15,7 @@ npm i @gilbarbara/hooks
 
 [useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.
 [useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
-[useFetch](docs/useFetch.md) — Make a request with fetch.
+[useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
 [useIsFirstRun](docs/useIsFirstRun.md) — Detect if it is the first execution.
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted before changing the state.

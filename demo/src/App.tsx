@@ -3,6 +3,7 @@ import './styles.css';
 import { Divider, H1, Page } from '@gilbarbara/components';
 
 import UseClickOutside from './examples/UseClickOutside';
+import UseFetch from './examples/UseFetch';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
@@ -16,6 +17,8 @@ export default function Hooks() {
       <H1>@gilbarbara/hooks</H1>
       <div>
         <UseClickOutside />
+        <Divider my="jumbo" />
+        <UseFetch />
         <Divider my="jumbo" />
         <UseIntersectionObserver />
         <Divider my="jumbo" />

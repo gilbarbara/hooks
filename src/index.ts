@@ -1,6 +1,12 @@
 export { useClickOutside } from './useClickOutside';
 export { useEffectOnce } from './useEffectOnce';
-export { useFetch, type FetchStatus } from './useFetch';
+export {
+  useFetch,
+  USE_FETCH_STATUS,
+  type UseFetchOptions,
+  type UseFetchResult,
+  type UseFetchStatus,
+} from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsFirstRun } from './useIsFirstRun';
 export { useIsMounted } from './useIsMounted';
