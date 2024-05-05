@@ -13,6 +13,7 @@ const BorderBox = forwardRef<HTMLDivElement, Props.BoxProps>((props, ref) => {
           color: 'primary.500',
         },
       ]}
+      data-component-name="BorderBox"
       mx="auto"
       padding="md"
       radius="md"

@@ -1,9 +1,10 @@
 import { useRef } from 'react';
-import { Box, H2 } from '@gilbarbara/components';
+import { Box } from '@gilbarbara/components';
 import { useMeasure } from '@gilbarbara/hooks';
 
-import BorderBox from './BorderBox';
-import TagList from './TagList';
+import BorderBox from '../components/BorderBox';
+import Heading from '../components/Heading';
+import TagList from '../components/TagList';
 
 export default function UseMeasure() {
   const sizeRef = useRef<HTMLDivElement>(null);
@@ -11,9 +12,9 @@ export default function UseMeasure() {
 
   return (
     <Box padding="md">
-      <H2>useMeasure</H2>
+      <Heading>useMeasure</Heading>
 
-      <BorderBox ref={sizeRef}>
+      <BorderBox ref={sizeRef} maxWidth={400}>
         <TagList data={data} />
       </BorderBox>
     </Box>

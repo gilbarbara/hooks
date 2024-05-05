@@ -11,7 +11,7 @@ interface Row {
   value: ReactNode;
 }
 
-export default function TagList({ data, invertTag }: Props): JSX.Element {
+export default function TagList({ data, invertTag }: Props) {
   const columns = Object.entries(data).reduce<{ left: Row[]; right: Row[] }>(
     (acc, [key, value], index) => {
       const isEven = index % 2 === 0;
@@ -28,11 +28,11 @@ export default function TagList({ data, invertTag }: Props): JSX.Element {
   );
 
   return (
-    <Spacer distribution="center">
+    <Spacer data-component-name="TagList" distribution="center">
       <Spacer direction="vertical" distribution="end">
         {columns.left.map(row => {
           const key = <Tag bg="primary.100">{row.key}</Tag>;
-          const value = <Text>{row.value}</Text>;
+          const value = <Text>{row.value?.toString()}</Text>;
 
           return (
             <Spacer key={row.key} gap="xs">
@@ -46,7 +46,7 @@ export default function TagList({ data, invertTag }: Props): JSX.Element {
         {columns.right.map(row => (
           <Spacer key={row.key} gap="xs">
             <Tag bg="primary.100">{row.key}</Tag>
-            <Text>{row.value}</Text>
+            <Text>{row.value?.toString()}</Text>
           </Spacer>
         ))}
       </Spacer>
