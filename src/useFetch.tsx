@@ -1,28 +1,72 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { PlainObject } from './types';
-import { isPlainObject, isString, isURL } from './utils';
+import { isPlainObject, isURL } from './utils';
 
-export type FetchStatus = 'idle' | 'running' | 'success' | 'failure';
+export const USE_FETCH_STATUS = {
+  IDLE: 'IDLE',
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+} as const;
 
-interface ResponseError extends Error {
+export type UseFetchStatus = keyof typeof USE_FETCH_STATUS;
+
+interface UseFetchError extends Error {
   response?: unknown;
   status?: number;
 }
 
-interface UseFetchOptions {
-  body?: BodyInit;
-  headers?: PlainObject;
-  method?: string;
+export interface UseFetchOptions {
+  body?: BodyInit | Record<string, any>;
+  headers?: PlainObject<string>;
+  /**
+   * HTTP method.
+   * @default: 'GET'
+   */
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'CONNECT' | 'TRACE';
+  /**
+   * Request mode.
+   * @default: 'cors'
+   */
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  /**
+   * Number of retries.
+   */
+  retry?: number;
+  /**
+   * Time to wait before retrying.
+   * A function like attempt => Math.min(attempt > 1 ? 2 ** attempt * 1000 : 1000, 30 * 1000) applies exponential backoff.
+   * A function like attempt => attempt * 1000 applies linear backoff.
+   * @default: attempt => attempt * 1000
+   */
+  retryDelay?: number | ((attempt: number) => number);
+  /**
+   * Request type.
+   * @default: 'json'
+   */
   type?: 'json' | 'urlencoded';
   url: string;
+  /**
+   * Wait for the user to trigger the request.
+   * @default: false
+   */
+  wait?: boolean;
 }
 
-interface UseFetchResponse<T> {
-  data?: T;
-  error?: ResponseError;
-  status: FetchStatus;
+interface UseFetchState<TDataType> {
+  data?: TDataType;
+  error?: UseFetchError;
+  status: UseFetchStatus;
+}
+
+export interface UseFetchResult<TDataType> extends UseFetchState<TDataType> {
+  isError: () => boolean;
+  isFetched: () => boolean;
+  isLoading: () => boolean;
+  isPaused: () => boolean;
+  isSuccess: () => boolean;
+  refetch: (eraseData?: boolean) => void;
 }
 
 async function request(options: UseFetchOptions): Promise<any> {
@@ -45,7 +89,7 @@ async function request(options: UseFetchOptions): Promise<any> {
     cache: 'no-store' as const,
     headers: {
       Accept: 'application/json',
-      'Content-Type': type ? contentTypes[type] : 'application/json',
+      'Content-Type': contentTypes[type],
       ...headers,
     },
     method,
@@ -53,7 +97,11 @@ async function request(options: UseFetchOptions): Promise<any> {
     credentials: undefined,
   };
 
-  params.body = body && !isString(body) && type === 'json' ? JSON.stringify(body) : body;
+  if (body) {
+    params.body = (
+      isPlainObject(body) && type === 'json' ? JSON.stringify(body) : body
+    ) as BodyInit;
+  }
 
   return fetch(url, params).then(async response => {
     const text = await response.text();
@@ -66,7 +114,7 @@ async function request(options: UseFetchOptions): Promise<any> {
     }
 
     if (response.status > 299) {
-      const error = new Error(response.statusText) as ResponseError;
+      const error = new Error(response.statusText) as UseFetchError;
 
       error.status = response.status;
       error.response = content;
@@ -78,20 +126,72 @@ async function request(options: UseFetchOptions): Promise<any> {
   });
 }
 
-export function useFetch<T = unknown>(
+export function useFetch<TDataType = unknown>(
   urlOrOptions: string | UseFetchOptions,
-  skip = false,
-): UseFetchResponse<T> {
+): UseFetchResult<TDataType> {
   const isActive = useRef(false);
-  const [state, setState] = useState<UseFetchResponse<T>>({
+  const retryCount = useRef(0);
+  const [{ data, error, status }, setState] = useState<UseFetchState<TDataType>>({
     data: undefined,
     error: undefined,
-    status: 'idle',
+    status: USE_FETCH_STATUS.IDLE,
   });
+  const {
+    retry = 0,
+    retryDelay = (attempt: number) => attempt * 1000,
+    wait = false,
+    ...options
+  } = isURL(urlOrOptions)
+    ? ({
+        type: 'json',
+        url: urlOrOptions,
+      } as const)
+    : urlOrOptions;
 
-  if (!isPlainObject(urlOrOptions) && !isURL(urlOrOptions)) {
+  if (!isPlainObject(options) || !isURL(options.url)) {
     throw new Error('Expected an options object or URL');
   }
+
+  const getData = useCallback(
+    (eraseData?: boolean) => {
+      setState(s => ({
+        ...s,
+        data: eraseData ? undefined : s.data,
+        error: undefined,
+        status: USE_FETCH_STATUS.LOADING,
+      }));
+
+      request(options)
+        .then(response => {
+          if (isActive.current) {
+            setState(s => ({
+              ...s,
+              data: response,
+              status: USE_FETCH_STATUS.SUCCESS,
+            }));
+          }
+        })
+        .catch(responseError => {
+          if (isActive.current) {
+            setState(s => ({
+              ...s,
+              error: responseError,
+              status: USE_FETCH_STATUS.ERROR,
+            }));
+          }
+
+          if (retry && retryCount.current < retry) {
+            retryCount.current += 1;
+
+            setTimeout(
+              getData,
+              typeof retryDelay === 'function' ? retryDelay(retryCount.current) : retryDelay,
+            );
+          }
+        });
+    },
+    [options, retry, retryDelay],
+  );
 
   useEffect(() => {
     isActive.current = true;
@@ -102,40 +202,37 @@ export function useFetch<T = unknown>(
   }, []);
 
   useEffect(() => {
-    if (state.status === 'idle' && !skip) {
-      setState(s => ({
-        ...s,
-        status: 'running',
-      }));
-
-      request(
-        isURL(urlOrOptions)
-          ? {
-              type: 'json',
-              url: urlOrOptions,
-            }
-          : urlOrOptions,
-      )
-        .then(data => {
-          if (isActive.current) {
-            setState(s => ({
-              ...s,
-              data,
-              status: 'success',
-            }));
-          }
-        })
-        .catch(error => {
-          if (isActive.current) {
-            setState(s => ({
-              ...s,
-              error,
-              status: 'failure',
-            }));
-          }
-        });
+    if (status === USE_FETCH_STATUS.IDLE && !wait) {
+      getData();
     }
-  }, [state, urlOrOptions, skip]);
+  }, [getData, status, wait]);
 
-  return state;
+  const isError = useCallback(() => status === USE_FETCH_STATUS.ERROR, [status]);
+
+  const isFetched = useCallback(
+    () => ([USE_FETCH_STATUS.SUCCESS, USE_FETCH_STATUS.ERROR] as UseFetchStatus[]).includes(status),
+    [status],
+  );
+
+  const isLoading = useCallback(() => status === USE_FETCH_STATUS.LOADING, [status]);
+
+  const isPaused = useCallback(() => status === USE_FETCH_STATUS.IDLE && wait, [status, wait]);
+
+  const isSuccess = useCallback(() => status === USE_FETCH_STATUS.SUCCESS, [status]);
+  const refetch = useCallback((eraseData = false) => getData(eraseData), [getData]);
+
+  return useMemo(
+    () => ({
+      data,
+      error,
+      isError,
+      isFetched,
+      isLoading,
+      isPaused,
+      isSuccess,
+      refetch,
+      status,
+    }),
+    [data, error, isError, isFetched, isLoading, isPaused, isSuccess, refetch, status],
+  );
 }
