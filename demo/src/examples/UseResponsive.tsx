@@ -1,12 +1,14 @@
-import { Box, H2, H3, H4 } from '@gilbarbara/components';
+import { Box, H3, H4 } from '@gilbarbara/components';
 import { useResponsive } from '@gilbarbara/hooks';
+
+import Heading from '../components/Heading';
 
 export default function UseResponsive() {
   const { between, max, min, orientation, size } = useResponsive();
 
   return (
     <Box>
-      <H2>UseResponsive</H2>
+      <Heading>UseResponsive</Heading>
       <Box as="header" mb="md">
         <H3 color="primary">
           {size} - {orientation}

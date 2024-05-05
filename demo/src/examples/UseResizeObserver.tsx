@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Box, H2 } from '@gilbarbara/components';
+import { Box } from '@gilbarbara/components';
 import { useResizeObserver } from '@gilbarbara/hooks';
 
-import BorderBox from './BorderBox';
-import TagList from './TagList';
+import BorderBox from '../components/BorderBox';
+import Heading from '../components/Heading';
+import TagList from '../components/TagList';
 
 export default function UseResizeObserver() {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,9 +19,9 @@ export default function UseResizeObserver() {
 
   return (
     <Box>
-      <H2>useResizeObserver</H2>
+      <Heading>useResizeObserver</Heading>
 
-      <BorderBox ref={ref} minHeight="10vh" width="50vw">
+      <BorderBox ref={ref} maxWidth={400} minHeight="10vh">
         {entry && (
           <TagList
             data={{

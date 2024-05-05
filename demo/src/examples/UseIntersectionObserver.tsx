@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Box, H2, Paragraph } from '@gilbarbara/components';
+import { Box, Paragraph } from '@gilbarbara/components';
 import { useIntersectionObserver } from '@gilbarbara/hooks';
+
+import Heading from '../components/Heading';
 
 export default function UseIntersectionObserver() {
   const ref = useRef<HTMLParagraphElement>(null);
@@ -13,7 +15,7 @@ export default function UseIntersectionObserver() {
 
   return (
     <Box>
-      <H2>useIntersectionObserver</H2>
+      <Heading>useIntersectionObserver</Heading>
 
       <Paragraph bold mb="xxl">
         {intersectionEntry?.isIntersecting ? 'Visible' : 'Hidden'}
