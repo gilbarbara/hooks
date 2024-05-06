@@ -27,5 +27,6 @@ export { useSingleton } from './useSingleton';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useUnmount } from './useUnmount';
+export { useUpdateEffect } from './useUpdateEffect';
 export { useWhyDidYouUpdate } from './useWhyDidYouUpdate';
 export { useWindowSize, type WindowSize } from './useWindowSize';
