@@ -1,6 +1,6 @@
 # useWhyDidYouUpdate
 
-Get which props changes are causing a component to re-render.
+Get which props/state changes are causing a component to re-render.
 
 ## Usage
 
@@ -17,15 +17,20 @@ function Component(props: any) {
 ## Reference
 
 ```typescript
-type PlainObject<T = unknown> = Record<string | number | symbol, T>;
-
 interface UseWhyDidYouUpdateOptions {
   name?: string;
   skipLog?: boolean;
 }
 
-useWhyDidYouUpdate<T extends PlainObject>(
+type UseWhyDidYouUpdateResult<T> = {
+  [K in keyof T]?: {
+    from: any;
+    to: any;
+  };
+};
+
+useWhyDidYouUpdate<T extends Record<string, any>>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
-);
+): UseWhyDidYouUpdateResult<T>;
 ```

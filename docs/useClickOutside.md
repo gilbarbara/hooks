@@ -36,5 +36,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useClickOutside<T extends Element = HTMLElement>(callback: () => void): RefObject<T>
+useClickOutside<T extends Element = HTMLElement>(callback: () => void): RefObject<T>;
 ```

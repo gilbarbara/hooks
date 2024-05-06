@@ -9,6 +9,8 @@ interface UseScriptOptions {
   type?: string;
 }
 
+export type UseScriptResult = [loaded: boolean, error: boolean];
+
 export function useScript(
   src: string,
   idOrOptions: string | UseScriptOptions = {},

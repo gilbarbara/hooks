@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 
 import { canUseDOM } from './utils';
 
-export interface WindowSize {
+export interface UseWindowSizeResult {
   height: number;
   width: number;
 }
 
 export function useWindowSize(debounce = 0) {
-  const [size, setSize] = useState<WindowSize>({
+  const [size, setSize] = useState<UseWindowSizeResult>({
     height: canUseDOM() ? window.innerHeight : 0,
     width: canUseDOM() ? window.innerWidth : 0,
   });

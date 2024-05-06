@@ -5,7 +5,6 @@ It supports retries, backoff, and more.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useFetch, USE_FETCH_STATUS, UseFetchStatus } from '@gilbarbara/hooks';
 
 function Component() {

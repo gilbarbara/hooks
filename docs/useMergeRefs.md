@@ -1,17 +1,16 @@
 # useMergeRefs
 
-Merge multiple refs into one.  
-Returns a `React.RefCallback`.
+Merge multiple refs into one.
 
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useRef } from 'react';
 import { UseMeasure, useMergeRefs, useResizeObserver } from '@gilbarbara/hooks';
 
 function Component() {
-  const observerRef = React.useRef<HTMLDivElement>(null);
-  const sizeRef = React.useRef<HTMLDivElement>(null);
+  const observerRef = useRef<HTMLDivElement>(null);
+  const sizeRef = useRef<HTMLDivElement>(null);
   const ref = useMergeRefs(observerRef, sizeRef);
   const dimensions = UseMeasure(sizeRef, 200);
 
@@ -28,5 +27,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useMergeRefs<T>(...refs: Ref<T>[]): RefCallback<T>
+useMergeRefs<T>(...refs: Ref<T>[]): React.RefCallback<T>
 ```

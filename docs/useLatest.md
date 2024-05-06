@@ -1,7 +1,6 @@
 # useLatest
 
-Get a ref with the most recent value.  
-Returns a `React.MutableRefObject` with the same type as the input.
+Get a ref with the most recent value.
 
 ## Usage
 

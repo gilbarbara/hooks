@@ -5,7 +5,6 @@ Detect if it is the first execution.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useIsFirstMount } from '@gilbarbara/hooks';
 
 function Component() {

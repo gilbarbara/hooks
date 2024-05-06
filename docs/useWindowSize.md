@@ -1,12 +1,10 @@
 # useWindowSize
 
 Get the window dimensions. Updates on resize.  
-Returns a `WindowSize` object.
 
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useWindowSize } from '@gilbarbara/hooks';
 
 function Component() {
@@ -19,10 +17,10 @@ function Component() {
 ## Reference
 
 ```typescript
-interface WindowSize {
+interface UseWindowSizeResult {
   height: number;
   width: number;
 }
 
-useWindowSize(debounce?: number): WindowSize;
+useWindowSize(debounce?: number): UseWindowSizeResult;
 ```

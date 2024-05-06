@@ -26,8 +26,12 @@ export { useMount } from './useMount';
 export { usePrevious } from './usePrevious';
 export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';
-export { useResponsive } from './useResponsive';
-export { useScript } from './useScript';
+export {
+  useResponsive,
+  type UseResponsiveOrientation,
+  type UseResponsiveResult,
+} from './useResponsive';
+export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
 export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useTimeout';
@@ -35,5 +39,9 @@ export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useUnmount } from './useUnmount';
 export { useUpdateEffect } from './useUpdateEffect';
-export { useWhyDidYouUpdate } from './useWhyDidYouUpdate';
-export { useWindowSize, type WindowSize } from './useWindowSize';
+export {
+  useWhyDidYouUpdate,
+  type UseWhyDidYouUpdateOptions,
+  type UseWhyDidYouUpdateResult,
+} from './useWhyDidYouUpdate';
+export { useWindowSize, type UseWindowSizeResult } from './useWindowSize';

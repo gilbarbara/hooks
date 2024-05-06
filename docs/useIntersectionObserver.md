@@ -1,16 +1,15 @@
 # useIntersectionObserver
 
-Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.  
-Returns an `IntersectionObserverEntry`.
+Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
 
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useRef } from 'react';
 import { useIntersectionObserver } from '@gilbarbara/hooks';
 
 function Component() {
-  const ref = React.useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const { isIntersecting } = useIntersectionObserver(ref);
 
   return (
@@ -35,5 +34,5 @@ interface UseIntersectionObserverOptions extends IntersectionObserverInit {
 useIntersectionObserver<T extends Element>(
   target: RefObject<T> | T | null | string,
   options?: UseIntersectionObserverOptions,
-): IntersectionObserverEntry
+): IntersectionObserverEntry;
 ```

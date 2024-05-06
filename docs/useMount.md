@@ -5,7 +5,6 @@ Run the callback after the component is mounted.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useMount } from '@gilbarbara/hooks';
 
 function Component() {

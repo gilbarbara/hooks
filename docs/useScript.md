@@ -1,12 +1,10 @@
 # useScript
 
-Create a script tag and append it to the `document.body`.  
-Returns an array with `loaded` and `error` properties.
+Create a script tag and append it to the `document.body`.
 
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useScript } from '@gilbarbara/hooks';
 
 function Component() {
@@ -34,5 +32,7 @@ interface UseScriptOptions {
   type?: string;
 }
 
-useScript(src: string, idOrOptions: string | UseScriptOptions = {});
+type UseScriptResult = [loaded: boolean, error: boolean];
+
+useScript(src: string, idOrOptions: string | UseScriptOptions = {}): UseScriptResult;
 ```

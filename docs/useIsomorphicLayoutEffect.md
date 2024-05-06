@@ -5,7 +5,6 @@ Returns `useLayoutEffect` in the client or `useEffect` on the server.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useIsomorphicLayoutEffect } from '@gilbarbara/hooks';
 
 function Component() {

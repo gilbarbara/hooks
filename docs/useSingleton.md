@@ -6,12 +6,12 @@ Similar to constructors in classes.
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { useSingleton } from '@gilbarbara/hooks';
 
 function Component() {
-  const node = React.useRef<HTMLElement | null>(null);
+  const node = useRef<HTMLElement | null>(null);
 
   useSingleton(() => {
     // this code will only be executed once.
@@ -28,5 +28,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useSingleton(cb: () => void);
+useSingleton(callback: () => void): void;
 ```

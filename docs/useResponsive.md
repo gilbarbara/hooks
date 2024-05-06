@@ -1,12 +1,11 @@
 # useResponsive
 
 Get responsive breakpoints.  
-Returns a `Responsive<T>` object.
+Returns a `UseResponsiveResult<T>` object.
 
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useResponsive } from '@gilbarbara/hooks';
 
 function Component() {
@@ -34,11 +33,13 @@ function Component() {
 ```typescript
 const defaultBreakpoints = { xs: 0, sm: 400, md: 768, lg: 1024, xl: 1280 };
 
-interface Responsive<T> {
-  between(min: keyof T, max: keyof T, andOrientation?: Orientation): boolean;
-  min(breakpoint: keyof T, andOrientation?: Orientation): boolean;
-  max(breakpoint: keyof T, andOrientation?: Orientation): boolean;
-  orientation: Orientation;
+type UseResponsiveOrientation = 'landscape' | 'portrait';
+
+interface UseResponsiveResult<T> {
+  between(min: keyof T, max: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  min(breakpoint: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  max(breakpoint: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  orientation: UseResponsiveOrientation;
   size: keyof T;
 }
 
@@ -46,5 +47,5 @@ useResponsive<T extends Record<string, number> | typeof defaultBreakpoints>(
   breakpoints?: T,
   initialWidth = Infinity,
   initialHeight = Infinity
-): Responsive<T>;
+): UseResponsiveResult<T>;
 ```

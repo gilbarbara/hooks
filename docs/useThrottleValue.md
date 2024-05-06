@@ -6,7 +6,7 @@ Return a throttled value that only changes once per every `ms`.
 ## Usage
 
 ```tsx
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useThrottleValue } from '@gilbarbara/hooks';
 
 function Component() {
@@ -37,5 +37,5 @@ interface UseThrottleOptions {
   trailing?: boolean; // default: false
 }
 
-useThrottleValue(value: string, ms = 500, options?: UseThrottleOptions):
+useThrottleValue<T>(value: T, ms = 500, options?: UseThrottleOptions): T;
 ```
