@@ -22,6 +22,7 @@ export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';
 export { useResponsive } from './useResponsive';
 export { useScript } from './useScript';
+export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
