@@ -33,6 +33,9 @@
   "peerDependencies": {
     "react": "16.8 - 18"
   },
+  "dependencies": {
+    "@gilbarbara/deep-equal": "^0.3.1"
+  },
   "devDependencies": {
     "@gilbarbara/eslint-config": "^0.7.7",
     "@gilbarbara/prettier-config": "^1.0.0",
@@ -112,14 +115,14 @@
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [
     {
-      "name": "commonjs",
-      "path": "./dist/index.js",
-      "limit": "4 kB"
-    },
-    {
       "name": "esm",
       "path": "./dist/index.mjs",
-      "limit": "4 kB"
+      "limit": "5 kB"
+    },
+    {
+      "name": "commonjs",
+      "path": "./dist/index.js",
+      "limit": "5 kB"
     }
   ]
 }

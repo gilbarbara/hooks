@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@gilbarbara/deep-equal':
+        specifier: ^0.3.1
+        version: 0.3.1
     devDependencies:
       '@gilbarbara/eslint-config':
         specifier: ^0.7.7
@@ -699,6 +703,9 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@gilbarbara/deep-equal@0.3.1':
+    resolution: {integrity: sha512-I7xWjLs2YSVMc5gGx1Z3ZG1lgFpITPndpi8Ku55GeEIKpACCPQNS/OTqQbxgTCfq0Ncvcc+CrFov96itVh6Qvw==}
 
   '@gilbarbara/eslint-config@0.7.7':
     resolution: {integrity: sha512-bTPVN+t0D9uQOThxapkbtlHzeRHJsDVdCyMu2/N8gQMcRopWBNmeCQq7zEBuq3qxaJQAS7II7ti3hFwNHfaYDQ==}
@@ -4393,6 +4400,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@gilbarbara/deep-equal@0.3.1': {}
 
   '@gilbarbara/eslint-config@0.7.7(@testing-library/dom@10.1.0)(@types/eslint@8.44.4)(prettier@3.0.3)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(happy-dom@14.7.1)(jsdom@24.0.0)(terser@5.21.0))(webpack@5.88.2(esbuild@0.19.5))':
     dependencies:

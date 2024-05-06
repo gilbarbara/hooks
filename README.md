@@ -14,6 +14,7 @@ npm i @gilbarbara/hooks
 
 
 [useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.
+[useDeepCompareEffect](docs/useDeepCompareEffect.md) — A custom useEffect hook that uses deep comparison on its dependencies.
 [useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
 [useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
