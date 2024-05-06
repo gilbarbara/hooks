@@ -1,4 +1,4 @@
-import { PlainObject, Target } from './types';
+import { PlainObject, Primitive, Target } from './types';
 
 export function canUseDOM() {
   return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
@@ -28,6 +28,10 @@ export function isPlainObject(value: unknown): value is PlainObject {
   const prototype = Object.getPrototypeOf(value);
 
   return prototype === null || prototype === Object.getPrototypeOf({});
+}
+
+export function isPrimitive(value: any): value is Primitive {
+  return value !== Object(value);
 }
 
 export function isString(value: unknown): value is string {
