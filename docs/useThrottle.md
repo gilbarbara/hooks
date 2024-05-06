@@ -6,7 +6,6 @@ Return a throttled function that only invokes `fn` once per every `ms`.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useThrottle } from '@gilbarbara/hooks';
 
 function Component() {
@@ -29,5 +28,5 @@ interface UseThrottleOptions {
   trailing?: boolean; // default: false
 }
 
-useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions):
+useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions): () => void;
 ```

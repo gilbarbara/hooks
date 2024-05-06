@@ -40,7 +40,7 @@ type UseLocalStorageResult<TValue> = [
   () => void,
 ];
 
-useLocalStorage<TValue>(key, initialValue?: TValue, options?: UseLocalStorageOptions<TValue>): UseLocalStorageResult ;
+useLocalStorage<TValue>(key, initialValue?: TValue, options?: UseLocalStorageOptions<TValue>): UseLocalStorageResult;
 ```
 
 - key — localStorage key to manage.

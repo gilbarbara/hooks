@@ -29,5 +29,5 @@ function Component() {
 useDeepCompareEffect<TDeps extends DependencyList>(
   effect: EffectCallback,
   dependencies: TDeps,
-)
+): void;
 ```

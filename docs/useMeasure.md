@@ -4,11 +4,11 @@ Get element measurements using the [ResizeObserver](https://developer.mozilla.or
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useRef } from 'react';
 import { useMeasure } from '@gilbarbara/hooks';
 
 function Component() {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const dimensions = useMeasure(ref);
 
   return (

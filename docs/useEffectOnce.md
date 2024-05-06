@@ -24,5 +24,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useEffectOnce(effect: EffectCallback): void
+useEffectOnce(effect: EffectCallback): void;
 ```

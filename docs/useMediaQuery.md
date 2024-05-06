@@ -1,12 +1,10 @@
 # useMediaQuery
 
-Detect media query changes.  
-Returns a `boolean`.
+Detect media query changes.
 
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useMediaQuery } from '@gilbarbara/hooks';
 
 function Component() {

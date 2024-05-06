@@ -1,19 +1,18 @@
 # useIsMounted
 
-Check if the component is still mounted before changing the state.  
-Returns a `() => boolean`.
+Check if the component is still mounted before changing the state.
 
 ## Usage
 
 ```tsx
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useIsMounted } from '@gilbarbara/hooks';
 
 function Component() {
-  const [data, setData] = React.useState('loading...');
+  const [data, setData] = useState('loading...');
   const isMounted = useIsMounted();
 
-  React.useEffect(() => {
+  useEffect(() => {
     asyncFn(`...`).then(() => {
       if (isMounted()) {
         setData('ready');

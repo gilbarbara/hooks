@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 import { PlainObject } from './types';
 import { isString } from './utils';
 
-type Changes<T> = {
+export type UseWhyDidYouUpdateResult<T> = {
   [K in keyof T]?: {
     from: any;
     to: any;
   };
 };
 
-interface UseWhyDidYouUpdateOptions {
+export interface UseWhyDidYouUpdateOptions {
   name?: string;
   skipLog?: boolean;
 }
@@ -18,10 +18,10 @@ interface UseWhyDidYouUpdateOptions {
 export function useWhyDidYouUpdate<T extends PlainObject<any>>(
   props: T,
   nameOrOptions: string | UseWhyDidYouUpdateOptions = {},
-): Changes<T> | false {
+): UseWhyDidYouUpdateResult<T> | false {
   type K = keyof T;
 
-  const [changes, setChanges] = useState<Changes<T>>({});
+  const [changes, setChanges] = useState<UseWhyDidYouUpdateResult<T>>({});
   const previousProps = useRef<T>();
 
   const { name, skipLog = false } = isString(nameOrOptions)
@@ -38,7 +38,7 @@ export function useWhyDidYouUpdate<T extends PlainObject<any>>(
       const allKeys = Object.keys({ ...current, ...props }) as K[];
 
       // Use this object to keep track of changed props
-      const changesObject: Changes<T> = {};
+      const changesObject: UseWhyDidYouUpdateResult<T> = {};
 
       // Iterate through keys
       allKeys.forEach(key => {

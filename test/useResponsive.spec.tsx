@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { act, render } from '@testing-library/react';
 
-import { Breakpoints, Orientation, useResponsive } from '../src/useResponsive';
+import { Breakpoints, useResponsive, UseResponsiveOrientation } from '../src/useResponsive';
 
 declare let window: any;
 
@@ -9,7 +9,7 @@ interface Props {
   breakpoints?: Record<string, number>;
   maximum?: keyof Breakpoints | string;
   minimum?: keyof Breakpoints | string;
-  orientation?: Orientation;
+  orientation?: UseResponsiveOrientation;
 }
 
 function Component({ breakpoints, maximum, minimum, orientation }: Props) {

@@ -12,35 +12,55 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
-[useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.
-[useDeepCompareEffect](docs/useDeepCompareEffect.md) — A custom useEffect hook that uses deep comparison on its dependencies.
-[useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
-[useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.
-[useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
-[useInterval](docs/useInterval.md) — A declarative interval hook.
-[useIsFirstMount](docs/useIsFirstMount) — Check if it is the first mount.
-[useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted before changing the state.
-[useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.
-[useLatest](docs/useLatest.md) — Get a ref with the most recent value.
-[useLocalStorage](docs/useLocalStorage.md) — Interact with the browser localStorage API.
-[useMeasure](docs/useMeasure.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
-[useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.
-[useMergeRefs](docs/useMergeRefs.md) — Merge multiple refs into one.
-[useMount](docs/useMount.md) — Run a function after the component is mounted.
-[usePrevious](docs/usePrevious.md) — Return the previous value.
-[useRenderCount](docs/useRenderCount.md) — Log how many times the component was rendered.
-[useResizeObserver](docs/useResizeObserver.md) — Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
-[useResponsive](docs/useResponsive.md) — Get responsive breakpoints.
-[useSetState](docs/useSetState.md) — A state hook that returns a setState that merges object changes into the current state.
-[useScript](docs/useScript.md) — Create a script tag and append it to the `document.body`.
-[useSingleton](docs/useSingleton.md) — Run the code just once before the render.
-[useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.
-[useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that only changes once per every `ms`.
-[useTimeout](docs/useTimeout.md) — Execute the callback after specified delay.
-[useUnmount](docs/useUnmount.md) — Run a function when the component unmounts.
-[useUpdateEffect](docs/useUpdateEffect.md) — An effect hook that doesn't run on mount.
-[useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Get which prop changes are causing a component to re-render.
+#### Sensors
+
+[useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.  
+[useMeasure](docs/useMeasure.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
+[useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.  
+[useResizeObserver](docs/useResizeObserver.md) — Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
 [useWindowSize](docs/useWindowSize.md) — Get the window dimensions. Updates on resize.
+
+#### UI
+
+[useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.  
+[useResponsive](docs/useResponsive.md) — Get responsive breakpoints.
+
+#### Timers
+
+[useInterval](docs/useInterval.md) — Execute the callback repeatedly with the specified delay.  
+[useTimeout](docs/useTimeout.md) — Execute the callback after the specified delay.
+
+#### Side-effects
+
+[useLocalStorage](docs/useLocalStorage.md) — Interact with the browser localStorage API.  
+[useScript](docs/useScript.md) — Create a script tag and append it to the `document.body`.  
+[useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.  
+[useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that only changes once per every `ms`.  
+
+#### Lifecycles
+
+[useDeepCompareEffect](docs/useDeepCompareEffect.md) — Uses deep comparison on its dependencies.  
+[useEffectOnce](docs/useEffectOnce.md) — Run the effect only once.  
+[useIsFirstMount](docs/useIsFirstMount) — Check if it's the first mount.  
+[useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted.  
+[useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.  
+[useMount](docs/useMount.md) — Run the callback after the component is mounted.  
+[useUnmount](docs/useUnmount.md) — Run the callback when the component unmounts.  
+[useUpdateEffect](docs/useUpdateEffect.md) — Doesn't run on mount.  
+
+#### State
+
+[useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.
+
+#### Misc
+
+[useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.  
+[useLatest](docs/useLatest.md) — Get a ref with the most recent value.  
+[useMergeRefs](docs/useMergeRefs.md) — Merge multiple refs into one.  
+[usePrevious](docs/usePrevious.md) — Return the previous value.  
+[useRenderCount](docs/useRenderCount.md) — Log how many times the component was rendered.  
+[useSingleton](docs/useSingleton.md) — Run the code just once before the render.  
+[useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Get which prop/state changes are causing a component to re-render.
 
 ## License
 

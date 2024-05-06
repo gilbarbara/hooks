@@ -6,7 +6,6 @@ Useful to debug optimizations.
 ## Usage
 
 ```tsx
-import React from 'react';
 import { useRenderCount } from '@gilbarbara/hooks';
 
 function Component() {
@@ -21,5 +20,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useRenderCount(name?: string);
+useRenderCount(name?: string): void;
 ```

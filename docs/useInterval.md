@@ -15,9 +15,7 @@ function Component() {
   const [isRunning, setIsRunning] = useState(true);
 
   useInterval(
-    () => {
-      setCount(count + 1);
-    },
+    () => { setCount(count + 1); },
     isRunning ? delay : null
   );
 
