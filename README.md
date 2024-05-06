@@ -36,6 +36,7 @@ npm i @gilbarbara/hooks
 [useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.
 [useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that only changes once per every `ms`.
 [useUnmount](docs/useUnmount.md) — Run a function when the component unmounts.
+[useUpdateEffect](docs/useUpdateEffect.md) — An effect hook that doesn't run on mount.
 [useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Get which prop changes are causing a component to re-render.
 [useWindowSize](docs/useWindowSize.md) — Get the window dimensions. Updates on resize.
 
