@@ -9,7 +9,7 @@ export {
   type UseFetchStatus,
 } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
-export { useIsFirstRun } from './useIsFirstRun';
+export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';

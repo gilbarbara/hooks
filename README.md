@@ -18,7 +18,7 @@ npm i @gilbarbara/hooks
 [useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
 [useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
-[useIsFirstRun](docs/useIsFirstRun.md) — Detect if it is the first execution.
+[useIsFirstMount](docs/useIsFirstMount) — Check if it is the first mount.
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted before changing the state.
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.
 [useLatest](docs/useLatest.md) — Get a ref with the most recent value.
