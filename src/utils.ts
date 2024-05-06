@@ -51,3 +51,7 @@ export function isURL(value: unknown): value is string {
     return false;
   }
 }
+
+export function noop() {
+  return undefined;
+}

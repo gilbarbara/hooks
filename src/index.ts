@@ -13,6 +13,11 @@ export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
+export {
+  useLocalStorage,
+  type UseLocalStorageOptions,
+  type UseLocalStorageResult,
+} from './useLocalStorage';
 export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
