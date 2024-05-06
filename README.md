@@ -22,6 +22,7 @@ npm i @gilbarbara/hooks
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted before changing the state.
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.
 [useLatest](docs/useLatest.md) — Get a ref with the most recent value.
+[useLocalStorage](docs/useLocalStorage.md) — Interact with the browser localStorage API.
 [useMeasure](docs/useMeasure.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
 [useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.
 [useMergeRefs](docs/useMergeRefs.md) — Merge multiple refs into one.
