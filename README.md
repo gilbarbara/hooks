@@ -30,6 +30,7 @@ npm i @gilbarbara/hooks
 [useRenderCount](docs/useRenderCount.md) — Log how many times the component was rendered.
 [useResizeObserver](docs/useResizeObserver.md) — Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
 [useResponsive](docs/useResponsive.md) — Get responsive breakpoints.
+[useSetState](docs/useSetState.md) — A state hook that returns a setState that merges object changes into the current state.
 [useScript](docs/useScript.md) — Create a script tag and append it to the `document.body`.
 [useSingleton](docs/useSingleton.md) — Run the code just once before the render.
 [useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.
