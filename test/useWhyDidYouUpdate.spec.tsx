@@ -37,14 +37,11 @@ describe('useWhyDidYouUpdate', () => {
   });
 
   it('should log the changes', () => {
-    const { rerender, result } = renderHook(
-      (props: Record<string, any>) => useWhyDidYouUpdate(props),
-      {
-        initialProps: {
-          version: 1,
-        },
+    const { rerender } = renderHook((props: Record<string, any>) => useWhyDidYouUpdate(props), {
+      initialProps: {
+        version: 1,
       },
-    );
+    });
 
     expect(console.log).toHaveBeenCalledTimes(0);
 
@@ -60,7 +57,7 @@ describe('useWhyDidYouUpdate', () => {
   });
 
   it('should log the changes with `name`', () => {
-    const { rerender, result } = renderHook(
+    const { rerender } = renderHook(
       (props: Record<string, any>) => useWhyDidYouUpdate(props, { name: 'Component' }),
       {
         initialProps: {

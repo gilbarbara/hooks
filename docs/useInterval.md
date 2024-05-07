@@ -1,7 +1,7 @@
 # useInterval
 
 Execute the callback repeatedly with the specified delay.  
-It can be paused by setting the delay to `null`.
+It can be paused by setting the delayMs to `null`.
 
 ## Usage
 
@@ -36,5 +36,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useInterval(callback: () => void, delay: number | null = 100): void;
+useInterval(callback: () => void, delayMs: number | null = 100): void;
 ```

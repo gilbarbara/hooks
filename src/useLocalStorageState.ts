@@ -53,7 +53,7 @@ export function useLocalStorageState<TState extends PlainObject>(
 
   const [value, setValue, remove] = useLocalStorage(key, initialState);
   const [state, setState] = useSetState<TState>(
-    getState(initialState, value as TState, overrideDivergentSavedState, resetProperties) as TState,
+    getState(initialState, value!, overrideDivergentSavedState, resetProperties) as TState,
   );
 
   useDeepCompareEffect(() => {

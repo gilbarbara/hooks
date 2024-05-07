@@ -2,7 +2,7 @@
 
 Defer function execution until the delay has elapsed since the last invocation.
 
-The third argument is the array of values that the debounce depends on, in the same manner as useEffect.  
+The third argument is the array of values that it depends on, in the same manner as useEffect.  
 The debounce timeout will start when one of the values changes.
 
 ## Usage
@@ -63,7 +63,7 @@ export interface UseDebounceResult {
 
 useDebounce(
   callback: () => void,
-  ms: number = 250,
+  delayMs: number = 250,
   deps: DependencyList = [],
 ): UseDebounceResult;
 ```

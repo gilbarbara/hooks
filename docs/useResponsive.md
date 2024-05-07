@@ -1,7 +1,6 @@
 # useResponsive
 
-Get responsive breakpoints.  
-Returns a `UseResponsiveResult<T>` object.
+Get responsive breakpoints.
 
 ## Usage
 

@@ -1,5 +1,5 @@
 # useMeasure
-Get element measurements using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
+Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
 
 ## Usage
 
