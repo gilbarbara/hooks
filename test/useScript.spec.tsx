@@ -15,7 +15,6 @@ describe('useScript', () => {
     const { result } = renderHook(() =>
       useScript('https://maps.googleapis.com/maps/api/js?key=Ab2S23Bd&callback=initMap'),
     );
-    // const { container } = render(<Component />);
     const script = document.body.querySelector('script');
 
     expect(script).toHaveAttribute(

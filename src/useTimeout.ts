@@ -10,7 +10,7 @@ export interface UseTimeoutResult {
   reset: () => void;
 }
 
-export function useTimeout(callback: () => void, ms: number = 0): UseTimeoutResult {
+export function useTimeout(callback: () => void, delayMs: number = 0): UseTimeoutResult {
   const status = useRef<UseTimeoutStatus>('pending');
   const timeout = useRef<ReturnType<typeof setTimeout>>();
   const savedCallback = useRef(callback);
@@ -27,8 +27,8 @@ export function useTimeout(callback: () => void, ms: number = 0): UseTimeoutResu
     timeout.current = setTimeout(() => {
       status.current = 'completed';
       savedCallback.current();
-    }, ms);
-  }, [ms]);
+    }, delayMs);
+  }, [delayMs]);
 
   const getStatus = useCallback(() => status.current, []);
 

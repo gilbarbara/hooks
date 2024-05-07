@@ -66,5 +66,5 @@ interface UseTimeoutResult {
   set: () => void;
 }
 
-useInterval(callback: () => void, delay: number | null = 100): UseTimeoutResult;
+useInterval(callback: () => void, delayMs: number | null = 100): UseTimeoutResult;
 ```

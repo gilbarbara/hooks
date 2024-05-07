@@ -1,6 +1,6 @@
 # useThrottleValue
 
-Return a throttled value that only changes once per every `ms`.
+Return a throttled value that only changes once per every `delayMs`.
 
 ## Usage
 
@@ -24,5 +24,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useThrottleValue<T>(value: T, ms = 500): T;
+useThrottleValue<T>(value: T, delayMs: number = 500): T;
 ```

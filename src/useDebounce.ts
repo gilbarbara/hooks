@@ -14,7 +14,7 @@ export interface UseDebounceResult {
 
 export function useDebounce(
   callback: () => void,
-  ms: number = 250,
+  delayMs: number = 250,
   deps: DependencyList = [],
 ): UseDebounceResult {
   const status = useRef<UseDebounceStatus>('pending');
@@ -34,8 +34,8 @@ export function useDebounce(
     timeout.current = setTimeout(() => {
       status.current = 'completed';
       savedCallback.current();
-    }, ms);
-  }, [ms]);
+    }, delayMs);
+  }, [delayMs]);
 
   const getStatus = useCallback(() => status.current, []);
 
@@ -51,7 +51,7 @@ export function useDebounce(
     }
 
     return undefined;
-  }, [set, clear, deps, ms]);
+  }, [set, clear, deps, delayMs]);
 
   return { cancel: clear, getStatus };
 }

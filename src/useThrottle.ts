@@ -4,7 +4,7 @@ import { useUnmount } from './useUnmount';
 
 export function useThrottle<T extends (...arguments_: Array<any>) => void>(
   callback: T,
-  ms = 500,
+  delayMs = 500,
   trailing: boolean = false,
 ): () => void {
   const [now, setNow] = useState(0);
@@ -38,11 +38,11 @@ export function useThrottle<T extends (...arguments_: Array<any>) => void>(
         }
       };
 
-      timer.current = window.setTimeout(timerCallback, ms);
+      timer.current = window.setTimeout(timerCallback, delayMs);
     } else {
       hasPendingCall.current = true;
     }
-  }, [ms, now, trailing]);
+  }, [delayMs, now, trailing]);
 
   useUnmount(() => {
     window.clearTimeout(timer.current);

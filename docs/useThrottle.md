@@ -1,6 +1,6 @@
 # useThrottle
 
-Returns a function that invokes `callback` once per every `ms`.  
+Returns a function that invokes `callback` once per every `delayMs`.  
 *If you set the `trailing` argument the callback will be called again when the timer runs out.*
 
 ## Usage
@@ -23,5 +23,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useThrottle(callback: () => void, ms = 500, trailing: boolean = false): () => void;
+useThrottle(callback: () => void, delayMs: number = 500, trailing: boolean = false): () => void;
 ```

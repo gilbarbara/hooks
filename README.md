@@ -43,7 +43,7 @@ npm i @gilbarbara/hooks
 
 [useDeepCompareEffect](docs/useDeepCompareEffect.md) — Uses deep comparison on its dependencies.  
 [useEffectOnce](docs/useEffectOnce.md) — Run the effect only once.  
-[useIsFirstMount](docs/useIsFirstMount) — Check if it's the first mount.  
+[useIsFirstMount](docs/useIsFirstMount.md) — Check if it's the first mount.  
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted.  
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.  
 [useLifecycles](docs/useLifecycles.md) — Run the callbacks when the component mounts and unmounts, respectively.  
