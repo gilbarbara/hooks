@@ -12,12 +12,12 @@ npm i @gilbarbara/hooks
 
 ## Hooks
 
-
 [useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.
 [useDeepCompareEffect](docs/useDeepCompareEffect.md) — A custom useEffect hook that uses deep comparison on its dependencies.
 [useEffectOnce](docs/useEffectOnce.md) — Run an effect only once.
 [useFetch](docs/useFetch.md) — Make a request with fetch. It supports retries, backoff, and more.
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.
+[useInterval](docs/useInterval.md) — A declarative interval hook.
 [useIsFirstMount](docs/useIsFirstMount) — Check if it is the first mount.
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted before changing the state.
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.
@@ -36,6 +36,7 @@ npm i @gilbarbara/hooks
 [useSingleton](docs/useSingleton.md) — Run the code just once before the render.
 [useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.
 [useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that only changes once per every `ms`.
+[useTimeout](docs/useTimeout.md) — Execute the callback after specified delay.
 [useUnmount](docs/useUnmount.md) — Run a function when the component unmounts.
 [useUpdateEffect](docs/useUpdateEffect.md) — An effect hook that doesn't run on mount.
 [useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Get which prop changes are causing a component to re-render.

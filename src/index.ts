@@ -9,6 +9,7 @@ export {
   type UseFetchStatus,
 } from './useFetch';
 export { useIntersectionObserver } from './useIntersectionObserver';
+export { useInterval } from './useInterval';
 export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
@@ -29,6 +30,7 @@ export { useResponsive } from './useResponsive';
 export { useScript } from './useScript';
 export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
+export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useTimeout';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useUnmount } from './useUnmount';
