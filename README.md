@@ -61,6 +61,7 @@ npm i @gilbarbara/hooks
 [usePrevious](docs/usePrevious.md) — Return the previous value.  
 [useRenderCount](docs/useRenderCount.md) — Log how many times the component was rendered.  
 [useSingleton](docs/useSingleton.md) — Run the code just once before the render.  
+[useUpdate](docs/useUpdate.md) — Returns a function that re-renders the component when called.  
 [useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Get which prop/state changes are causing a component to re-render.
 
 ## License
