@@ -14,6 +14,7 @@ export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
+export { useLifecycles } from './useLifecycles';
 export {
   useLocalStorage,
   type UseLocalStorageOptions,

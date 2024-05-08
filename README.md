@@ -44,6 +44,7 @@ npm i @gilbarbara/hooks
 [useIsFirstMount](docs/useIsFirstMount) — Check if it's the first mount.  
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted.  
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Returns `useLayoutEffect` in the client or `useEffect` on the server.  
+[useLifecycles](docs/useLifecycles.md) — Run the callbacks when the component mounts and unmounts, respectively.  
 [useMount](docs/useMount.md) — Run the callback after the component is mounted.  
 [useUnmount](docs/useUnmount.md) — Run the callback when the component unmounts.  
 [useUpdateEffect](docs/useUpdateEffect.md) — Doesn't run on mount.  
