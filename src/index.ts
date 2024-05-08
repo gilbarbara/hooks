@@ -39,6 +39,7 @@ export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useT
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useUnmount } from './useUnmount';
+export { useUpdate } from './useUpdate';
 export { useUpdateEffect } from './useUpdateEffect';
 export {
   useWhyDidYouUpdate,
