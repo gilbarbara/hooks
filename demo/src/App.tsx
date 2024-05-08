@@ -7,6 +7,7 @@ import UseFetch from './examples/UseFetch';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
 import UseLocalStorage from './examples/UseLocalStorage';
+import UseLocation from './examples/UseLocation';
 import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
 import UseResizeObserver from './examples/UseResizeObserver';
@@ -26,6 +27,7 @@ export default function Hooks() {
         <UseIntersectionObserver />
         <UseInterval />
         <UseLocalStorage />
+        <UseLocation />
         <UseMeasure />
         <UseMediaQuery />
         <UseResponsive />

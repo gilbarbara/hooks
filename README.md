@@ -15,6 +15,7 @@ npm i @gilbarbara/hooks
 #### Sensors
 
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.  
+[useLocation](docs/useLocation.md) — Track the browser's location.  
 [useMeasure](docs/useMeasure.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
 [useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.  
 [useResizeObserver](docs/useResizeObserver.md) — Detect changes in an Element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  

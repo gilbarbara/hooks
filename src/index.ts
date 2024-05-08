@@ -20,6 +20,7 @@ export {
   type UseLocalStorageOptions,
   type UseLocalStorageResult,
 } from './useLocalStorage';
+export { useLocation, type UseLocationResult } from './useLocation';
 export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
