@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useLatest } from './useLatest';
+import { off, on } from './utils';
 
 export function useClickOutside<T extends Element = HTMLElement>(callback: () => void) {
   const ref = useRef<T>(null);
@@ -13,10 +14,10 @@ export function useClickOutside<T extends Element = HTMLElement>(callback: () =>
       }
     };
 
-    document.addEventListener('click', handleClick);
+    on(document, 'click', handleClick);
 
     return () => {
-      document.removeEventListener('click', handleClick);
+      off(document, 'click', handleClick);
     };
   }, [latestCallback]);
 
