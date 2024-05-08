@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { canUseDOM } from './utils';
+import { canUseDOM, off, on } from './utils';
 
 export interface UseWindowSizeResult {
   height: number;
@@ -37,9 +37,11 @@ export function useWindowSize(debounce = 0) {
       height: window.innerHeight,
       width: window.innerWidth,
     });
-    window.addEventListener('resize', getSize);
+    on(window, 'resize', getSize);
 
-    return () => window.removeEventListener('resize', getSize);
+    return () => {
+      off(window, 'resize', getSize);
+    };
   }, []);
 
   return size;

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { canUseDOM } from './utils';
+import { canUseDOM, off, on } from './utils';
 
 const defaultBreakpoints = { xs: 0, sm: 400, md: 768, lg: 1024, xl: 1280 };
 
@@ -73,10 +73,10 @@ function useResponsiveBase<T extends Record<string, number>>(
       }
     };
 
-    window.addEventListener('resize', onResize);
+    on(window, 'resize', onResize);
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      off(window, 'resize', onResize);
     };
   }, [getScreen, screen, setScreen]);
 

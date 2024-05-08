@@ -55,3 +55,23 @@ export function isURL(value: unknown): value is string {
 export function noop() {
   return undefined;
 }
+
+/* eslint-disable @typescript-eslint/ban-types */
+export function on<T extends Window | Document | HTMLElement | EventTarget>(
+  target: T | null,
+  ...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
+): void {
+  if (target && target.addEventListener) {
+    target.addEventListener(...(rest as Parameters<HTMLElement['addEventListener']>));
+  }
+}
+
+export function off<T extends Window | Document | HTMLElement | EventTarget>(
+  target: T | null,
+  ...rest: Parameters<T['removeEventListener']> | [string, Function | null, ...any]
+): void {
+  if (target && target.removeEventListener) {
+    target.removeEventListener(...(rest as Parameters<HTMLElement['removeEventListener']>));
+  }
+}
+/* eslint-enable @typescript-eslint/ban-types */

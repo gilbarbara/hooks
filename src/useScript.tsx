@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { canUseDOM, isString } from './utils';
+import { canUseDOM, isString, off, on } from './utils';
 
 interface UseScriptOptions {
   async?: boolean;
@@ -61,15 +61,15 @@ export function useScript(
 
       const { current } = script;
 
-      current.addEventListener('load', onLoad);
-      current.addEventListener('error', onError);
+      on(current, 'load', onLoad);
+      on(current, 'error', onError);
 
       // Add script to document body
       document.body.appendChild(current);
 
       return () => {
-        current.removeEventListener('load', onLoad);
-        current.removeEventListener('error', onError);
+        off(current, 'load', onLoad);
+        off(current, 'error', onError);
       };
     },
     [onError, onLoad, options, src], // Only re-run effect if script src changes
