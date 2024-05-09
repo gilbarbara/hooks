@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { Box } from '@gilbarbara/components';
 import { useResizeObserver } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Heading from '../components/Heading';
 import TagList from '../components/TagList';
@@ -18,7 +18,7 @@ export default function UseResizeObserver() {
   const { bottom, height, left, right, top, width, x, y } = entry?.contentRect || {};
 
   return (
-    <Box>
+    <Block>
       <Heading>useResizeObserver</Heading>
 
       <BorderBox ref={ref} maxWidth={400} minHeight="10vh">
@@ -37,6 +37,6 @@ export default function UseResizeObserver() {
           />
         )}
       </BorderBox>
-    </Box>
+    </Block>
   );
 }

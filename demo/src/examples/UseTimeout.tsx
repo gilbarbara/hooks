@@ -1,7 +1,8 @@
 import { ReactNode, useState } from 'react';
-import { Box, Button, Paragraph } from '@gilbarbara/components';
+import { Button, Paragraph } from '@gilbarbara/components';
 import { useTimeout } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Heading from '../components/Heading';
 
@@ -39,7 +40,7 @@ export default function UseTimeout() {
   }
 
   return (
-    <Box>
+    <Block>
       <Heading>useTimeout</Heading>
       <BorderBox maxWidth={400}>
         <Paragraph bold mb="md">
@@ -49,6 +50,6 @@ export default function UseTimeout() {
           {content.button} timeout
         </Button>
       </BorderBox>
-    </Box>
+    </Block>
   );
 }
