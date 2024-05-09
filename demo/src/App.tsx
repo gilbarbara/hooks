@@ -1,43 +1,38 @@
 import './styles.css';
 
-import { Divider, H1, Page } from '@gilbarbara/components';
+import { Box, H1, Page } from '@gilbarbara/components';
 
 import UseClickOutside from './examples/UseClickOutside';
 import UseFetch from './examples/UseFetch';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
+import UseLocalStorage from './examples/UseLocalStorage';
 import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
 import UseResizeObserver from './examples/UseResizeObserver';
 import UseResponsive from './examples/UseResponsive';
 import UseTimeout from './examples/UseTimeout';
+import UseWhyDidYouUpdate from './examples/UseWhyDidYouUpdate';
 import UseWindowSize from './examples/UseWindowSize';
 
 export default function Hooks() {
   return (
     <Page align="center">
       <H1>@gilbarbara/hooks</H1>
-      <div>
+      <Box width="100%">
         <UseClickOutside />
-        <Divider my="jumbo" />
         <UseFetch />
-        <Divider my="jumbo" />
         <UseIntersectionObserver />
-        <Divider my="jumbo" />
         <UseInterval />
-        <Divider my="jumbo" />
+        <UseLocalStorage />
         <UseMeasure />
-        <Divider my="jumbo" />
         <UseMediaQuery />
-        <Divider my="jumbo" />
         <UseResponsive />
-        <Divider my="jumbo" />
         <UseResizeObserver />
-        <Divider my="jumbo" />
         <UseTimeout />
-        <Divider my="jumbo" />
+        <UseWhyDidYouUpdate />
         <UseWindowSize />
-      </div>
+      </Box>
     </Page>
   );
 }

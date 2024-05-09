@@ -1,9 +1,14 @@
 import { ReactNode } from 'react';
-import { Spacer, Tag, Text } from '@gilbarbara/components';
+import { Props, Spacer, Tag } from '@gilbarbara/components';
+
+import Code from './Code';
 
 interface Props {
   data: Record<string, any>;
-  invertTag?: boolean;
+  invertLeftTag?: boolean;
+  leftDistribution?: Props.SpacerProps['distribution'];
+  rightDistribution?: Props.SpacerProps['distribution'];
+  tagBg?: Props.TagProps['bg'];
 }
 
 interface Row {
@@ -11,7 +16,13 @@ interface Row {
   value: ReactNode;
 }
 
-export default function TagList({ data, invertTag }: Props) {
+export default function TagList({
+  data,
+  invertLeftTag = false,
+  leftDistribution = 'end',
+  rightDistribution = 'start',
+  tagBg = 'primary.100',
+}: Props) {
   const columns = Object.entries(data).reduce<{ left: Row[]; right: Row[] }>(
     (acc, [key, value], index) => {
       const isEven = index % 2 === 0;
@@ -28,25 +39,25 @@ export default function TagList({ data, invertTag }: Props) {
   );
 
   return (
-    <Spacer data-component-name="TagList" distribution="center">
-      <Spacer direction="vertical" distribution="end">
+    <Spacer data-component-name="TagList" distribution="center" verticalAlign="start">
+      <Spacer direction="vertical" distribution={leftDistribution}>
         {columns.left.map(row => {
-          const key = <Tag bg="primary.100">{row.key}</Tag>;
-          const value = <Text>{row.value?.toString()}</Text>;
+          const key = <Tag bg={tagBg}>{row.key}</Tag>;
+          const value = <Code data={row.value} />;
 
           return (
             <Spacer key={row.key} gap="xs">
-              {invertTag ? value : key}
-              {invertTag ? key : value}
+              {invertLeftTag ? value : key}
+              {invertLeftTag ? key : value}
             </Spacer>
           );
         })}
       </Spacer>
-      <Spacer direction="vertical">
+      <Spacer direction="vertical" distribution={rightDistribution}>
         {columns.right.map(row => (
           <Spacer key={row.key} gap="xs">
-            <Tag bg="primary.100">{row.key}</Tag>
-            <Text>{row.value?.toString()}</Text>
+            <Tag bg={tagBg}>{row.key}</Tag>
+            <Code data={row.value} />
           </Spacer>
         ))}
       </Spacer>

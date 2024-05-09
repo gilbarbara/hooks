@@ -1,13 +1,14 @@
 import { Box, H3, H4 } from '@gilbarbara/components';
 import { useResponsive } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import Heading from '../components/Heading';
 
 export default function UseResponsive() {
   const { between, max, min, orientation, size } = useResponsive();
 
   return (
-    <Box>
+    <Block>
       <Heading>UseResponsive</Heading>
       <Box as="header" mb="md">
         <H3 color="primary">
@@ -21,6 +22,6 @@ export default function UseResponsive() {
       <p>Medium {min('md') ? '✅' : '🚫'}</p>
       <p>Large {min('lg') ? '✅' : '🚫'}</p>
       <p>Extra Large {min('xl') ? '✅' : '🚫'}</p>
-    </Box>
+    </Block>
   );
 }

@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { Box, Button, FormGroup, Input, Label, Paragraph } from '@gilbarbara/components';
 import { useInterval } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Heading from '../components/Heading';
 
@@ -18,7 +19,7 @@ export default function UseInterval() {
   );
 
   return (
-    <Box>
+    <Block>
       <Heading>useInterval</Heading>
       <BorderBox maxWidth={400}>
         <Box mb="md">
@@ -41,6 +42,6 @@ export default function UseInterval() {
           </Button>
         </div>
       </BorderBox>
-    </Box>
+    </Block>
   );
 }

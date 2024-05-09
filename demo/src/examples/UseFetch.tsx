@@ -2,28 +2,30 @@ import { useState } from 'react';
 import { Box, Button, Paragraph, Spacer } from '@gilbarbara/components';
 import { useFetch } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
+import Code from '../components/Code';
 import Heading from '../components/Heading';
 import Status from '../components/Status';
 
 export default function UseFetch() {
   const [wait, setWait] = useState(true);
   const { data, error, isError, isFetched, isLoading, isPaused, isSuccess, refetch, status } =
-    useFetch({
+    useFetch<Record<string, any>>({
       url: 'https://jsonplaceholder.typicode.com/todos/1',
       wait,
     });
 
   return (
-    <Box>
+    <Block>
       <Heading>useFetch</Heading>
 
       <BorderBox maxWidth={400}>
         <Spacer distribution="center">
-          <Button disabled={!wait} onClick={() => setWait(false)} size="xs">
+          <Button disabled={!wait} onClick={() => setWait(false)} size="sm">
             {wait ? 'Execute' : 'Fetched'}
           </Button>
-          <Button disabled={wait} onClick={() => refetch()} size="xs">
+          <Button disabled={wait} onClick={() => refetch()} size="sm">
             Refetch
           </Button>
         </Spacer>
@@ -45,10 +47,10 @@ export default function UseFetch() {
           </Box>
           <Box>
             <Paragraph bold>Data</Paragraph>
-            <pre style={{ margin: 0 }}>{JSON.stringify(data, null, 2)}</pre>
+            <Code data={data} />
           </Box>
         </Spacer>
       </BorderBox>
-    </Box>
+    </Block>
   );
 }

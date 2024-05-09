@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Button } from '@gilbarbara/components';
 import { useClickOutside } from '@gilbarbara/hooks';
 
+import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Heading from '../components/Heading';
 
@@ -13,7 +14,7 @@ export default function UseClickOutside() {
   });
 
   return (
-    <Box>
+    <Block>
       <Heading>useClickOutside</Heading>
       <BorderBox ref={ref} maxWidth={290}>
         <Button
@@ -31,6 +32,6 @@ export default function UseClickOutside() {
           </Box>
         )}
       </BorderBox>
-    </Box>
+    </Block>
   );
 }
