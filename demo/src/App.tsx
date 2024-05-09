@@ -3,6 +3,7 @@ import './styles.css';
 import { Box, H1, Page } from '@gilbarbara/components';
 
 import UseClickOutside from './examples/UseClickOutside';
+import UseDebounce from './examples/UseDebounce';
 import UseFetch from './examples/UseFetch';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
@@ -24,6 +25,7 @@ export default function Hooks() {
       <H1>@gilbarbara/hooks</H1>
       <Box width="100%">
         <UseClickOutside />
+        <UseDebounce />
         <UseFetch />
         <UseIntersectionObserver />
         <UseInterval />
