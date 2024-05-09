@@ -39,6 +39,7 @@ export { useSingleton } from './useSingleton';
 export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useTimeout';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
+export { useToggle, type UseToggleResult } from './useToggle';
 export { useUnmount } from './useUnmount';
 export { useUpdate } from './useUpdate';
 export { useUpdateEffect } from './useUpdateEffect';

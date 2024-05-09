@@ -52,7 +52,8 @@ npm i @gilbarbara/hooks
 
 #### State
 
-[useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.
+[useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.  
+[useToggle](docs/useToggle.md) — State hook to track the value of a boolean.
 
 #### Misc
 

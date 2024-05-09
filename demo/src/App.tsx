@@ -13,6 +13,7 @@ import UseMediaQuery from './examples/UseMediaQuery';
 import UseResizeObserver from './examples/UseResizeObserver';
 import UseResponsive from './examples/UseResponsive';
 import UseTimeout from './examples/UseTimeout';
+import UseToggle from './examples/UseToggle';
 import UseUpdate from './examples/UseUpdate';
 import UseWhyDidYouUpdate from './examples/UseWhyDidYouUpdate';
 import UseWindowSize from './examples/UseWindowSize';
@@ -33,6 +34,7 @@ export default function Hooks() {
         <UseResponsive />
         <UseResizeObserver />
         <UseTimeout />
+        <UseToggle />
         <UseUpdate />
         <UseWhyDidYouUpdate />
         <UseWindowSize />
