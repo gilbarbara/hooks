@@ -1,0 +1,51 @@
+# useLocalStorageState
+
+State hook that persists the state in localStorage.
+
+## Usage
+
+```tsx
+import { useLocalStorageState } from '@gilbarbara/hooks';
+
+function Component() {
+  const [state, setState, remove] = useLocalStorageState('my-key', { foo: 'bar', baz: 'qux' });
+
+  return (
+    <div>
+      <div>Value: {JSON.stringify(state, null, 2)}</div>
+      <button onClick={() => setState({ foo: 'baz' })}>Change foo</button>
+      <button onClick={() => setState({ baz: 'foo' })}>Change baz</button>
+      <button onClick={() => remove()}>Remove</button>
+    </div>
+  );
+}
+```
+
+## Reference
+
+```typescript
+interface UseLocalStorageStateOptions<TState> {
+  /**
+   * Check if the saved state keys are different from the initial state and override it if needed.
+   * @default false
+   */
+  overrideDivergentSavedState?: boolean;
+  /**
+   * Reset properties in the saved state.
+   */
+  resetProperties?: Partial<TState>;
+}
+
+type UseLocalStorageStateResult<T> = [
+  state: T,
+  setState: Dispatch<SetStateAction<Partial<T>>,
+  remove: () => void,
+];
+
+export function useLocalStorageState<TState extends PlainObject>(
+  key: string,
+  initialState: TState,
+  options?: UseLocalStorageStateOptions<TState>,
+): UseLocalStorageStateResult<TState>
+```
+
