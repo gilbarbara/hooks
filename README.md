@@ -53,6 +53,7 @@ npm i @gilbarbara/hooks
 
 #### State
 
+[useLocalStorageState](docs/useLocalStorageState.md) — State hook that persists the state in localStorage.  
 [useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.  
 [useToggle](docs/useToggle.md) — State hook to track the value of a boolean.
 

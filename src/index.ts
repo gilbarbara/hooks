@@ -21,6 +21,12 @@ export {
   type UseLocalStorageOptions,
   type UseLocalStorageResult,
 } from './useLocalStorage';
+
+export {
+  useLocalStorageState,
+  type UseLocalStorageStateOptions,
+  type UseLocalStorageStateResult,
+} from './useLocalStorageState';
 export { useLocation, type UseLocationResult } from './useLocation';
 export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
