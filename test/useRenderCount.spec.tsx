@@ -10,19 +10,16 @@ function Component({ name, version }: any) {
 }
 
 describe('useRenderCount', () => {
-  const spy = vi.spyOn(console, 'log');
-
   beforeAll(() => {
     vi.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    // @ts-ignore
-    console.log.mockClear();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    spy.mockRestore();
+    vi.restoreAllMocks();
   });
 
   it('should log all the changes', () => {

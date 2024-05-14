@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function useRenderCount(name?: string): void {
+export function useRenderCount(name?: string): number {
   const count = useRef(1);
 
   useEffect(() => {
@@ -13,4 +13,6 @@ export function useRenderCount(name?: string): void {
     'font-size: 14px;  font-weight: bold;',
     'color: #999; font-size: 14px;',
   );
+
+  return count.current;
 }
