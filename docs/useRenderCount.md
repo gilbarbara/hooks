@@ -9,7 +9,7 @@ Useful to debug optimizations.
 import { useRenderCount } from '@gilbarbara/hooks';
 
 function Component() {
-  useRenderCount()
+  useRenderCount();
 
   return (
     <div>Something</div>
@@ -20,5 +20,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useRenderCount(name?: string): void;
+useRenderCount(name?: string): number;
 ```
