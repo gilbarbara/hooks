@@ -1,7 +1,6 @@
 # useThrottleValue
 
-Return a throttled value that only changes once per every `ms`.  
-*Unless you set the `trailing` option that will call it again when the timer runs out.*
+Return a throttled value that only changes once per every `ms`.
 
 ## Usage
 
@@ -11,18 +10,11 @@ import { useThrottleValue } from '@gilbarbara/hooks';
 
 function Component() {
   const [text, setText] = useState('');
-  const throttledText = useThrottleValue(text, 500, options);
-
-  const updater = (value) => console.log(value);
-  
-  useEffect(() => {
-    throttledText && updater(throttledText);
-  }, [throttledText]);
+  const throttledText = useThrottleValue(text, 2000);
 
   return (
     <div>
-      <input type="text" onChange={e => setText(e.target.value)} />
-      <p>Actual value: {text}</p>
+      <input type="text" onChange={e => setText(e.target.value)} value={text} />
       <p>Throttle value: {throttledText}</p>
     </div>
   );
@@ -32,10 +24,5 @@ function Component() {
 ## Reference
 
 ```typescript
-interface UseThrottleOptions {
-  leading?: boolean; // default: true
-  trailing?: boolean; // default: false
-}
-
-useThrottleValue<T>(value: T, ms = 500, options?: UseThrottleOptions): T;
+useThrottleValue<T>(value: T, ms = 500): T;
 ```

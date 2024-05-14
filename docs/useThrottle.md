@@ -1,7 +1,7 @@
 # useThrottle
 
-Return a throttled function that only invokes `fn` once per every `ms`.  
-*Unless you set the `trailing` option that will call it again when the timer runs out.*
+Returns a function that invokes `callback` once per every `ms`.  
+*If you set the `trailing` argument the callback will be called again when the timer runs out.*
 
 ## Usage
 
@@ -23,10 +23,5 @@ function Component() {
 ## Reference
 
 ```typescript
-interface UseThrottleOptions {
-  leading?: boolean; // default: true
-  trailing?: boolean; // default: false
-}
-
-useThrottle(fn: () => void, ms = 500, options?: UseThrottleOptions): () => void;
+useThrottle(callback: () => void, ms = 500, trailing: boolean = false): () => void;
 ```

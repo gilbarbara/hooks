@@ -14,6 +14,8 @@ import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
 import UseResizeObserver from './examples/UseResizeObserver';
 import UseResponsive from './examples/UseResponsive';
+import UseThrottle from './examples/UseThrottle';
+import UseThrottleValue from './examples/UseThrottleValue';
 import UseTimeout from './examples/UseTimeout';
 import UseToggle from './examples/UseToggle';
 import UseUpdate from './examples/UseUpdate';
@@ -37,6 +39,8 @@ export default function Hooks() {
         <UseMediaQuery />
         <UseResponsive />
         <UseResizeObserver />
+        <UseThrottle />
+        <UseThrottleValue />
         <UseTimeout />
         <UseToggle />
         <UseUpdate />
