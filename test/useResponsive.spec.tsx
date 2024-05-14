@@ -1,101 +1,76 @@
-import * as React from 'react';
-import { act, render } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 
-import { Breakpoints, useResponsive, UseResponsiveOrientation } from '../src/useResponsive';
+import { useResponsive } from '../src/useResponsive';
 
 declare let window: any;
-
-interface Props {
-  breakpoints?: Record<string, number>;
-  maximum?: keyof Breakpoints | string;
-  minimum?: keyof Breakpoints | string;
-  orientation?: UseResponsiveOrientation;
-}
-
-function Component({ breakpoints, maximum, minimum, orientation }: Props) {
-  const { between, max, min, size } = useResponsive(breakpoints);
-  let output = !minimum && !maximum;
-
-  if (minimum && maximum) {
-    output = between(minimum, maximum, orientation);
-  } else if (minimum) {
-    output = min(minimum, orientation);
-  } else if (maximum) {
-    output = max(maximum, orientation);
-  }
-
-  if (!output) {
-    return null;
-  }
-
-  return (
-    <div>
-      <h1>{size}</h1>
-    </div>
-  );
-}
 
 describe('useResponsive', () => {
   const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
   afterAll(() => {
-    spy.mockRestore();
+    vi.restoreAllMocks();
   });
 
   describe('min', () => {
     it.each([
-      [320, 'xs', 'portrait'],
-      [320, 'xs', 'landscape'],
-      [400, 'sm', 'portrait'],
-      [400, 'sm', 'landscape'],
-      [768, 'md', 'portrait'],
-      [768, 'md', 'landscape'],
-      [1024, 'lg', 'portrait'],
-      [1024, 'lg', 'landscape'],
-      [1280, 'xl', 'portrait'],
-      [1280, 'xl', 'landscape'],
-    ] as const)('should render properly for %p with %p and %p', (width, min, orientation) => {
-      window.innerWidth = width;
+      { width: 320, min: 'xs', orientation: 'portrait', expected: true },
+      { width: 320, min: 'xs', orientation: 'landscape', expected: false },
+      { width: 400, min: 'sm', orientation: 'portrait', expected: true },
+      { width: 400, min: 'sm', orientation: 'landscape', expected: false },
+      { width: 768, min: 'md', orientation: 'portrait', expected: true },
+      { width: 768, min: 'md', orientation: 'landscape', expected: false },
+      { width: 1024, min: 'lg', orientation: 'portrait', expected: false },
+      { width: 1024, min: 'lg', orientation: 'landscape', expected: true },
+      { width: 1280, min: 'xl', orientation: 'portrait', expected: false },
+      { width: 1280, min: 'xl', orientation: 'landscape', expected: true },
+    ] as const)(
+      'should render properly for $width with $min and $orientation',
+      ({ expected, min, orientation, width }) => {
+        window.innerWidth = width;
 
-      const { container } = render(<Component minimum={min} orientation={orientation} />);
+        const { result } = renderHook(() => useResponsive());
 
-      expect(container.firstChild).toMatchSnapshot();
-    });
+        expect(result.current.min(min, orientation)).toBe(expected);
+      },
+    );
   });
 
   describe('max', () => {
     it.each([
-      [360, 'sm'],
-      [568, 'sm'],
-      [568, 'md'],
-      [800, 'md'],
-      [800, 'lg'],
-      [1100, 'lg'],
-      [1100, 'xl'],
-      [1280, 'xl'],
-    ] as const)('should render properly for %p with %p', (width, max) => {
+      { width: 360, max: 'sm', expected: true },
+      { width: 568, max: 'sm', expected: false },
+      { width: 568, max: 'md', expected: true },
+      { width: 800, max: 'md', expected: false },
+      { width: 800, max: 'lg', expected: true },
+      { width: 1100, max: 'lg', expected: false },
+      { width: 1100, max: 'xl', expected: true },
+      { width: 1280, max: 'xl', expected: false },
+    ] as const)('should render properly for $width with $max', ({ expected, max, width }) => {
       window.innerWidth = width;
 
-      const { container } = render(<Component maximum={max} />);
+      const { result } = renderHook(() => useResponsive());
 
-      expect(container.firstChild).toMatchSnapshot();
+      expect(result.current.max(max)).toBe(expected);
     });
   });
 
   describe('between', () => {
     it.each([
-      [320, 'xs', 'sm'],
-      [400, 'sm', 'md'],
-      [568, 'sm', 'md'],
-      [768, 'md', 'lg'],
-      [1024, 'lg', 'xl'],
-    ] as const)('should render properly for %p between %s/%s', (width, min, max) => {
-      window.innerWidth = width;
+      { width: 320, min: 'xs', max: 'sm', expected: true },
+      { width: 400, min: 'sm', max: 'md', expected: true },
+      { width: 568, min: 'sm', max: 'md', expected: true },
+      { width: 768, min: 'md', max: 'lg', expected: true },
+      { width: 1024, min: 'lg', max: 'xl', expected: true },
+    ] as const)(
+      'should render properly for $width between $min/$max',
+      ({ expected, max, min, width }) => {
+        window.innerWidth = width;
 
-      const { container } = render(<Component maximum={max} minimum={min} />);
+        const { result } = renderHook(() => useResponsive());
 
-      expect(container.firstChild).toMatchSnapshot();
-    });
+        expect(result.current.between(min, max)).toBe(expected);
+      },
+    );
   });
 
   describe('custom breakpoints', () => {
@@ -106,21 +81,22 @@ describe('useResponsive', () => {
     };
 
     it.each([
-      [320, 'small', 'medium'],
-      [568, 'small', 'medium'],
-      [768, 'medium', 'large'],
-      [1024, 'medium', 'large'],
-      [1280, 'medium', 'large'],
-    ])('should render properly for %p between %s/%s', (width, min, max) => {
-      window.innerWidth = width;
+      { width: 320, min: 'small', max: 'medium', expected: true },
+      { width: 568, min: 'small', max: 'medium', expected: true },
+      { width: 768, min: 'medium', max: 'large', expected: true },
+      { width: 1024, min: 'medium', max: 'large', expected: true },
+      { width: 1280, min: 'medium', max: 'large', expected: false },
+    ] as const)(
+      'should render properly for $width between $min/$max',
+      ({ expected, max, min, width }) => {
+        window.innerWidth = width;
 
-      const { container } = render(
-        <Component breakpoints={breakpoints} maximum={max} minimum={min} />,
-      );
+        const { result } = renderHook(() => useResponsive(breakpoints));
 
-      expect(spy).toHaveBeenCalledWith('The "small" breakpoint should be 0');
-      expect(container.firstChild).toMatchSnapshot();
-    });
+        expect(result.current.between(min, max)).toBe(expected);
+        expect(spy).toHaveBeenCalledWith('The "small" breakpoint should be 0');
+      },
+    );
   });
 
   describe('resize', () => {
@@ -129,18 +105,18 @@ describe('useResponsive', () => {
     });
 
     it('should update the matcher with a window.resize', async () => {
-      const { container, rerender } = render(<Component />);
+      const { rerender, result } = renderHook(() => useResponsive());
 
-      expect(container.firstChild).toMatchSnapshot();
+      expect(result.current.size).toBe('lg');
 
       await act(async () => {
         window.innerWidth = 768;
         window.dispatchEvent(new Event('resize'));
       });
 
-      rerender(<Component />);
+      rerender();
 
-      expect(container.firstChild).toMatchSnapshot();
+      expect(result.current.size).toBe('md');
     });
   });
 });
