@@ -22,8 +22,6 @@ describe('utils', () => {
       target.setAttribute('data-testid', 'test');
       document.body.appendChild(target);
 
-      console.log(getElement(target)?.getAttribute('data-testid'));
-
       expect(getElement('[data-testid="test"]')).toBe(target);
 
       document.body.removeChild(target);

@@ -1,20 +1,6 @@
-import * as React from 'react';
-import { act, render } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 
 import { useScript } from '../src/useScript';
-
-function Component() {
-  const [loaded, error] = useScript(
-    'https://maps.googleapis.com/maps/api/js?key=Ab2S23Bd&callback=initMap',
-  );
-
-  return (
-    <div>
-      {loaded && <span>loaded</span>}
-      {error && <span>error</span>}
-    </div>
-  );
-}
 
 describe('useScript', () => {
   afterEach(() => {
@@ -26,7 +12,10 @@ describe('useScript', () => {
   });
 
   it('should insert the script and load', async () => {
-    const { container } = render(<Component />);
+    const { result } = renderHook(() =>
+      useScript('https://maps.googleapis.com/maps/api/js?key=Ab2S23Bd&callback=initMap'),
+    );
+    // const { container } = render(<Component />);
     const script = document.body.querySelector('script');
 
     expect(script).toHaveAttribute(
@@ -38,11 +27,14 @@ describe('useScript', () => {
       script?.dispatchEvent(new Event('load'));
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(result.current[0]).toBe(true);
+    expect(result.current[1]).toBe(false);
   });
 
   it('should insert the script and fail', async () => {
-    const { container } = render(<Component />);
+    const { result } = renderHook(() =>
+      useScript('https://maps.googleapis.com/maps/api/js?key=Ab2S23Bd&callback=initMap'),
+    );
     const script = document.body.querySelector('script');
 
     expect(script).toHaveAttribute(
@@ -54,6 +46,7 @@ describe('useScript', () => {
       script?.dispatchEvent(new Event('error'));
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(result.current[0]).toBe(false);
+    expect(result.current[1]).toBe(true);
   });
 });
