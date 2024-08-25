@@ -24,9 +24,11 @@ jobs:
 
     steps:
       - name: Setup timezone
-        uses: zcong1993/setup-timezone@master
+        uses: MathRobin/timezone-action@v1.1
         with:
-          timezone: America/Sao_Paulo
+          timezoneLinux: America/Sao_Paulo
+          timezoneMacos: America/Sao_Paulo
+          timezoneWindows: 'E. South America Standard Time'
 
       - name: Setup repo
         uses: actions/checkout@v4
