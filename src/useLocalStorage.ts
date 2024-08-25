@@ -121,9 +121,6 @@ function useLocalStorageSSR<TValue>(
   initialValue?: TValue,
   _options?: UseLocalStorageOptions<TValue>,
 ): UseLocalStorageResult<TValue> {
-  // eslint-disable-next-line no-console
-  console.error('`useLocalStorage` is not available.');
-
   return [initialValue, noop, noop];
 }
 
