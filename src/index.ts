@@ -43,6 +43,7 @@ export {
 export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
+export { useStableValue } from './useStableValue';
 export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useTimeout';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
