@@ -102,14 +102,12 @@ describe('isToggle', () => {
     const [, actions] = result.current;
 
     act(() => {
-      // @ts-expect-error - testing non-boolean parameters
       actions.toggle('string');
     });
 
     expect(result.current[0]).toBe(false);
 
     act(() => {
-      // @ts-expect-error - testing non-boolean parameters
       actions.toggle({});
     });
 

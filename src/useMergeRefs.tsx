@@ -1,4 +1,4 @@
-import { MutableRefObject, Ref, RefCallback, useCallback } from 'react';
+import { Ref, RefCallback, RefObject, useCallback } from 'react';
 
 export function useMergeRefs<T>(...refs: Ref<T>[]): RefCallback<T> {
   return useCallback(
@@ -7,7 +7,7 @@ export function useMergeRefs<T>(...refs: Ref<T>[]): RefCallback<T> {
         if (typeof ref === 'function') {
           ref(value);
         } else if (ref && typeof ref === 'object') {
-          (ref as MutableRefObject<T>).current = value;
+          (ref as RefObject<T>).current = value;
         }
       }
     },

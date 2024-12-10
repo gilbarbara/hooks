@@ -18,7 +18,7 @@ export function useDebounce(
   deps: DependencyList = [],
 ): UseDebounceResult {
   const status = useRef<UseDebounceStatus>('pending');
-  const timeout = useRef<ReturnType<typeof setTimeout>>();
+  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
   const savedCallback = useRef(callback);
   const isFirstMount = useIsFirstMount();
 

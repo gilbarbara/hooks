@@ -12,7 +12,7 @@ export interface UseTimeoutResult {
 
 export function useTimeout(callback: () => void, delayMs: number = 0): UseTimeoutResult {
   const status = useRef<UseTimeoutStatus>('pending');
-  const timeout = useRef<ReturnType<typeof setTimeout>>();
+  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
   const savedCallback = useRef(callback);
 
   const clear = useCallback(() => {

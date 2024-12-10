@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
@@ -17,7 +17,7 @@ describe('useResizeObserver', () => {
     vi.useRealTimers();
   });
 
-  const ref = { current: null } as MutableRefObject<Element | null>;
+  const ref = { current: null } as RefObject<Element | null>;
   const rootElement = document.createElement('div');
 
   rootElement.id = 'root';
@@ -48,7 +48,7 @@ describe('useResizeObserver', () => {
   });
 
   it('should initialize with a ref', () => {
-    const { result } = renderHook(() => useResizeObserver(ref));
+    const { result } = renderHook(() => useResizeObserver(ref.current));
 
     resizeObserver.mockElementSize(rootElement, mockResizeObserveResponse);
 

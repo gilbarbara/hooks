@@ -6,7 +6,7 @@ export function useThrottleValue<T>(value: T, delayMs: number): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const hasNextValue = useRef(false);
   const nextValue = useRef<any>(null);
-  const timer = useRef<number>();
+  const timer = useRef<number>(undefined);
 
   useEffect(() => {
     if (!timer.current) {

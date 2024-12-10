@@ -22,7 +22,7 @@ export function useWhyDidYouUpdate<T extends PlainObject<any>>(
   type K = keyof T;
 
   const [changes, setChanges] = useState<UseWhyDidYouUpdateResult<T>>({});
-  const previousProps = useRef<T>();
+  const previousProps = useRef<T>(undefined);
 
   const { name, skipLog = false } = isString(nameOrOptions)
     ? { name: nameOrOptions }

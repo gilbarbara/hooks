@@ -1,7 +1,7 @@
 import { PlainObject, Primitive, Target } from './types';
 
 export function canUseDOM() {
-  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  return !!(typeof window !== 'undefined' && window?.document?.createElement);
 }
 
 export function getElement<T extends Element>(target: Target<T>) {
@@ -56,7 +56,7 @@ export function noop() {
   return undefined;
 }
 
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 export function on<T extends Window | Document | HTMLElement | EventTarget>(
   target: T | null,
   ...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
@@ -74,4 +74,4 @@ export function off<T extends Window | Document | HTMLElement | EventTarget>(
     target.removeEventListener(...(rest as Parameters<HTMLElement['removeEventListener']>));
   }
 }
-/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/no-unsafe-function-type */
