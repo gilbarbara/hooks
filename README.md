@@ -33,7 +33,8 @@ npm i @gilbarbara/hooks
 
 #### Side-effects
 
-[useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
+[useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.   
+[useHasChanged](docs/useHasChanged.md) — Detects value changes and optionally triggers a callback.  
 [useLocalStorage](docs/useLocalStorage.md) — Interact with the browser localStorage API.  
 [useScript](docs/useScript.md) — Create a script tag and append it to the `document.body`.  
 [useThrottle](docs/useThrottle.md) — Return a throttled function that only invokes `fn` once per every `ms`.  
