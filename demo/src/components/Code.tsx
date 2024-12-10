@@ -1,4 +1,4 @@
-import { Box, Props, Text } from '@gilbarbara/components';
+import { Flex, Props, Text } from '@gilbarbara/components';
 
 import { isPlainObject } from '../modules/helpers';
 
@@ -24,8 +24,8 @@ export default function Code({ bold, data, skipWrapper, ...rest }: CodeProps) {
   }
 
   return (
-    <Box flexBox justify="center" mx="auto" {...rest}>
+    <Flex justify="center" mx="auto" {...rest}>
       {content}
-    </Box>
+    </Flex>
   );
 }

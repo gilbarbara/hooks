@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Box, Button, FormGroup, Input, Label, Paragraph } from '@gilbarbara/components';
+import { Box, Button, Flex, FormGroup, Input, Label, Paragraph } from '@gilbarbara/components';
 import { useInterval } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -24,11 +24,12 @@ export default function UseInterval() {
       <BorderBox maxWidth={400}>
         <Box mb="md">
           <FormGroup>
-            <Label htmlFor="delay">Delay</Label>
+            <Label labelId="delay">Delay</Label>
             <Input
               name="delay"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setDelay(Number(event.target.value))}
+                setDelay(Number(event.target.value))
+              }
               value={delay}
             />
           </FormGroup>
@@ -36,11 +37,11 @@ export default function UseInterval() {
         <Paragraph bold mb="md" size="lg">
           count: {count}
         </Paragraph>
-        <div>
+        <Flex justify="center">
           <Button onClick={() => setIsRunning(!isRunning)} size="sm">
             {isRunning ? 'stop' : 'start'}
           </Button>
-        </div>
+        </Flex>
       </BorderBox>
     </Block>
   );

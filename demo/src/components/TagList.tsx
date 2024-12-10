@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
-import { Props, Spacer, Tag } from '@gilbarbara/components';
+import { Spacer, type ChipProps, type SpacerProps, Chip } from '@gilbarbara/components';
 
 import Code from './Code';
 
 interface Props {
   data: Record<string, any>;
   invertLeftTag?: boolean;
-  leftDistribution?: Props.SpacerProps['distribution'];
-  rightDistribution?: Props.SpacerProps['distribution'];
-  tagBg?: Props.TagProps['bg'];
+  leftDistribution?: SpacerProps['distribution'];
+  rightDistribution?: SpacerProps['distribution'];
+  tagBg?: ChipProps['bg'];
 }
 
 interface Row {
@@ -40,9 +40,9 @@ export default function TagList({
 
   return (
     <Spacer data-component-name="TagList" distribution="center" verticalAlign="start">
-      <Spacer direction="vertical" distribution={leftDistribution}>
+      <Spacer orientation="vertical" distribution={leftDistribution}>
         {columns.left.map(row => {
-          const key = <Tag bg={tagBg}>{row.key}</Tag>;
+          const key = <Chip bg={tagBg}>{row.key}</Chip>;
           const value = <Code data={row.value} />;
 
           return (
@@ -53,10 +53,10 @@ export default function TagList({
           );
         })}
       </Spacer>
-      <Spacer direction="vertical" distribution={rightDistribution}>
+      <Spacer orientation="vertical" distribution={rightDistribution}>
         {columns.right.map(row => (
           <Spacer key={row.key} gap="xs">
-            <Tag bg={tagBg}>{row.key}</Tag>
+            <Chip bg={tagBg}>{row.key}</Chip>
             <Code data={row.value} />
           </Spacer>
         ))}

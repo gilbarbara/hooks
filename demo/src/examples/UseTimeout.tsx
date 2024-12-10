@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Button, Paragraph } from '@gilbarbara/components';
+import { Button, Flex, Paragraph } from '@gilbarbara/components';
 import { useTimeout } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -46,9 +46,11 @@ export default function UseTimeout() {
         <Paragraph bold mb="md">
           {description}
         </Paragraph>
-        <Button onClick={cancelButtonClick} size="sm">
-          {content.button} timeout
-        </Button>
+        <Flex justify="center">
+          <Button onClick={cancelButtonClick} size="sm">
+            {content.button} timeout
+          </Button>
+        </Flex>
       </BorderBox>
     </Block>
   );

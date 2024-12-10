@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button } from '@gilbarbara/components';
+import { Button, Flex } from '@gilbarbara/components';
 import { useClickOutside } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -27,9 +27,9 @@ export default function UseClickOutside() {
           {isVisible ? 'Click outside the dotted line to hide it' : 'Show'}
         </Button>
         {isVisible && (
-          <Box align="center" bg="green" flexBox height={120} justify="center" mt="md">
+          <Flex align="center" bg="green" height={120} justify="center" mt="md">
             Element
-          </Box>
+          </Flex>
         )}
       </BorderBox>
     </Block>

@@ -1,4 +1,4 @@
-import { Tag } from '@gilbarbara/components';
+import { Chip } from '@gilbarbara/components';
 
 interface Props {
   label: string;
@@ -7,8 +7,8 @@ interface Props {
 
 export default function Status({ label, status }: Props) {
   return (
-    <Tag bg={status ? 'green' : 'red'} size="xs">
+    <Chip bg={status ? 'green' : 'gray.200'} size="xs">
       {label}
-    </Tag>
+    </Chip>
   );
 }

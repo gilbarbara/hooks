@@ -1,4 +1,4 @@
-import { Button, Paragraph } from '@gilbarbara/components';
+import { Button, Flex, Paragraph } from '@gilbarbara/components';
 import { useUpdate } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -15,9 +15,11 @@ export default function UseUpdate() {
         <Paragraph bold mb="md">
           Time: {Date.now()}
         </Paragraph>
-        <Button onClick={update} size="sm">
-          Update
-        </Button>
+        <Flex justify="center">
+          <Button onClick={update} size="sm">
+            Update
+          </Button>
+        </Flex>
       </BorderBox>
     </Block>
   );
