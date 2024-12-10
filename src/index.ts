@@ -9,6 +9,7 @@ export {
   type UseFetchResult,
   type UseFetchStatus,
 } from './useFetch';
+export { useHasChanged } from './useHasChanged';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useInterval } from './useInterval';
 export { useIsFirstMount } from './useIsFirstMount';
