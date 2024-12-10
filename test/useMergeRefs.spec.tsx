@@ -6,8 +6,8 @@ import { useMergeRefs } from '../src/useMergeRefs';
 const mergedRefs: any = {};
 
 function Component() {
-  const firstRef = useRef<HTMLDivElement>();
-  const secondRef = useRef<HTMLDivElement>();
+  const firstRef = useRef<HTMLDivElement>(null);
+  const secondRef = useRef<HTMLDivElement>(null);
 
   const functionRef = (element: HTMLDivElement) => {
     secondRef.current = element;

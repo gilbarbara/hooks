@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
@@ -35,7 +35,7 @@ vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
 );
 
 describe('useMeasure', () => {
-  const ref = { current: null } as MutableRefObject<Element | null>;
+  const ref = { current: null } as RefObject<Element | null>;
   const rootElement = createElement();
 
   beforeAll(() => {
@@ -55,12 +55,12 @@ describe('useMeasure', () => {
   it.each([{ target: 'element' }, { target: '#root' }, { target: 'ref' }])(
     'should return the dimensions with a "$target" target',
     ({ target }) => {
-      let result: MutableRefObject<UseMeasureResult> | null = null;
+      let result: RefObject<UseMeasureResult> | null = null;
       let rerender: () => void;
 
       if (target === 'ref') {
         ref.current = rootElement;
-        ({ rerender, result } = renderHook(() => useMeasure(ref)));
+        ({ rerender, result } = renderHook(() => useMeasure(ref.current)));
       } else if (target.startsWith('#')) {
         ({ rerender, result } = renderHook(() => useMeasure(target)));
       } else {

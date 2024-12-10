@@ -19,7 +19,7 @@ export function useScript(
     () => (isString(idOrOptions) ? { id: idOrOptions } : idOrOptions),
     [idOrOptions],
   );
-  const script = useRef<HTMLScriptElement>();
+  const script = useRef<HTMLScriptElement>(null);
   const [state, setState] = useState({
     loaded: false,
     error: false,

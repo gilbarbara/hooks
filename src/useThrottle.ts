@@ -10,7 +10,7 @@ export function useThrottle<T extends (...arguments_: Array<any>) => void>(
   const [now, setNow] = useState(0);
   const callbackRef = useRef(callback);
   const hasPendingCall = useRef(false);
-  const timer = useRef<number>();
+  const timer = useRef<number>(undefined);
 
   useEffect(() => {
     callbackRef.current = callback;

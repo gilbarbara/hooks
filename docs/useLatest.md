@@ -31,5 +31,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useLatest<T>(value: T): React.MutableRefObject<T>;
+useLatest<T>(value: T): React.RefObject<T>;
 ```
