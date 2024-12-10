@@ -15,7 +15,7 @@ export default function UseThrottleValue() {
       <Heading>useThrottleValue</Heading>
       <BorderBox maxWidth={400}>
         <FormGroup>
-          <Label htmlFor="text">Text</Label>
+          <Label labelId="text">Text</Label>
           <Input
             name="text"
             onChange={(event: ChangeEvent<HTMLInputElement>) => setText(event.target.value)}
@@ -23,10 +23,7 @@ export default function UseThrottleValue() {
             value={text}
           />
         </FormGroup>
-        <Paragraph bold>
-          Throttle value:{' '}
-          {throttledText}
-        </Paragraph>
+        <Paragraph bold>Throttle value: {throttledText}</Paragraph>
       </BorderBox>
     </Block>
   );

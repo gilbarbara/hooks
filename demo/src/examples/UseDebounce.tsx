@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Input, Paragraph } from '@gilbarbara/components';
+import { Box, Button, Flex, Input, Paragraph } from '@gilbarbara/components';
 import { useDebounce } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -39,15 +39,17 @@ export default function UseDebounce() {
         <Paragraph bold my="md">
           Debounced value: {debouncedValue}
         </Paragraph>
-        <Button
-          onClick={() => {
-            cancel();
-            setState('Debounce canceled');
-          }}
-          size="sm"
-        >
-          Cancel debounce
-        </Button>
+        <Flex justify="center">
+          <Button
+            onClick={() => {
+              cancel();
+              setState('Debounce canceled');
+            }}
+            size="sm"
+          >
+            Cancel debounce
+          </Button>
+        </Flex>
       </Box>
     </Block>
   );

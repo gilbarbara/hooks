@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Paragraph, Spacer } from '@gilbarbara/components';
+import { Box, Button, Flex, Paragraph } from '@gilbarbara/components';
 import { useFetch } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
@@ -21,22 +21,22 @@ export default function UseFetch() {
       <Heading>useFetch</Heading>
 
       <BorderBox maxWidth={400}>
-        <Spacer distribution="center">
+        <Flex gap="md" justify="center">
           <Button disabled={!wait} onClick={() => setWait(false)} size="sm">
             {wait ? 'Execute' : 'Fetched'}
           </Button>
           <Button disabled={wait} onClick={() => refetch()} size="sm">
             Refetch
           </Button>
-        </Spacer>
-        <Spacer distribution="center" gapVertical="sm" mt="md">
+        </Flex>
+        <Flex gap="sm" justify="center" mt="md" wrap="wrap">
           <Status label="isPaused" status={isPaused()} />
           <Status label="isLoading" status={isLoading()} />
           <Status label="isFetched" status={isFetched()} />
           <Status label="isSuccess" status={isSuccess()} />
           <Status label="isError" status={isError()} />
-        </Spacer>
-        <Spacer direction="vertical" maxWidth={400} mt="xl" mx="auto" textAlign="left">
+        </Flex>
+        <Flex direction="column" gap="sm" maxWidth={400} mt="xl" mx="auto" textAlign="left">
           <Box>
             <Paragraph bold>Status</Paragraph>
             <Paragraph mt="xxs">{status}</Paragraph>
@@ -49,7 +49,7 @@ export default function UseFetch() {
             <Paragraph bold>Data</Paragraph>
             <Code data={data} />
           </Box>
-        </Spacer>
+        </Flex>
       </BorderBox>
     </Block>
   );

@@ -5,6 +5,7 @@ import { Box, H1, Page } from '@gilbarbara/components';
 import UseClickOutside from './examples/UseClickOutside';
 import UseDebounce from './examples/UseDebounce';
 import UseFetch from './examples/UseFetch';
+import UseHasChanged from './examples/useHasChanged';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
 import UseLocalStorage from './examples/UseLocalStorage';
@@ -30,6 +31,7 @@ export default function Hooks() {
         <UseClickOutside />
         <UseDebounce />
         <UseFetch />
+        <UseHasChanged />
         <UseIntersectionObserver />
         <UseInterval />
         <UseLocalStorage />
