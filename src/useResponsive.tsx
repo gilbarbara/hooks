@@ -9,10 +9,25 @@ export type Breakpoints = typeof defaultBreakpoints;
 export type UseResponsiveOrientation = 'landscape' | 'portrait';
 
 export interface UseResponsiveResult<T> {
+  /**
+   * Returns true if the screen size is between the specified breakpoints and matches the optional orientation.
+   */
   between(min: keyof T, max: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  /**
+   * Returns true if the screen size is less than or equal to the specified breakpoint and matches the optional orientation.
+   */
   max(breakpoint: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  /**
+   * Returns true if the screen size is greater than or equal to the specified breakpoint and matches the optional orientation.
+   */
   min(breakpoint: keyof T, andOrientation?: UseResponsiveOrientation): boolean;
+  /**
+   * The current screen orientation, either portrait or landscape.
+   */
   orientation: UseResponsiveOrientation;
+  /**
+   * The current active breakpoint, based on the defined breakpoints.
+   */
   size: keyof T;
 }
 

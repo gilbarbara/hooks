@@ -22,7 +22,6 @@ function Component() {
 describe('useClickOutside', () => {
   it('should execute the callback when clicking outside', () => {
     render(<Component />);
-    console.log(mockFn.mock.calls);
 
     screen.getByRole('button', { name: 'Send' }).click();
     expect(mockFn).not.toHaveBeenCalled();

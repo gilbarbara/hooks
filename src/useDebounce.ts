@@ -15,7 +15,7 @@ export interface UseDebounceResult {
 export function useDebounce(
   callback: () => void,
   delayMs: number = 250,
-  deps: DependencyList = [],
+  dependencies: DependencyList = [],
 ): UseDebounceResult {
   const status = useRef<UseDebounceStatus>('pending');
   const timeout = useRef<ReturnType<typeof setTimeout>>(null);
@@ -51,7 +51,7 @@ export function useDebounce(
     }
 
     return undefined;
-  }, [set, clear, deps, delayMs]);
+  }, [set, clear, dependencies, delayMs]);
 
   return { cancel: clear, getStatus };
 }

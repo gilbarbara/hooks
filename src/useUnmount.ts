@@ -1,8 +1,8 @@
 import { useEffectOnce } from './useEffectOnce';
 import { useLatest } from './useLatest';
 
-export function useUnmount(fn: () => any) {
-  const unmountFn = useLatest(fn);
+export function useUnmount(callback: () => void) {
+  const unmountFn = useLatest(callback);
 
-  useEffectOnce(() => () => unmountFn.current());
+  useEffectOnce(() => unmountFn.current);
 }

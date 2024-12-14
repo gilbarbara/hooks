@@ -1,7 +1,7 @@
 # useInterval
 
-Execute the callback repeatedly with the specified delay.  
-It can be paused by setting the delayMs to `null`.
+Execute the callback at regular intervals with the specified delay.  
+Pauses execution if delayMs is set to `null`.
 
 ## Usage
 
@@ -14,10 +14,7 @@ function Component() {
   const [delay, setDelay] = useState(1000);
   const [isRunning, setIsRunning] = useState(true);
 
-  useInterval(
-    () => { setCount(count + 1); },
-    isRunning ? delay : null
-  );
+  useInterval(() => setCount(prevCount => prevCount + 1), isRunning ? delay : null);
 
   return (
     <div>

@@ -21,9 +21,9 @@ export type UseLocalStorageOptions<TValue> =
     };
 
 export type UseLocalStorageResult<TValue> = [
-  TValue | undefined,
-  Dispatch<SetStateAction<TValue | undefined>>,
-  () => void,
+  value: TValue | undefined,
+  setValue: Dispatch<SetStateAction<TValue | undefined>>,
+  remove: () => void,
 ];
 
 function useLocalStorageHook<TValue>(

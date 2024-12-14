@@ -1,7 +1,7 @@
 import { ActionDispatch, AnyActionArg, useCallback, useReducer } from 'react';
 
 export type UseToggleResult = [
-  boolean,
+  value: boolean,
   actions: {
     toggle: ActionDispatch<AnyActionArg>;
     toggleOff: () => void;

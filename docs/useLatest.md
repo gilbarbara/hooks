@@ -1,6 +1,9 @@
 # useLatest
 
-Get a ref with the most recent value.
+Returns a `ref` object containing the most recent value.  
+This hook is useful for accessing the latest value in asynchronous callbacks or effects without re-triggering updates.
+
+> Don't mutate the `current` property of the returned ref directly. This hook is intended for read-only access to the latest value.
 
 ## Usage
 

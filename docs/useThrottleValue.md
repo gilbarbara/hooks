@@ -1,6 +1,7 @@
 # useThrottleValue
 
-Return a throttled value that only changes once per every `delayMs`.
+Returns a throttled version of a value that only updates once every specified `delayMs`.  
+This hook is useful for limiting the frequency of updates for rapidly changing values, such as user inputs or scroll positions.
 
 ## Usage
 

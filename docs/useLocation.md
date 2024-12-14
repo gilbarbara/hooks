@@ -1,6 +1,8 @@
 # useLocation
 
-Track the browser's location.
+Tracks the browser's location, providing details about the current URL, such as the pathname, query parameters, and other location properties.
+
+> The query property simplifies working with query parameters by returning them as a parsed object.
 
 ## Usage
 

@@ -1,6 +1,7 @@
 # useScript
 
-Create a script tag and append it to the `document.body`.
+Dynamically loads a script by creating a `<script>` tag and appending it to the `document.body`.  
+This hook is useful for integrating third-party scripts like APIs or analytics libraries.
 
 ## Usage
 
@@ -19,6 +20,22 @@ function Component() {
       {error && <span>error</span>}
     </div>
   );
+}
+```
+
+**Custom Attributes**
+  
+```tsx
+import { useScript } from '@gilbarbara/hooks';
+
+function Component() {
+  const [loaded] = useScript('https://example.com/script.js', {
+    id: 'example-script',
+    async: true,
+    type: 'module',
+  });
+
+  return <div>{loaded ? 'Script is ready!' : 'Loading...'}</div>;
 }
 ```
 

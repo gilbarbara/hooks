@@ -1,6 +1,9 @@
 # useSetState
 
-A state hook that returns a setState that merges object changes into the current state instead of replacing it.
+A state hook that simplifies managing state objects by merging updates into the current state instead of replacing it.  
+This hook is especially useful for managing complex or deeply nested state structures without manually merging updates.
+
+> It automatically merges updates into the current state instead of replacing it, mimicking the behavior of this.setState in React class components.
 
 ## Usage
 

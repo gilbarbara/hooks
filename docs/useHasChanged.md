@@ -2,6 +2,8 @@
 
 Tracks whether a given value has changed and optionally executes a callback when a change is detected.
 
+> The returned value is `undefined` on the initial render.
+
 ## Usage
 
 ```tsx

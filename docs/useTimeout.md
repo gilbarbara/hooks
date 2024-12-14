@@ -1,6 +1,7 @@
 # useTimeout
 
-Execute the callback after the specified delay.
+Executes a callback function after a specified delay.  
+This hook provides enhanced control over timers, including the ability to cancel, reset, or check the timer's status.
 
 ## Usage
 

@@ -2,7 +2,7 @@ import { DependencyList, EffectCallback, useEffect } from 'react';
 
 import { useIsFirstMount } from './useIsFirstMount';
 
-export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
+export function useUpdateEffect(effect: EffectCallback, dependencies?: DependencyList) {
   const isFirstMount = useIsFirstMount();
 
   useEffect(() => {
@@ -12,5 +12,5 @@ export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
 
     return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, dependencies);
 }

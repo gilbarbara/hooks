@@ -1,7 +1,8 @@
 # useStableValue
 
-Get a stabilized value that only changes when the original is truly different.
-Useful for non-primitive values such as objects, arrays or functions.
+Provides a stable reference to a value, ensuring it only updates when the original value genuinely changes.
+
+> Prevents unnecessary renders or re-computations when passing non-primitive values like objects, arrays, or functions as dependencies to React hooks like useEffect, useMemo, or useCallback.
 
 ## Usage
 

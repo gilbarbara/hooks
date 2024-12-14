@@ -1,6 +1,8 @@
 # useIsMounted
 
-Check if the component is still mounted before changing the state.
+Checks if the component is still mounted before performing state updates or other side effects.
+
+Useful for avoiding memory leaks and ensuring side effects are only performed while the component is active and prevent errors like “Can’t perform a React state update on an unmounted component.”
 
 ## Usage
 

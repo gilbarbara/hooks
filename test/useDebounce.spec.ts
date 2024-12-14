@@ -9,15 +9,15 @@ const defaultDelay = 5;
 function getHook(
   initialDeps: DependencyList = [5],
   ms: number = defaultDelay,
-): [Mock, RenderHookResult<UseDebounceResult, { delay: number; deps: DependencyList }>] {
+): [Mock, RenderHookResult<UseDebounceResult, { delay: number; dependencies: DependencyList }>] {
   const mock = vi.fn();
 
   return [
     mock,
-    renderHook(({ delay, deps = [] }) => useDebounce(mock, delay, deps), {
+    renderHook(({ delay, dependencies = [] }) => useDebounce(mock, delay, dependencies), {
       initialProps: {
         delay: ms,
-        deps: initialDeps,
+        dependencies: initialDeps,
       },
     }),
   ];
@@ -61,12 +61,12 @@ describe('useDebounce', () => {
     expect(mock).not.toHaveBeenCalled();
   });
 
-  it('should execute the callback when deps change', () => {
+  it('should execute the callback when dependencies change', () => {
     const [mock, hook] = getHook();
 
     expect(mock).not.toHaveBeenCalled();
 
-    hook.rerender({ delay: defaultDelay, deps: [6] });
+    hook.rerender({ delay: defaultDelay, dependencies: [6] });
 
     act(() => {
       vi.advanceTimersByTime(defaultDelay);
@@ -78,7 +78,7 @@ describe('useDebounce', () => {
   it('should stop the timer when "cancel" is called', () => {
     const [mock, hook] = getHook();
 
-    hook.rerender({ delay: defaultDelay, deps: [6] });
+    hook.rerender({ delay: defaultDelay, dependencies: [6] });
     hook.result.current.cancel();
 
     act(() => {
@@ -93,7 +93,7 @@ describe('useDebounce', () => {
 
     expect(mock).not.toHaveBeenCalled();
 
-    hook.rerender({ delay: defaultDelay, deps: [6] });
+    hook.rerender({ delay: defaultDelay, dependencies: [6] });
     hook.unmount();
 
     act(() => {
@@ -109,14 +109,14 @@ describe('useDebounce', () => {
 
     expect(getStatus()).toBe('pending');
 
-    hook.rerender({ delay: defaultDelay, deps: [6] });
+    hook.rerender({ delay: defaultDelay, dependencies: [6] });
     hook.unmount();
     expect(getStatus()).toBe('cancelled');
 
     [, hook] = getHook();
     ({ getStatus } = hook.result.current);
 
-    hook.rerender({ delay: defaultDelay, deps: [7] });
+    hook.rerender({ delay: defaultDelay, dependencies: [7] });
 
     act(() => {
       vi.advanceTimersByTime(defaultDelay);
@@ -132,7 +132,7 @@ describe('useDebounce', () => {
     expect(mock).not.toHaveBeenCalled();
     expect(getStatus()).toBe('pending');
 
-    hook.rerender({ delay: defaultDelay, deps: [6] });
+    hook.rerender({ delay: defaultDelay, dependencies: [6] });
 
     act(() => {
       cancel();
@@ -147,7 +147,7 @@ describe('useDebounce', () => {
     const [mock, hook] = getHook();
 
     expect(mock).not.toHaveBeenCalled();
-    hook.rerender({ delay: 10, deps: [6] });
+    hook.rerender({ delay: 10, dependencies: [6] });
 
     act(() => {
       vi.advanceTimersByTime(10);
@@ -155,10 +155,10 @@ describe('useDebounce', () => {
     expect(mock).toHaveBeenCalledTimes(1);
   });
 
-  it('should reset timeout on deps change', () => {
+  it('should reset timeout on dependencies change', () => {
     const [mock, hook] = getHook();
 
-    hook.rerender({ delay: 10, deps: [6] });
+    hook.rerender({ delay: 10, dependencies: [6] });
 
     act(() => {
       vi.advanceTimersByTime(defaultDelay);

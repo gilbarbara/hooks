@@ -1,6 +1,6 @@
 # useToggle
 
-State hook to track the value of a boolean.
+A state hook for managing a boolean value with easy-to-use methods for toggling or explicitly setting its value.
 
 ## Usage
 
@@ -25,8 +25,8 @@ function Component() {
 
 ```typescript
 type UseToggleResult = [
-  boolean,
-  {
+  value: boolean,
+  actions: {
     toggle: (nextValue?: boolean) => void;
     toggleOn: () => void;
     toggleOff: () => void;
