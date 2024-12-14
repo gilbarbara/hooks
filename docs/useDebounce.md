@@ -1,9 +1,10 @@
 # useDebounce
 
-Defer function execution until the delay has elapsed since the last invocation.
+Defer function execution until the delay has elapsed since the last invocation.  
+Useful for optimizing expensive operations like API calls triggered by user input.
 
-The third argument is the array of values that it depends on, in the same manner as useEffect.  
-The debounce timeout will start when one of the values changes.
+> The third argument is a dependency array similar to useEffect.  
+> The debounce timer resets whenever one of the dependencies changes.
 
 ## Usage
 
@@ -13,16 +14,17 @@ import { useDebounce } from '@gilbarbara/hooks';
 
 function Component() {
   const [state, setState] = useState('No typing yet...');
-  const [value, setValue] = React.useState('');
-  const [debouncedValue, setDebouncedValue] = React.useState('');
+  const [value, setValue] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
 
   const { cancel } = useDebounce(
     () => {
+      // This function executes after delay
       setState('Typing stopped');
       setDebouncedValue(value);
     },
-    1000,
-    [value]
+    1000, // Delay in milliseconds
+    [value] // Dependencies for the debounce
   );
 
   return (
@@ -64,6 +66,6 @@ export interface UseDebounceResult {
 useDebounce(
   callback: () => void,
   delayMs: number = 250,
-  deps: DependencyList = [],
+  dependencies: React.DependencyList = [],
 ): UseDebounceResult;
 ```

@@ -32,5 +32,8 @@ function Component() {
 ## Reference
 
 ```typescript
-useUpdateEffect(effect: EffectCallback, deps?: DependencyList): void;
+useUpdateEffect(
+  effect: EffectCallback,
+  dependencies?: DependencyList
+): void;
 ```

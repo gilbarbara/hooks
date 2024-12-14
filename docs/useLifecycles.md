@@ -1,6 +1,8 @@
 # useLifecycles
 
-Run the callbacks when the component mounts and unmounts, respectively.
+
+Executes the provided callbacks when the component mounts and unmounts, respectively.  
+This hook is a convenient way to handle lifecycle-specific logic without explicitly managing `useEffect`.
 
 ## Usage
 

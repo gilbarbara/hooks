@@ -1,6 +1,6 @@
 # useClickOutside
 
-Execute the callback when clicking outside the target element.
+Triggers the callback function when a click occurs outside the specified target element.
 
 ## Usage
 
@@ -11,7 +11,7 @@ import { useClickOutside } from '@gilbarbara/hooks';
 function Component() {
   const [isActive, setActive]= useState(false);
   const ref = useClickOutside(() => {
-    console.log('clicked outside');
+    console.log('Clicked outside the element');
     setActive(false);
   });
   
@@ -36,5 +36,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useClickOutside<T extends Element = HTMLElement>(callback: () => void): RefObject<T>;
+useClickOutside<T extends Element = HTMLElement>(callback: () => void): React.RefObject<T>;
 ```

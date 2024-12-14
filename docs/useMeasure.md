@@ -1,5 +1,9 @@
 # useMeasure
-Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.
+
+A hook for measuring element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
+Automatically updates measurements whenever the element's size changes.
+
+> The absoluteHeight and absoluteWidth properties include padding and border, while height and width do not.
 
 ## Usage
 
@@ -13,7 +17,7 @@ function Component() {
 
   return (
     <div ref={ref}>
-      {JSON.stringify(dimensions, undefined, 2)}
+      {JSON.stringify(dimensions, null, 2)}
     </div>
   );
 }
@@ -28,7 +32,9 @@ interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
 }
 
 useMeasure<T extends Element>(
-  target: RefObject<T> | T | null | string,
+  // Can be a ref, DOM element, or a CSS selector string.
+  target: React.RefObject<T> | T | null | string,
+  // Optional debounce delay in milliseconds. Helps optimize performance by reducing frequent updates during rapid size changes..
   debounce = 0,
 ): UseMeasureResult;
 ```

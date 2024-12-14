@@ -1,5 +1,10 @@
 # useDeepCompareEffect
-A custom `useEffect` hook that uses deep comparison on its dependencies instead of reference equality.
+A custom `useEffect` hook that uses deep comparison on its dependencies instead of reference equality.  
+This is useful when dealing with objects or arrays as dependencies, where changes in their values should trigger the effect, even if the reference remains the same.
+
+> Deep comparisons can be expensive for large or deeply nested dependencies. Ensure this hook is necessary before using it.
+> 
+> For more details on `useEffect`, refer to the [React documentation](https://react.dev/reference/react/useEffect).
 
 ## Usage
 
@@ -7,11 +12,11 @@ A custom `useEffect` hook that uses deep comparison on its dependencies instead 
 import { useState } from 'react';
 import { useDeepCompareEffect } from '@gilbarbara/hooks';
 
-function Component() {
-  const options = { step: 2 };
+function Component(props: { options: { step: number } }) {
+  const { options } = props;
   const [count, setCount] = useState(0);
-  
-  useEffectOnce(() => {
+
+  useDeepCompareEffect(() => {
     setCount(s => s + options.step);
   }, [options]);
 
@@ -26,8 +31,8 @@ function Component() {
 ## Reference
 
 ```typescript
-useDeepCompareEffect<TDeps extends DependencyList>(
-  effect: EffectCallback,
+useDeepCompareEffect<TDeps extends React.DependencyList>(
+  effect: React.EffectCallback,
   dependencies: TDeps,
 ): void;
 ```

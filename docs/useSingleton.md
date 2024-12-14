@@ -1,7 +1,7 @@
 # useSingleton
 
-Run the code just once before the render.  
-Similar to constructors in classes.
+Executes the provided callback function only once, before the component's initial render.  
+This hook is similar to class constructors in React class components, allowing you to perform one-time setup tasks.
 
 ## Usage
 

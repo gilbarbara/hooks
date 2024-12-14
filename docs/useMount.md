@@ -1,6 +1,9 @@
 # useMount
 
-Run the callback after the component is mounted.
+Executes the provided effect once, similar to `useEffect` with an empty dependency array.
+Ideal for running initialization logic like API calls or subscriptions.
+
+> For more details on `useEffect`, refer to the [React documentation](https://react.dev/reference/react/useEffect).
 
 ## Usage
 
@@ -19,5 +22,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useMount(fn: () => void): void;
+useMount(callback: () => void):void;
 ```

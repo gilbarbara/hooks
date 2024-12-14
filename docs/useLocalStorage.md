@@ -1,6 +1,7 @@
 # useLocalStorage
 
-Interact with the browser localStorage API.
+A custom hook to interact with the browser's `localStorage` API.  
+It provides a simple way to manage persistent state, including support for serialization and deserialization of complex values.
 
 ## Usage
 
@@ -8,14 +9,13 @@ Interact with the browser localStorage API.
 import { useLocalStorage } from '@gilbarbara/hooks';
 
 function Component() {
-  const [value, setValue, remove] = useLocalStorage('my-key', 'foo');
+  const [user, setUser, removeUser] = useLocalStorage('user', { name: 'John Doe', age: 30 });
 
   return (
     <div>
-      <div>Value: {value}</div>
-      <button onClick={() => setValue('bar')}>bar</button>
-      <button onClick={() => setValue('baz')}>baz</button>
-      <button onClick={() => remove()}>Remove</button>
+      <div>User: {JSON.stringify(user)}</div>
+      <button onClick={() => setUser({ name: 'Jane Doe', age: 25 })}>Update User</button>
+      <button onClick={() => removeUser()}>Remove User</button>
     </div>
   );
 }
@@ -34,10 +34,10 @@ type UseLocalStorageOptions<TValue> =
   serializer: (value: TValue) => string;
 };
 
-type UseLocalStorageResult<TValue> = [
-    TValue | undefined,
-  Dispatch<SetStateAction<TValue | undefined>>,
-  () => void,
+export type UseLocalStorageResult<TValue> = [
+  value: TValue | undefined,
+  setValue: Dispatch<SetStateAction<TValue | undefined>>,
+  remove: () => void,
 ];
 
 useLocalStorage<TValue>(key, initialValue?: TValue, options?: UseLocalStorageOptions<TValue>): UseLocalStorageResult;

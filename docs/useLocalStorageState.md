@@ -1,6 +1,7 @@
 # useLocalStorageState
 
-State hook that persists the state in localStorage.
+A state hook that persists its value in the `localStorage`.  
+It provides the functionality to synchronize state with the browser's storage, ensuring the state persists across page reloads.
 
 ## Usage
 

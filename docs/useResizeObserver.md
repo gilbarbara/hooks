@@ -22,10 +22,10 @@ function Component() {
 
 ```typescript
 useResizeObserver<T extends Element>(
-  target: RefObject<T> | T | null | string,
+  target: React.RefObject<T> | T | null | string,
   debounce: number = 0,
 ): ResizeObserverEntry;
 ```
 
-> This hook uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver), so if you want to support
+> If you want to support
 legacy browsers, install the [resize-observer-polyfill](https://www.npmjs.com/package/resize-observer-polyfill) in your app.

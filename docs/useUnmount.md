@@ -1,6 +1,7 @@
 # useUnmount
 
-Run the callback when the component unmounts.
+Executes the provided callback when the component unmounts.  
+This hook is useful for cleanup tasks like removing event listeners, canceling subscriptions, or clearing timers.
 
 ## Usage
 
@@ -9,7 +10,8 @@ import { useUnmount } from '@gilbarbara/hooks';
 
 function Component() {
   useUnmount(() => {
-    // cleanup the listener
+    console.log('Component unmounted');
+    // Cleanup code here, e.g., removing event listeners or subscriptions
   });
 
   return <div>Some content...</div>;
@@ -19,5 +21,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useUnmount(fn: () => void): void;
+useUnmount(callback: () => void): void;
 ```

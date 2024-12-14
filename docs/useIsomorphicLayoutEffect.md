@@ -1,6 +1,9 @@
 # useIsomorphicLayoutEffect
 
-Returns `useLayoutEffect` in the client or `useEffect` on the server.
+Returns `useLayoutEffect` on the client and falls back to `useEffect` on the server.  
+This prevents React warnings about using `useLayoutEffect` during server-side rendering (SSR).
+
+> Avoid using this hook for effects that don’t require synchronous DOM updates. Use useEffect instead for non-DOM-related logic.
 
 ## Usage
 
