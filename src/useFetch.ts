@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { PlainObject } from './types';
+import { useSetState } from './useSetState';
 import { isPlainObject, isURL } from './utils';
 
 export const USE_FETCH_STATUS = {
@@ -19,6 +20,11 @@ interface UseFetchError extends Error {
 
 export interface UseFetchOptions {
   body?: BodyInit | Record<string, any>;
+  /**
+   * Time to cache the request if provided.
+   * When the cache is expired, the request will be triggered again.
+   */
+  cacheTTL?: number;
   headers?: PlainObject<string>;
   /**
    * HTTP method.
@@ -57,10 +63,16 @@ export interface UseFetchOptions {
 interface UseFetchState<TDataType> {
   data?: TDataType;
   error?: UseFetchError;
+  isCached: boolean;
   status: UseFetchStatus;
+  url: string;
 }
 
 export interface UseFetchResult<TDataType> extends UseFetchState<TDataType> {
+  /**
+   * Whether the response is cached.
+   */
+  isCached: boolean;
   isError: () => boolean;
   isFetched: () => boolean;
   isLoading: () => boolean;
@@ -68,6 +80,8 @@ export interface UseFetchResult<TDataType> extends UseFetchState<TDataType> {
   isSuccess: () => boolean;
   refetch: (eraseData?: boolean) => void;
 }
+
+const globalCache = new Map<string, { data: any; expiry: number }>();
 
 async function request(options: UseFetchOptions): Promise<any> {
   const {
@@ -126,17 +140,65 @@ async function request(options: UseFetchOptions): Promise<any> {
   });
 }
 
+export const useFetchCache = {
+  /**
+   * Retrieve data from the cache.
+   * @param url The URL to retrieve data for.
+   * @returns Cached data or `undefined` if not found or expired.
+   */
+  get(url: string) {
+    const cached = globalCache.get(url);
+
+    if (cached && Date.now() < cached.expiry) {
+      return cached;
+    }
+
+    globalCache.delete(url); // Remove expired entry
+
+    return undefined;
+  },
+
+  /**
+   * Set data in the cache.
+   * @param url The URL to cache data for.
+   * @param data The data to cache.
+   * @param ttl Time-to-live in milliseconds.
+   */
+  set(url: string, data: any, ttl: number) {
+    globalCache.set(url, { data, expiry: Date.now() + ttl });
+  },
+
+  /**
+   * Clear the cache.
+   * @param url Optional URL to clear. Clears all cache if not specified.
+   */
+  clear(url?: string) {
+    if (url) {
+      globalCache.delete(url);
+    } else {
+      globalCache.clear();
+    }
+  },
+
+  /**
+   * Check if a URL is cached and still valid.
+   * @param url The URL to check.
+   * @returns `true` if cached and valid, `false` otherwise.
+   */
+  has(url: string) {
+    const cached = globalCache.get(url);
+
+    return !!cached && Date.now() < cached.expiry;
+  },
+};
+
 export function useFetch<TDataType = unknown>(
   urlOrOptions: string | UseFetchOptions,
 ): UseFetchResult<TDataType> {
   const isActive = useRef(false);
   const retryCount = useRef(0);
-  const [{ data, error, status }, setState] = useState<UseFetchState<TDataType>>({
-    data: undefined,
-    error: undefined,
-    status: USE_FETCH_STATUS.IDLE,
-  });
   const {
+    cacheTTL = 0,
     retry = 0,
     retryDelay = (attempt: number) => attempt * 1000,
     wait = false,
@@ -147,50 +209,75 @@ export function useFetch<TDataType = unknown>(
         url: urlOrOptions,
       } as const)
     : urlOrOptions;
+  const [{ data, error, isCached, status, url }, setState] = useSetState<UseFetchState<TDataType>>({
+    data: undefined,
+    error: undefined,
+    isCached: false,
+    status: USE_FETCH_STATUS.IDLE,
+    url: options.url,
+  });
 
-  if (!isPlainObject(options) || !isURL(options.url)) {
+  if (!isPlainObject(options) || !isURL(url)) {
     throw new Error('Expected an options object or URL');
   }
 
   const getData = useCallback(
-    (eraseData?: boolean) => {
+    async (eraseData?: boolean) => {
       setState(s => ({
-        ...s,
         data: eraseData ? undefined : s.data,
         error: undefined,
+        isCached: false,
         status: USE_FETCH_STATUS.LOADING,
       }));
 
-      request(options)
-        .then(response => {
-          if (isActive.current) {
-            setState(s => ({
-              ...s,
-              data: response,
-              status: USE_FETCH_STATUS.SUCCESS,
-            }));
-          }
-        })
-        .catch(responseError => {
-          if (isActive.current) {
-            setState(s => ({
-              ...s,
-              error: responseError,
-              status: USE_FETCH_STATUS.ERROR,
-            }));
-          }
+      // Check cache
+      if (cacheTTL && useFetchCache.has(url) && !eraseData) {
+        const cached = useFetchCache.get(url);
 
-          if (retry && retryCount.current < retry) {
-            retryCount.current += 1;
+        if (cached) {
+          setState({
+            data: cached.data,
+            error: undefined,
+            isCached: true,
+            status: USE_FETCH_STATUS.SUCCESS,
+          });
 
-            setTimeout(
-              getData,
-              typeof retryDelay === 'function' ? retryDelay(retryCount.current) : retryDelay,
-            );
-          }
-        });
+          return;
+        }
+      }
+
+      try {
+        const response = await request({ ...options });
+
+        if (cacheTTL) {
+          useFetchCache.set(url, response, cacheTTL);
+        }
+
+        if (isActive.current) {
+          setState({
+            data: response,
+            status: USE_FETCH_STATUS.SUCCESS,
+          });
+        }
+      } catch (responseError: any) {
+        if (isActive.current) {
+          setState({
+            error: responseError,
+            status: USE_FETCH_STATUS.ERROR,
+          });
+        }
+
+        if (retry && retryCount.current < retry) {
+          retryCount.current += 1;
+
+          setTimeout(
+            getData,
+            typeof retryDelay === 'function' ? retryDelay(retryCount.current) : retryDelay,
+          );
+        }
+      }
     },
-    [options, retry, retryDelay],
+    [cacheTTL, options, retry, retryDelay, setState, url],
   );
 
   useEffect(() => {
@@ -202,22 +289,29 @@ export function useFetch<TDataType = unknown>(
   }, []);
 
   useEffect(() => {
+    if (url !== options.url) {
+      setState({
+        data: undefined,
+        error: undefined,
+        status: USE_FETCH_STATUS.IDLE,
+        url: options.url,
+      });
+    }
+  }, [options.url, setState, url]);
+
+  useEffect(() => {
     if (status === USE_FETCH_STATUS.IDLE && !wait) {
       getData();
     }
   }, [getData, status, wait]);
 
   const isError = useCallback(() => status === USE_FETCH_STATUS.ERROR, [status]);
-
   const isFetched = useCallback(
     () => ([USE_FETCH_STATUS.SUCCESS, USE_FETCH_STATUS.ERROR] as UseFetchStatus[]).includes(status),
     [status],
   );
-
   const isLoading = useCallback(() => status === USE_FETCH_STATUS.LOADING, [status]);
-
   const isPaused = useCallback(() => status === USE_FETCH_STATUS.IDLE && wait, [status, wait]);
-
   const isSuccess = useCallback(() => status === USE_FETCH_STATUS.SUCCESS, [status]);
   const refetch = useCallback((eraseData = false) => getData(eraseData), [getData]);
 
@@ -225,6 +319,7 @@ export function useFetch<TDataType = unknown>(
     () => ({
       data,
       error,
+      isCached,
       isError,
       isFetched,
       isLoading,
@@ -232,7 +327,20 @@ export function useFetch<TDataType = unknown>(
       isSuccess,
       refetch,
       status,
+      url,
     }),
-    [data, error, isError, isFetched, isLoading, isPaused, isSuccess, refetch, status],
+    [
+      data,
+      error,
+      isCached,
+      isError,
+      isFetched,
+      isLoading,
+      isPaused,
+      isSuccess,
+      refetch,
+      status,
+      url,
+    ],
   );
 }
