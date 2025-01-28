@@ -2,13 +2,13 @@ import { RefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
+import { useMeasure, UseMeasureResult } from '../src/useMeasure';
+
 import {
   mockGetBoundingClientRectResponse,
   mockGetComputedStyleResponse,
   mockResizeObserveResponse,
 } from './__fixtures__/data';
-
-import { useMeasure, UseMeasureResult } from '../src/useMeasure';
 
 const resizeObserver = mockResizeObserver();
 
@@ -55,7 +55,7 @@ describe('useMeasure', () => {
   it.each([{ target: 'element' }, { target: '#root' }, { target: 'ref' }])(
     'should return the dimensions with a "$target" target',
     ({ target }) => {
-      let result: RefObject<UseMeasureResult> | null = null;
+      let result: RefObject<UseMeasureResult> | null;
       let rerender: () => void;
 
       if (target === 'ref') {

@@ -2,9 +2,9 @@ import { RefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
-import { mockResizeObserveResponse } from './__fixtures__/data';
-
 import { useResizeObserver } from '../src/useResizeObserver';
+
+import { mockResizeObserveResponse } from './__fixtures__/data';
 
 const resizeObserver = mockResizeObserver();
 

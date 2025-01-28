@@ -1,10 +1,10 @@
 export { useClickOutside } from './useClickOutside';
-export { useDeepCompareEffect } from './useDeepCompareEffect';
 export { useDebounce } from './useDebounce';
+export { useDeepCompareEffect } from './useDeepCompareEffect';
 export { useEffectOnce } from './useEffectOnce';
 export {
-  useFetch,
   USE_FETCH_STATUS,
+  useFetch,
   type UseFetchOptions,
   type UseFetchResult,
   type UseFetchStatus,
@@ -45,9 +45,9 @@ export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
 export { useStableValue } from './useStableValue';
-export { useTimeout, type UseTimeoutStatus, type UseTimeoutResult } from './useTimeout';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
+export { useTimeout, type UseTimeoutResult, type UseTimeoutStatus } from './useTimeout';
 export { useToggle, type UseToggleResult } from './useToggle';
 export { useUnmount } from './useUnmount';
 export { useUpdate } from './useUpdate';

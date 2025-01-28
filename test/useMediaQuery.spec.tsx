@@ -1,8 +1,8 @@
 import { renderHook, waitFor } from '@testing-library/react';
 
-import matchMediaMock from './__fixtures__/matchMediaMock';
-
 import { useMediaQuery } from '../src/useMediaQuery';
+
+import matchMediaMock from './__fixtures__/matchMediaMock';
 
 describe('useMediaQuery', () => {
   const matches = false;

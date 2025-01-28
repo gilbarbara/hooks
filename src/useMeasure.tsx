@@ -11,12 +11,6 @@ export interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
   absoluteWidth: number;
 }
 
-function parseFloatValue(value: string) {
-  const parsed = parseFloat(value);
-
-  return Number.isNaN(parsed) ? 0 : parsed;
-}
-
 function getElementMeasure(element: Element | null): UseMeasureResult {
   if (!canUseDOM() || !element) {
     return defaultElementDimensions;
@@ -57,6 +51,12 @@ function getElementMeasure(element: Element | null): UseMeasureResult {
     x,
     y,
   };
+}
+
+function parseFloatValue(value: string) {
+  const parsed = parseFloat(value);
+
+  return Number.isNaN(parsed) ? 0 : parsed;
 }
 
 export function useMeasure<T extends Element>(target: Target<T>, debounce = 0): UseMeasureResult {
