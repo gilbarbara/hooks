@@ -1,4 +1,4 @@
-# useLocalStorageState
+# usePersistentState
 
 A state hook that persists its value in the `localStorage`.  
 It provides the functionality to synchronize state with the browser's storage, ensuring the state persists across page reloads.
@@ -6,10 +6,10 @@ It provides the functionality to synchronize state with the browser's storage, e
 ## Usage
 
 ```tsx
-import { useLocalStorageState } from '@gilbarbara/hooks';
+import { usePersistentState } from '@gilbarbara/hooks';
 
 function Component() {
-  const [state, setState, remove] = useLocalStorageState('my-key', { foo: 'bar', baz: 'qux' });
+  const [state, setState, remove] = usePersistentState('my-key', { foo: 'bar', baz: 'qux' });
 
   return (
     <div>
@@ -25,7 +25,7 @@ function Component() {
 ## Reference
 
 ```typescript
-interface UseLocalStorageStateOptions<TState> {
+interface UsePersistentStateOptions<TState> {
   /**
    * Check if the saved state keys are different from the initial state and override it if needed.
    * @default false
@@ -37,16 +37,16 @@ interface UseLocalStorageStateOptions<TState> {
   resetProperties?: Partial<TState>;
 }
 
-type UseLocalStorageStateResult<T> = [
+type UsePersistentStateResult<T> = [
   state: T,
   setState: Dispatch<SetStateAction<Partial<T>>,
   remove: () => void,
 ];
 
-export function useLocalStorageState<TState extends PlainObject>(
+export function usePersistentState<TState extends PlainObject>(
   key: string,
   initialState: TState,
-  options?: UseLocalStorageStateOptions<TState>,
-): UseLocalStorageStateResult<TState>
+  options?: UsePersistentStateOptions<TState>,
+): UsePersistentStateResult<TState>
 ```
 
