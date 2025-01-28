@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { PlainObject } from './types';
+import { useIsMounted } from './useIsMounted';
+import { usePrevious } from './usePrevious';
 import { useSetState } from './useSetState';
 import { isPlainObject, isURL } from './utils';
 
@@ -11,12 +13,21 @@ export const USE_FETCH_STATUS = {
   ERROR: 'ERROR',
 } as const;
 
-export type UseFetchStatus = keyof typeof USE_FETCH_STATUS;
-
 interface UseFetchError extends Error {
   response?: unknown;
   status?: number;
 }
+
+interface UseFetchState<TDataType> {
+  data?: TDataType;
+  error?: UseFetchError;
+  isCached: boolean;
+  retryCount: number | null;
+  status: UseFetchStatus;
+  url: string;
+}
+
+export type UseFetchStatus = keyof typeof USE_FETCH_STATUS;
 
 export interface UseFetchOptions {
   body?: BodyInit | Record<string, any>;
@@ -39,7 +50,7 @@ export interface UseFetchOptions {
   /**
    * Number of retries.
    */
-  retry?: number;
+  retries?: number;
   /**
    * Time to wait before retrying.
    * A function like attempt => Math.min(attempt > 1 ? 2 ** attempt * 1000 : 1000, 30 * 1000) applies exponential backoff.
@@ -58,14 +69,6 @@ export interface UseFetchOptions {
    * @default: false
    */
   wait?: boolean;
-}
-
-interface UseFetchState<TDataType> {
-  data?: TDataType;
-  error?: UseFetchError;
-  isCached: boolean;
-  status: UseFetchStatus;
-  url: string;
 }
 
 export interface UseFetchResult<TDataType> extends UseFetchState<TDataType> {
@@ -195,11 +198,9 @@ export const useFetchCache = {
 export function useFetch<TDataType = unknown>(
   urlOrOptions: string | UseFetchOptions,
 ): UseFetchResult<TDataType> {
-  const isActive = useRef(false);
-  const retryCount = useRef(0);
   const {
     cacheTTL = 0,
-    retry = 0,
+    retries = 0,
     retryDelay = (attempt: number) => attempt * 1000,
     wait = false,
     ...options
@@ -209,20 +210,25 @@ export function useFetch<TDataType = unknown>(
         url: urlOrOptions,
       } as const)
     : urlOrOptions;
-  const [{ data, error, isCached, status, url }, setState] = useSetState<UseFetchState<TDataType>>({
+  const [{ data, error, isCached, retryCount, status, url }, setState] = useSetState<
+    UseFetchState<TDataType>
+  >({
     data: undefined,
     error: undefined,
     isCached: false,
+    retryCount: null,
     status: USE_FETCH_STATUS.IDLE,
     url: options.url,
   });
+  const isMounted = useIsMounted();
+  const previousRetryCount = usePrevious(retryCount);
 
   if (!isPlainObject(options) || !isURL(url)) {
     throw new Error('Expected an options object or URL');
   }
 
   const getData = useCallback(
-    async (eraseData?: boolean) => {
+    (eraseData?: boolean) => {
       setState(s => ({
         data: eraseData ? undefined : s.data,
         error: undefined,
@@ -246,47 +252,45 @@ export function useFetch<TDataType = unknown>(
         }
       }
 
-      try {
-        const response = await request({ ...options });
+      request({ ...options })
+        .then(response => {
+          if (!isMounted()) {
+            return;
+          }
 
-        if (cacheTTL) {
-          useFetchCache.set(url, response, cacheTTL);
-        }
+          if (cacheTTL) {
+            useFetchCache.set(url, response, cacheTTL);
+          }
 
-        if (isActive.current) {
           setState({
             data: response,
+            retryCount: null,
             status: USE_FETCH_STATUS.SUCCESS,
           });
-        }
-      } catch (responseError: any) {
-        if (isActive.current) {
-          setState({
-            error: responseError,
-            status: USE_FETCH_STATUS.ERROR,
-          });
-        }
+        })
+        .catch(responseError => {
+          if (!isMounted()) {
+            return;
+          }
 
-        if (retry && retryCount.current < retry) {
-          retryCount.current += 1;
+          const counter = retryCount ?? 0;
 
-          setTimeout(
-            getData,
-            typeof retryDelay === 'function' ? retryDelay(retryCount.current) : retryDelay,
-          );
-        }
-      }
+          if (!retries || counter >= retries) {
+            setState({
+              error: responseError,
+              status: USE_FETCH_STATUS.ERROR,
+            });
+          }
+
+          if (retries && counter < retries) {
+            setState({
+              retryCount: counter + 1,
+            });
+          }
+        });
     },
-    [cacheTTL, options, retry, retryDelay, setState, url],
+    [cacheTTL, isMounted, options, retries, retryCount, setState, url],
   );
-
-  useEffect(() => {
-    isActive.current = true;
-
-    return () => {
-      isActive.current = false;
-    };
-  }, []);
 
   useEffect(() => {
     if (url !== options.url) {
@@ -304,6 +308,12 @@ export function useFetch<TDataType = unknown>(
       getData();
     }
   }, [getData, status, wait]);
+
+  useEffect(() => {
+    if (retries && typeof retryCount === 'number' && retryCount !== previousRetryCount) {
+      setTimeout(getData, typeof retryDelay === 'function' ? retryDelay(retryCount) : retryDelay);
+    }
+  }, [getData, previousRetryCount, retries, retryCount, retryDelay]);
 
   const isError = useCallback(() => status === USE_FETCH_STATUS.ERROR, [status]);
   const isFetched = useCallback(
@@ -326,6 +336,7 @@ export function useFetch<TDataType = unknown>(
       isPaused,
       isSuccess,
       refetch,
+      retryCount,
       status,
       url,
     }),
@@ -339,6 +350,7 @@ export function useFetch<TDataType = unknown>(
       isPaused,
       isSuccess,
       refetch,
+      retryCount,
       status,
       url,
     ],

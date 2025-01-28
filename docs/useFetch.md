@@ -59,7 +59,7 @@ function Component() {
 
   const { error, data, isError, isLoading, isPaused, isSuccess, refetch } = useFetch<Array<ToDo>>({
     url: 'https://jsonplaceholder.typicode.com/todos',
-    retry: 3, // Retry up to 3 times on failure
+    retries: 3, // Retry up to 3 times on failure
     retryDelay: (attempt: number) => Math.min(2 ** attempt * 1000, 30 * 1000), // Exponential backoff
     wait,
   });
@@ -158,7 +158,7 @@ interface UseFetchOptions {
    * Number of retries.
    * @default: 3
    */
-  retry?: number | false;
+  retries?: number | false;
   /**
    * Time to wait before retrying.
    * A function like attempt => Math.min(attempt > 1 ? 2 ** attempt * 1000 : 1000, 30 * 1000) applies exponential backoff.

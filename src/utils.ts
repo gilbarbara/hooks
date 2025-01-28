@@ -4,6 +4,12 @@ export function canUseDOM() {
   return !!(typeof window !== 'undefined' && window?.document?.createElement);
 }
 
+export function delay(delayMs: number) {
+  return new Promise<void>(resolve => {
+    setTimeout(resolve, delayMs);
+  });
+}
+
 export function getElement<T extends Element>(target: Target<T>) {
   if (!canUseDOM()) {
     return null;
