@@ -36,11 +36,11 @@ function useLocalStorageHook<TValue>(
   }
 
   const deserializer = useMemo(
-    () => (options?.raw ? (value: any) => value : options?.deserializer ?? JSON.parse),
+    () => (options?.raw ? (value: any) => value : (options?.deserializer ?? JSON.parse)),
     [options],
   );
   const serializer = useMemo(
-    () => (options?.raw ? String : options?.serializer ?? JSON.stringify),
+    () => (options?.raw ? String : (options?.serializer ?? JSON.stringify)),
     [options],
   );
 

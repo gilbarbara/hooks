@@ -1,9 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { PlainObject } from './types';
 import { useDeepCompareEffect } from './useDeepCompareEffect';
 import { useLocalStorage } from './useLocalStorage';
 import { useSetState } from './useSetState';
+
+export type UseLocalStorageStateResult<T> = [
+  state: T,
+  setState: Dispatch<SetStateAction<Partial<T>>>,
+  remove: () => void,
+];
 
 export interface UseLocalStorageStateOptions<TState> {
   /**
@@ -17,13 +22,7 @@ export interface UseLocalStorageStateOptions<TState> {
   resetProperties?: Partial<TState>;
 }
 
-export type UseLocalStorageStateResult<T> = [
-  state: T,
-  setState: Dispatch<SetStateAction<Partial<T>>>,
-  remove: () => void,
-];
-
-function getState<TState extends PlainObject>(
+function getState<TState extends object>(
   initialState: TState,
   savedState: TState,
   shouldOverride: boolean,
@@ -44,7 +43,7 @@ function getState<TState extends PlainObject>(
   return { ...savedState, ...restoreProperties };
 }
 
-export function useLocalStorageState<TState extends PlainObject>(
+export function useLocalStorageState<TState extends object>(
   key: string,
   initialState: TState,
   options?: UseLocalStorageStateOptions<TState>,
@@ -53,7 +52,7 @@ export function useLocalStorageState<TState extends PlainObject>(
 
   const [value, setValue, remove] = useLocalStorage(key, initialState);
   const [state, setState] = useSetState<TState>(
-    getState(initialState, value!, overrideDivergentSavedState, resetProperties) as TState,
+    getState(initialState, value!, overrideDivergentSavedState, resetProperties),
   );
 
   useDeepCompareEffect(() => {

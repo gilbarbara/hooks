@@ -57,21 +57,21 @@ export function noop() {
 }
 
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
-export function on<T extends Window | Document | HTMLElement | EventTarget>(
-  target: T | null,
-  ...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
-): void {
-  if (target && target.addEventListener) {
-    target.addEventListener(...(rest as Parameters<HTMLElement['addEventListener']>));
-  }
-}
-
 export function off<T extends Window | Document | HTMLElement | EventTarget>(
   target: T | null,
   ...rest: Parameters<T['removeEventListener']> | [string, Function | null, ...any]
 ): void {
   if (target && target.removeEventListener) {
     target.removeEventListener(...(rest as Parameters<HTMLElement['removeEventListener']>));
+  }
+}
+
+export function on<T extends Window | Document | HTMLElement | EventTarget>(
+  target: T | null,
+  ...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
+): void {
+  if (target && target.addEventListener) {
+    target.addEventListener(...(rest as Parameters<HTMLElement['addEventListener']>));
   }
 }
 /* eslint-enable @typescript-eslint/no-unsafe-function-type */
