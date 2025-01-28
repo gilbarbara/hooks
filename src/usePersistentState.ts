@@ -4,13 +4,13 @@ import { useEffectDeepCompare } from './useEffectDeepCompare';
 import { useLocalStorage } from './useLocalStorage';
 import { useSetState } from './useSetState';
 
-export type UseLocalStorageStateResult<T> = [
+export type UsePersistentStateResult<T> = [
   state: T,
   setState: Dispatch<SetStateAction<Partial<T>>>,
   remove: () => void,
 ];
 
-export interface UseLocalStorageStateOptions<TState> {
+export interface UsePersistentStateOptions<TState> {
   /**
    * Check if the saved state keys are different from the initial state and override it if needed.
    * @default false
@@ -43,11 +43,11 @@ function getState<TState extends object>(
   return { ...savedState, ...restoreProperties };
 }
 
-export function useLocalStorageState<TState extends object>(
+export function usePersistentState<TState extends object>(
   key: string,
   initialState: TState,
-  options?: UseLocalStorageStateOptions<TState>,
-): UseLocalStorageStateResult<TState> {
+  options?: UsePersistentStateOptions<TState>,
+): UsePersistentStateResult<TState> {
   const { overrideDivergentSavedState = false, resetProperties } = options || {};
 
   const [value, setValue, remove] = useLocalStorage(key, initialState);

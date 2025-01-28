@@ -9,10 +9,10 @@ import UseHasChanged from './examples/useHasChanged';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
 import UseLocalStorage from './examples/UseLocalStorage';
-import UseLocalStorageState from './examples/UseLocalStorageState';
 import UseLocation from './examples/UseLocation';
 import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
+import UsePersistentState from './examples/usePersistentState';
 import UseResizeObserver from './examples/UseResizeObserver';
 import UseResponsive from './examples/UseResponsive';
 import UseThrottle from './examples/UseThrottle';
@@ -35,10 +35,10 @@ export default function Hooks() {
         <UseIntersectionObserver />
         <UseInterval />
         <UseLocalStorage />
-        <UseLocalStorageState />
         <UseLocation />
         <UseMeasure />
         <UseMediaQuery />
+        <UsePersistentState />
         <UseResponsive />
         <UseResizeObserver />
         <UseThrottle />

@@ -1,7 +1,7 @@
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 
-import { useLocalStorageState } from '../src/useLocalStorageState';
+import { usePersistentState } from '../src/usePersistentState';
 
 const key = 'my-key';
 const lastLogin = '2024-01-01T00:00:00.000Z';
@@ -15,14 +15,14 @@ const initialState = {
   lastLogin,
 };
 
-describe('useLocalStorageState', () => {
+describe('usePersistentState', () => {
   afterEach(() => {
     localStorage.clear();
   });
 
   it('should use the existing value from localStorage if present', () => {
     localStorage.setItem(key, JSON.stringify(initialState));
-    const { result } = renderHook(() => useLocalStorageState(key, { foo: 'bar' }));
+    const { result } = renderHook(() => usePersistentState(key, { foo: 'bar' }));
 
     expect(result.current[0]).toEqual(initialState);
   });
@@ -30,7 +30,7 @@ describe('useLocalStorageState', () => {
   it('should set and update the localStorage', () => {
     expect(localStorage.getItem(key)).toBeNull();
 
-    const { result } = renderHook(() => useLocalStorageState(key, initialState));
+    const { result } = renderHook(() => usePersistentState(key, initialState));
 
     expect(localStorage.getItem(key)).toEqual(JSON.stringify(initialState));
 
@@ -48,7 +48,7 @@ describe('useLocalStorageState', () => {
   it("should override the saved value from localStorage if it doesn't match the initialState shape", () => {
     localStorage.setItem(key, JSON.stringify({ foo: 'bar' }));
     const { rerender, result } = renderHook(() =>
-      useLocalStorageState(key, initialState, { overrideDivergentSavedState: true }),
+      usePersistentState(key, initialState, { overrideDivergentSavedState: true }),
     );
 
     rerender();
@@ -65,7 +65,7 @@ describe('useLocalStorageState', () => {
       }),
     );
     const { rerender, result } = renderHook(() =>
-      useLocalStorageState(key, initialState, {
+      usePersistentState(key, initialState, {
         resetProperties: { lastLogin },
       }),
     );

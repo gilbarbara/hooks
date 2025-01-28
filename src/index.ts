@@ -23,16 +23,16 @@ export {
   type UseLocalStorageResult,
 } from './useLocalStorage';
 
-export {
-  useLocalStorageState,
-  type UseLocalStorageStateOptions,
-  type UseLocalStorageStateResult,
-} from './useLocalStorageState';
 export { useLocation, type UseLocationResult } from './useLocation';
 export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';
+export {
+  usePersistentState,
+  type UsePersistentStateOptions,
+  type UsePersistentStateResult,
+} from './usePersistentState';
 export { usePrevious } from './usePrevious';
 export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';

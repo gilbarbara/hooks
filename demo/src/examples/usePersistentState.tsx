@@ -1,14 +1,13 @@
-/* eslint-disable react/jsx-curly-newline */
 import { Button, Paragraph, Spacer } from '@gilbarbara/components';
-import { useLocalStorageState } from '@gilbarbara/hooks';
+import { usePersistentState } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
 import Code from '../components/Code';
 import Heading from '../components/Heading';
 
-export default function UseLocalStorageState() {
-  const storageKey = 'useLocalStorageState';
-  const [state, setState, remove] = useLocalStorageState(storageKey, {
+export default function UsePersistentState() {
+  const storageKey = 'usePersistentState';
+  const [state, setState, remove] = usePersistentState(storageKey, {
     id: 1,
     name: 'John Doe',
     username: 'johndoe',
@@ -22,7 +21,7 @@ export default function UseLocalStorageState() {
 
   return (
     <Block>
-      <Heading>useLocalStorageState</Heading>
+      <Heading>usePersistentState</Heading>
       <Paragraph bold mb="md" size="lg">
         Value:
       </Paragraph>

@@ -15,7 +15,7 @@ Requires React 16.8+ (Hooks support). TypeScript support is included.
 ## Features
 
 - Built-in debouncing and throttling for smooth performance (`useDebounce`, `useThrottle`).
-- Advanced state management (`useSetState`, `useToggle`, `useLocalStorageState`).
+- Advanced state management (`useSetState`, `useToggle`, `usePersistentState`).
 - Debugging tools to optimize re-renders (`useWhyDidYouUpdate`, `useRenderCount`).
 - Flexible API integrations (`useFetch` with retries and backoff support).
 
@@ -49,9 +49,9 @@ function Component() {
 
 Hooks for managing and persisting application state.
 
+[usePersistentState](docs/usePersistentState) — State hook that persists the state in localStorage.  
 [useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.  
-[useToggle](docs/useToggle.md) — State hook to track the value of a boolean.  
-[useLocalStorageState](docs/useLocalStorageState.md) — State hook that persists the state in localStorage.  
+[useToggle](docs/useToggle.md) — State hook to track the value of a boolean.
 
 ### Effects
 
