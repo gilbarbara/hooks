@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 
-export function useLifecycles(mount: () => void, unmount: () => void) {
+/**
+ * Run the provided functions on mount and unmount.
+ */
+export function useLifecycleHooks(mount: () => void, unmount: () => void) {
   useEffect(() => {
     mount();
 
