@@ -68,7 +68,7 @@ Hooks for managing component lifecycle events such as mounting and unmounting.
 
 [useMount](docs/useMount.md) — Execute a callback when the component is mounted.  
 [useUnmount](docs/useUnmount.md) — Execute a callback when the component is unmounted.  
-[useLifecycles](docs/useLifecycles.md) — Execute callbacks during mount and unmount phases.  
+[useLifecycleHooks](docs/useLifecycleHooks) — Execute the callbacks when the component mount and unmount.  
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted.  
 [useIsFirstMount](docs/useIsFirstMount.md) — Check if it’s the first mount.  
 

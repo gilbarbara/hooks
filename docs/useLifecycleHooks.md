@@ -1,4 +1,4 @@
-# useLifecycles
+# useLifecycleHooks
 
 
 Executes the provided callbacks when the component mounts and unmounts, respectively.  
@@ -7,10 +7,10 @@ This hook is a convenient way to handle lifecycle-specific logic without explici
 ## Usage
 
 ```tsx
-import { useLifecycles } from '@gilbarbara/hooks';
+import { useLifecycleHooks } from '@gilbarbara/hooks';
 
 function Component() {
-  useLifecycles(
+  useLifecycleHooks(
     () => { console.log('MOUNTED') },
     () => { console.log('UNMOUNTED') },
   );
@@ -22,5 +22,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useLifecycles(mount: () => void, unmount: () => void): void;
+useLifecycleHooks(mount: () => void, unmount: () => void): void;
 ```
