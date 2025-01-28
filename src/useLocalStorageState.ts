@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { useDeepCompareEffect } from './useDeepCompareEffect';
+import { useEffectDeepCompare } from './useEffectDeepCompare';
 import { useLocalStorage } from './useLocalStorage';
 import { useSetState } from './useSetState';
 
@@ -55,7 +55,7 @@ export function useLocalStorageState<TState extends object>(
     getState(initialState, value!, overrideDivergentSavedState, resetProperties),
   );
 
-  useDeepCompareEffect(() => {
+  useEffectDeepCompare(() => {
     setValue(state);
   }, [setValue, state]);
 

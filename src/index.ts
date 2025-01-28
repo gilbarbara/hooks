@@ -1,6 +1,6 @@
 export { useClickOutside } from './useClickOutside';
 export { useDebounce } from './useDebounce';
-export { useDeepCompareEffect } from './useDeepCompareEffect';
+export { useEffectDeepCompare } from './useEffectDeepCompare';
 export { useEffectOnce } from './useEffectOnce';
 export {
   USE_FETCH_STATUS,

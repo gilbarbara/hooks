@@ -57,7 +57,6 @@ Hooks for managing and persisting application state.
 
 Hooks for managing side effects and extending React’s useEffect.
 
-[useDeepCompareEffect](docs/useDeepCompareEffect.md) — Uses deep comparisons of its dependencies.  
 [useEffectOnce](docs/useEffectOnce.md) — Execute the effect only once.  
 [useHasChanged](docs/useHasChanged.md) — Detect value changes and optionally trigger a callback.  
 [useIsomorphicLayoutEffect](docs/useIsomorphicLayoutEffect.md) — Use useLayoutEffect on the client and useEffect on the server.  
@@ -98,6 +97,7 @@ Hooks for managing user interactions and responsive design.
 Hooks for optimizing performance by reducing unnecessary renders or controlling execution frequency.
 
 [useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
+[useEffectDeepCompare](docs/useEffectDeepCompare.md) — Uses deep comparisons of its dependencies.  
 [useThrottle](docs/useThrottle.md) — Return a throttled function that invokes fn once per every ms.  
 [useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that changes only once per every ms.  
 [useStableValue](docs/useStableValue.md) — Get a stabilized value that only updates when the original value is truly different.

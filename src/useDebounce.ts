@@ -1,7 +1,7 @@
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
 
 import { TimerStatus } from './types';
-import { useDeepCompareEffect } from './useDeepCompareEffect';
+import { useEffectDeepCompare } from './useEffectDeepCompare';
 import { useIsFirstMount } from './useIsFirstMount';
 
 export type UseDebounceStatus = TimerStatus;
@@ -43,7 +43,7 @@ export function useDebounce(
     savedCallback.current = callback;
   }, [callback]);
 
-  useDeepCompareEffect(() => {
+  useEffectDeepCompare(() => {
     if (!isFirstMount) {
       set();
 
