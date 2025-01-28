@@ -1,3 +1,5 @@
+import { DependencyList } from 'react';
+
 import { PlainObject, Primitive, Target } from './types';
 
 export function canUseDOM() {
@@ -81,3 +83,21 @@ export function on<T extends Window | Document | HTMLElement | EventTarget>(
   }
 }
 /* eslint-enable @typescript-eslint/no-unsafe-function-type */
+
+export function validateDependencies(dependencies: DependencyList, name: string, fallback: string) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (!(dependencies instanceof Array) || !dependencies.length) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `${name} should not be used with no dependencies. Use React.${fallback} instead.`,
+      );
+    }
+
+    if (dependencies.length && dependencies.every(isPrimitive)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `${name} should not be used with dependencies that are all primitive values. Use React.${fallback} instead.`,
+      );
+    }
+  }
+}

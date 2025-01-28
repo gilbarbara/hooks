@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { renderHook } from '@testing-library/react';
 
-import { useDeepCompareEffect } from '../src/useDeepCompareEffect';
+import { useEffectDeepCompare } from '../src/useEffectDeepCompare';
 
 let options = { max: 10 };
 
-describe('useDeepCompareEffect', () => {
+describe('useEffectDeepCompare', () => {
   beforeAll(() => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
@@ -24,7 +24,7 @@ describe('useDeepCompareEffect', () => {
 
     const { rerender: rerenderNormal } = renderHook(() => useEffect(mockEffectNormal, [options]));
     const { rerender: rerenderDeep } = renderHook(() =>
-      useDeepCompareEffect(mockEffectDeep, [options]),
+      useEffectDeepCompare(mockEffectDeep, [options]),
     );
 
     expect(mockEffectNormal).toHaveBeenCalledTimes(1);
@@ -49,7 +49,7 @@ describe('useDeepCompareEffect', () => {
     const mockEffectCleanup = vi.fn();
     const mockEffectCallback = vi.fn().mockReturnValue(mockEffectCleanup);
 
-    const { unmount } = renderHook(() => useDeepCompareEffect(mockEffectCallback, [options]));
+    const { unmount } = renderHook(() => useEffectDeepCompare(mockEffectCallback, [options]));
 
     expect(mockEffectCleanup).not.toHaveBeenCalled();
 
@@ -58,18 +58,18 @@ describe('useDeepCompareEffect', () => {
   });
 
   it('should warn about primitive dependencies', () => {
-    renderHook(() => useDeepCompareEffect(() => {}, [1, true]));
+    renderHook(() => useEffectDeepCompare(() => {}, [1, true]));
 
     expect(console.warn).toHaveBeenCalledExactlyOnceWith(
-      '`useDeepCompareEffect` should not be used with dependencies that are all primitive values. Use React.useEffect instead.',
+      'useEffectDeepCompare should not be used with dependencies that are all primitive values. Use React.useEffect instead.',
     );
   });
 
   it('should warn about empty dependencies', () => {
-    renderHook(() => useDeepCompareEffect(() => {}, []));
+    renderHook(() => useEffectDeepCompare(() => {}, []));
 
     expect(console.warn).toHaveBeenCalledExactlyOnceWith(
-      '`useDeepCompareEffect` should not be used with no dependencies. Use React.useEffect instead.',
+      'useEffectDeepCompare should not be used with no dependencies. Use React.useEffect instead.',
     );
   });
 });
