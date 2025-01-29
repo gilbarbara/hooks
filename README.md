@@ -128,7 +128,7 @@ Hooks for debugging, monitoring, and optimizing component behavior.
 ### Utilities
 [useLocalStorage](docs/useLocalStorage.md) — Interact with the browser’s localStorage API.  
 [useLocation](docs/useLocation.md) — Track the browser’s location.  
-[useSingleton](docs/useSingleton.md) — Execute code just once before the component renders.
+[useOnce](docs/useOnce) — Execute code just once before the component renders.
 
 ## License
 

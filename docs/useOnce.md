@@ -1,4 +1,4 @@
-# useSingleton
+# useOnce
 
 Executes the provided callback function only once, before the component's initial render.  
 This hook is similar to class constructors in React class components, allowing you to perform one-time setup tasks.
@@ -8,12 +8,12 @@ This hook is similar to class constructors in React class components, allowing y
 ```tsx
 import { useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { useSingleton } from '@gilbarbara/hooks';
+import { useOnce } from '@gilbarbara/hooks';
 
 function Component() {
   const node = useRef<HTMLElement | null>(null);
 
-  useSingleton(() => {
+  useOnce(() => {
     // this code will only be executed once.
     node.current = document.createElement('div');
     node.current.id = 'MyPortal';
@@ -28,5 +28,5 @@ function Component() {
 ## Reference
 
 ```typescript
-useSingleton(callback: () => void): void;
+useOnce(callback: () => void): void;
 ```
