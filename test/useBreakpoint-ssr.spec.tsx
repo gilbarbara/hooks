@@ -5,10 +5,10 @@
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { useResponsive } from '../src/useResponsive';
+import { useBreakpoint } from '../src/useBreakpoint';
 
 function Component({ height, width }: any) {
-  const { max, min, orientation, size } = useResponsive(undefined, width, height);
+  const { max, min, orientation, size } = useBreakpoint(undefined, width, height);
 
   return (
     <div>
@@ -20,7 +20,7 @@ function Component({ height, width }: any) {
   );
 }
 
-describe('useResponsive', () => {
+describe('useBreakpoint', () => {
   it('should render the largest breakpoint with the default width and height', () => {
     const view = renderToString(<Component />);
 

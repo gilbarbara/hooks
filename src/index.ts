@@ -1,3 +1,8 @@
+export {
+  useBreakpoint,
+  type UseBreakpointOrientation,
+  type UseBreakpointResult,
+} from './useBreakpoint';
 export { useClickOutside } from './useClickOutside';
 export { useDebounce } from './useDebounce';
 export { useEffectDeepCompare } from './useEffectDeepCompare';
@@ -17,8 +22,8 @@ export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
-export { useLifecycleHooks } from './useLifecycleHooks';
 
+export { useLifecycleHooks } from './useLifecycleHooks';
 export {
   useLocalStorage,
   type UseLocalStorageOptions,
@@ -38,11 +43,6 @@ export {
 export { usePrevious } from './usePrevious';
 export { useRenderCount } from './useRenderCount';
 export { useResizeObserver } from './useResizeObserver';
-export {
-  useResponsive,
-  type UseResponsiveOrientation,
-  type UseResponsiveResult,
-} from './useResponsive';
 export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
 export { useThrottle } from './useThrottle';

@@ -84,12 +84,12 @@ Hooks for managing refs and interacting with the DOM.
 
 Hooks for managing user interactions and responsive design.
 
+[useBreakpoint](docs/useBreakpoint) — Get responsive breakpoints for adaptive layouts.  
 [useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.  
 [useElementMeasure](docs/useElementMeasure) — Get element dimensions using the ResizeObserver API.  
 [useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.  
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.  
 [useResizeObserver](docs/useResizeObserver.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
-[useResponsive](docs/useResponsive.md) — Get responsive breakpoints for adaptive layouts.  
 [useWindowSize](docs/useWindowSize.md) — Get the window dimensions. Updates on resize.
 
 ### Performance and Optimization
