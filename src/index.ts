@@ -2,6 +2,7 @@ export { useClickOutside } from './useClickOutside';
 export { useDebounce } from './useDebounce';
 export { useEffectDeepCompare } from './useEffectDeepCompare';
 export { useEffectOnce } from './useEffectOnce';
+export { useElementMeasure, type UseElementMeasureResult } from './useElementMeasure';
 export {
   USE_FETCH_STATUS,
   useFetch,
@@ -17,14 +18,13 @@ export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export { useLatest } from './useLatest';
 export { useLifecycleHooks } from './useLifecycleHooks';
+
 export {
   useLocalStorage,
   type UseLocalStorageOptions,
   type UseLocalStorageResult,
 } from './useLocalStorage';
-
 export { useLocation, type UseLocationResult } from './useLocation';
-export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
 export { useMemoizedValue } from './useMemoizedValue';
 export { useMergeRefs } from './useMergeRefs';

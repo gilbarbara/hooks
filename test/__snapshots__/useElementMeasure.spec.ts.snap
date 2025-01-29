@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useMeasure > should re-initialize if target changes > after render 1`] = `
+exports[`useElementMeasure > should re-initialize if target changes > after render 1`] = `
 {
   "absoluteHeight": 100,
   "absoluteWidth": 640,
@@ -15,7 +15,7 @@ exports[`useMeasure > should re-initialize if target changes > after render 1`] 
 }
 `;
 
-exports[`useMeasure > should re-initialize if target changes > initial 1`] = `
+exports[`useElementMeasure > should re-initialize if target changes > initial 1`] = `
 {
   "absoluteHeight": 0,
   "absoluteWidth": 0,
@@ -30,7 +30,7 @@ exports[`useMeasure > should re-initialize if target changes > initial 1`] = `
 }
 `;
 
-exports[`useMeasure > should return the default dimensions with an invalid string selector > after render 1`] = `
+exports[`useElementMeasure > should return the default dimensions with an invalid string selector > after render 1`] = `
 {
   "absoluteHeight": 0,
   "absoluteWidth": 0,
@@ -45,7 +45,7 @@ exports[`useMeasure > should return the default dimensions with an invalid strin
 }
 `;
 
-exports[`useMeasure > should return the default dimensions with an invalid string selector > initial 1`] = `
+exports[`useElementMeasure > should return the default dimensions with an invalid string selector > initial 1`] = `
 {
   "absoluteHeight": 0,
   "absoluteWidth": 0,
@@ -60,7 +60,7 @@ exports[`useMeasure > should return the default dimensions with an invalid strin
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'#root'" target > after resize 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'#root'" target > after resize 1`] = `
 {
   "absoluteHeight": 100,
   "absoluteWidth": 640,
@@ -75,7 +75,7 @@ exports[`useMeasure > should return the dimensions with a "'#root'" target > aft
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'#root'" target > initial 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'#root'" target > initial 1`] = `
 {
   "absoluteHeight": 92,
   "absoluteWidth": 632,
@@ -90,7 +90,7 @@ exports[`useMeasure > should return the dimensions with a "'#root'" target > ini
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'element'" target > after resize 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'element'" target > after resize 1`] = `
 {
   "absoluteHeight": 100,
   "absoluteWidth": 640,
@@ -105,7 +105,7 @@ exports[`useMeasure > should return the dimensions with a "'element'" target > a
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'element'" target > initial 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'element'" target > initial 1`] = `
 {
   "absoluteHeight": 92,
   "absoluteWidth": 632,
@@ -120,7 +120,7 @@ exports[`useMeasure > should return the dimensions with a "'element'" target > i
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'ref'" target > after resize 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'ref'" target > after resize 1`] = `
 {
   "absoluteHeight": 100,
   "absoluteWidth": 640,
@@ -135,7 +135,7 @@ exports[`useMeasure > should return the dimensions with a "'ref'" target > after
 }
 `;
 
-exports[`useMeasure > should return the dimensions with a "'ref'" target > initial 1`] = `
+exports[`useElementMeasure > should return the dimensions with a "'ref'" target > initial 1`] = `
 {
   "absoluteHeight": 92,
   "absoluteWidth": 632,

@@ -6,12 +6,12 @@ import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { useResizeObserver } from './useResizeObserver';
 import { canUseDOM, getElement } from './utils';
 
-export interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
+export interface UseElementMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
   absoluteHeight: number;
   absoluteWidth: number;
 }
 
-function getElementMeasure(element: Element | null): UseMeasureResult {
+function getElementMeasure(element: Element | null): UseElementMeasureResult {
   if (!canUseDOM() || !element) {
     return defaultElementDimensions;
   }
@@ -59,9 +59,12 @@ function parseFloatValue(value: string) {
   return Number.isNaN(parsed) ? 0 : parsed;
 }
 
-export function useMeasure<T extends Element>(target: Target<T>, debounce = 0): UseMeasureResult {
+export function useElementMeasure<T extends Element>(
+  target: Target<T>,
+  debounce = 0,
+): UseElementMeasureResult {
   const [element, setElement] = useState(getElement(target));
-  const [dimensions, setDimensions] = useState<UseMeasureResult>(getElementMeasure(element));
+  const [dimensions, setDimensions] = useState<UseElementMeasureResult>(getElementMeasure(element));
 
   const entry = useResizeObserver(element, debounce);
 

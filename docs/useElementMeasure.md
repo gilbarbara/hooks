@@ -1,4 +1,4 @@
-# useMeasure
+# useElementMeasure
 
 A hook for measuring element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
 Automatically updates measurements whenever the element's size changes.
@@ -9,11 +9,11 @@ Automatically updates measurements whenever the element's size changes.
 
 ```tsx
 import { useRef } from 'react';
-import { useMeasure } from '@gilbarbara/hooks';
+import { useElementMeasure } from '@gilbarbara/hooks';
 
 function Component() {
   const ref = useRef<HTMLDivElement>(null);
-  const dimensions = useMeasure(ref);
+  const dimensions = useElementMeasure(ref);
 
   return (
     <div ref={ref}>
@@ -31,7 +31,7 @@ interface UseMeasureResult extends Omit<DOMRectReadOnly, 'toJSON'> {
   absoluteWidth: number;
 }
 
-useMeasure<T extends Element>(
+useElementMeasure<T extends Element>(
   // Can be a ref, DOM element, or a CSS selector string.
   target: React.RefObject<T> | T | null | string,
   // Optional debounce delay in milliseconds. Helps optimize performance by reducing frequent updates during rapid size changes..

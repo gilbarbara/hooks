@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`useMeasure-ssr > should work without a DOM 1`] = `
+exports[`useElementMeasure-ssr > should work without a DOM 1`] = `
 "<pre>{
   &quot;absoluteHeight&quot;: 0,
   &quot;absoluteWidth&quot;: 0,
