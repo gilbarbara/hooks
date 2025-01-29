@@ -98,9 +98,9 @@ Hooks for optimizing performance by reducing unnecessary renders or controlling 
 
 [useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
 [useEffectDeepCompare](docs/useEffectDeepCompare.md) — Uses deep comparisons of its dependencies.  
+[useMemoizedValue](docs/useMemoizedValue) — Get a stabilized value that only updates when the original value is truly different.  
 [useThrottle](docs/useThrottle.md) — Return a throttled function that invokes fn once per every ms.  
-[useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that changes only once per every ms.  
-[useStableValue](docs/useStableValue.md) — Get a stabilized value that only updates when the original value is truly different.
+[useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that changes only once per every ms.
 
 ### Timers
 

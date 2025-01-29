@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react';
 
-import { useStableValue } from './useStableValue';
+import { useMemoizedValue } from './useMemoizedValue';
 import { off, on } from './utils';
 
 export function useClickOutside<T extends Element = HTMLElement>(callback: () => void) {
   const ref = useRef<T>(null);
-  const stableCallback = useStableValue(callback);
+  const memoizedCallback = useMemoizedValue(callback);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent | TouchEvent) => {
       if (!ref.current?.contains(event.target as Node)) {
-        stableCallback();
+        memoizedCallback();
       }
     };
 
@@ -19,7 +19,7 @@ export function useClickOutside<T extends Element = HTMLElement>(callback: () =>
     return () => {
       off(document, 'click', handleClick);
     };
-  }, [stableCallback]);
+  }, [memoizedCallback]);
 
   return ref;
 }
