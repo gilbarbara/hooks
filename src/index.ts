@@ -29,6 +29,7 @@ export { useMediaQuery } from './useMediaQuery';
 export { useMemoizedValue } from './useMemoizedValue';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';
+export { useOnce } from './useOnce';
 export {
   usePersistentState,
   type UsePersistentStateOptions,
@@ -44,7 +45,6 @@ export {
 } from './useResponsive';
 export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
-export { useSingleton } from './useSingleton';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useTimeout, type UseTimeoutResult, type UseTimeoutStatus } from './useTimeout';

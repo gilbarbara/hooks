@@ -1,12 +1,12 @@
 import { renderHook } from '@testing-library/react';
 
-import { useSingleton } from '../src/useSingleton';
+import { useOnce } from '../src/useOnce';
 
 const mockFn = vi.fn();
 
-describe('useSingleton', () => {
+describe('useOnce', () => {
   it('should execute the callback just once', () => {
-    const { rerender } = renderHook(() => useSingleton(mockFn));
+    const { rerender } = renderHook(() => useOnce(mockFn));
 
     expect(mockFn).toHaveBeenCalledTimes(1);
 
