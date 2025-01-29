@@ -26,6 +26,7 @@ export {
 export { useLocation, type UseLocationResult } from './useLocation';
 export { useMeasure, type UseMeasureResult } from './useMeasure';
 export { useMediaQuery } from './useMediaQuery';
+export { useMemoizedValue } from './useMemoizedValue';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';
 export {
@@ -44,7 +45,6 @@ export {
 export { useScript, type UseScriptResult } from './useScript';
 export { useSetState } from './useSetState';
 export { useSingleton } from './useSingleton';
-export { useStableValue } from './useStableValue';
 export { useThrottle } from './useThrottle';
 export { useThrottleValue } from './useThrottleValue';
 export { useTimeout, type UseTimeoutResult, type UseTimeoutStatus } from './useTimeout';
