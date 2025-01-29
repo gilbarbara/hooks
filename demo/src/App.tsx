@@ -4,13 +4,13 @@ import { Box, H1, Page } from '@gilbarbara/components';
 
 import UseClickOutside from './examples/UseClickOutside';
 import UseDebounce from './examples/UseDebounce';
+import UseElementMeasure from './examples/UseElementMeasure';
 import UseFetch from './examples/UseFetch';
 import UseHasChanged from './examples/useHasChanged';
 import UseIntersectionObserver from './examples/UseIntersectionObserver';
 import UseInterval from './examples/UseInterval';
 import UseLocalStorage from './examples/UseLocalStorage';
 import UseLocation from './examples/UseLocation';
-import UseMeasure from './examples/UseMeasure';
 import UseMediaQuery from './examples/UseMediaQuery';
 import UsePersistentState from './examples/usePersistentState';
 import UseResizeObserver from './examples/UseResizeObserver';
@@ -36,7 +36,7 @@ export default function Hooks() {
         <UseInterval />
         <UseLocalStorage />
         <UseLocation />
-        <UseMeasure />
+        <UseElementMeasure />
         <UseMediaQuery />
         <UsePersistentState />
         <UseResponsive />

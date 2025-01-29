@@ -1,14 +1,14 @@
 import { useRef } from 'react';
-import { useMeasure } from '@gilbarbara/hooks';
+import { useElementMeasure } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Heading from '../components/Heading';
 import TagList from '../components/TagList';
 
-export default function UseMeasure() {
+export default function UseElementMeasure() {
   const sizeRef = useRef<HTMLDivElement>(null);
-  const { absoluteHeight, absoluteWidth, height, width } = useMeasure(sizeRef, 100);
+  const { absoluteHeight, absoluteWidth, height, width } = useElementMeasure(sizeRef, 100);
 
   return (
     <Block>

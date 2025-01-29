@@ -9,13 +9,13 @@ This hook is useful when you need to combine refs for different purposes, such a
 
 ```tsx
 import { useRef } from 'react';
-import { UseMeasure, useMergeRefs, useResizeObserver } from '@gilbarbara/hooks';
+import { UseElementMeasure, useMergeRefs, useResizeObserver } from '@gilbarbara/hooks';
 
 function Component() {
   const observerRef = useRef<HTMLDivElement>(null);
   const sizeRef = useRef<HTMLDivElement>(null);
   const ref = useMergeRefs(observerRef, sizeRef);
-  const dimensions = UseMeasure(sizeRef, 200);
+  const dimensions = UseElementMeasure(sizeRef, 200);
 
   useResizeObserver(observerRef, entry => console.log(entry), 200);
 

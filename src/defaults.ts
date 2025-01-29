@@ -1,6 +1,6 @@
-import type { UseMeasureResult } from './useMeasure';
+import type { UseElementMeasureResult } from './useElementMeasure';
 
-export const defaultElementDimensions: UseMeasureResult = {
+export const defaultElementDimensions: UseElementMeasureResult = {
   absoluteHeight: 0,
   absoluteWidth: 0,
   bottom: 0,

@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { mockResizeObserver } from 'jsdom-testing-mocks';
 
-import { useMeasure, UseMeasureResult } from '../src/useMeasure';
+import { useElementMeasure, UseMeasureResult } from '../src/useElementMeasure';
 
 import {
   mockGetBoundingClientRectResponse,
@@ -34,7 +34,7 @@ vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
   () => mockGetBoundingClientRectResponse,
 );
 
-describe('useMeasure', () => {
+describe('useElementMeasure', () => {
   const ref = { current: null } as RefObject<Element | null>;
   const rootElement = createElement();
 
@@ -60,11 +60,11 @@ describe('useMeasure', () => {
 
       if (target === 'ref') {
         ref.current = rootElement;
-        ({ rerender, result } = renderHook(() => useMeasure(ref.current)));
+        ({ rerender, result } = renderHook(() => useElementMeasure(ref.current)));
       } else if (target.startsWith('#')) {
-        ({ rerender, result } = renderHook(() => useMeasure(target)));
+        ({ rerender, result } = renderHook(() => useElementMeasure(target)));
       } else {
-        ({ rerender, result } = renderHook(() => useMeasure(rootElement)));
+        ({ rerender, result } = renderHook(() => useElementMeasure(rootElement)));
       }
 
       expect(result?.current).toMatchSnapshot('initial');
@@ -86,7 +86,7 @@ describe('useMeasure', () => {
   );
 
   it('should re-initialize if target changes', async () => {
-    const { rerender, result } = renderHook((target: string = '#app') => useMeasure(target));
+    const { rerender, result } = renderHook((target: string = '#app') => useElementMeasure(target));
 
     expect(result.current).toMatchSnapshot('initial');
     window.getComputedStyle = el => ({ ...getComputedStyle(el), ...getComputedStyleData });
@@ -107,7 +107,7 @@ describe('useMeasure', () => {
   });
 
   it('should return the default dimensions with an invalid string selector', () => {
-    const { rerender, result } = renderHook(() => useMeasure('#app'));
+    const { rerender, result } = renderHook(() => useElementMeasure('#app'));
 
     expect(result.current).toMatchSnapshot('initial');
 

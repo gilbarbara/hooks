@@ -5,15 +5,15 @@
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { useMeasure } from '../src/useMeasure';
+import { useElementMeasure } from '../src/useElementMeasure';
 
 function Component() {
-  const dimensions = useMeasure('#root');
+  const dimensions = useElementMeasure('#root');
 
   return <pre>{JSON.stringify(dimensions, null, 2)}</pre>;
 }
 
-describe('useMeasure-ssr', () => {
+describe('useElementMeasure-ssr', () => {
   it('should work without a DOM', () => {
     const view = renderToString(<Component />);
 
