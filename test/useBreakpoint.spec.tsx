@@ -1,10 +1,10 @@
 import { act, renderHook } from '@testing-library/react';
 
-import { useResponsive } from '../src/useResponsive';
+import { useBreakpoint } from '../src/useBreakpoint';
 
 declare let window: any;
 
-describe('useResponsive', () => {
+describe('useBreakpoint', () => {
   const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
   afterAll(() => {
@@ -28,7 +28,7 @@ describe('useResponsive', () => {
       ({ expected, min, orientation, width }) => {
         window.innerWidth = width;
 
-        const { result } = renderHook(() => useResponsive());
+        const { result } = renderHook(() => useBreakpoint());
 
         expect(result.current.min(min, orientation)).toBe(expected);
       },
@@ -48,7 +48,7 @@ describe('useResponsive', () => {
     ] as const)('should render properly for $width with $max', ({ expected, max, width }) => {
       window.innerWidth = width;
 
-      const { result } = renderHook(() => useResponsive());
+      const { result } = renderHook(() => useBreakpoint());
 
       expect(result.current.max(max)).toBe(expected);
     });
@@ -66,7 +66,7 @@ describe('useResponsive', () => {
       ({ expected, max, min, width }) => {
         window.innerWidth = width;
 
-        const { result } = renderHook(() => useResponsive());
+        const { result } = renderHook(() => useBreakpoint());
 
         expect(result.current.between(min, max)).toBe(expected);
       },
@@ -91,7 +91,7 @@ describe('useResponsive', () => {
       ({ expected, max, min, width }) => {
         window.innerWidth = width;
 
-        const { result } = renderHook(() => useResponsive(breakpoints));
+        const { result } = renderHook(() => useBreakpoint(breakpoints));
 
         expect(result.current.between(min, max)).toBe(expected);
         expect(spy).toHaveBeenCalledWith('The "small" breakpoint should be 0');
@@ -105,7 +105,7 @@ describe('useResponsive', () => {
     });
 
     it('should update the matcher with a window.resize', async () => {
-      const { rerender, result } = renderHook(() => useResponsive());
+      const { rerender, result } = renderHook(() => useBreakpoint());
 
       expect(result.current.size).toBe('lg');
 

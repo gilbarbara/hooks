@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useBreakpoint > should render the "sm" breakpoint and landscape with 640x400 1`] = `"<div><p>sm</p><p>landscape</p></div>"`;
+
+exports[`useBreakpoint > should render the largest breakpoint with the default width and height 1`] = `"<div><p>xl</p><p>portrait</p></div>"`;
+
+exports[`useBreakpoint > should render the smallest breakpoint with 400x640 1`] = `"<div><p>xs</p><p>portrait</p></div>"`;

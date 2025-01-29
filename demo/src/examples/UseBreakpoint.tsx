@@ -1,15 +1,15 @@
 import { Box, H3, H4 } from '@gilbarbara/components';
-import { useResponsive } from '@gilbarbara/hooks';
+import { useBreakpoint } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
 import Heading from '../components/Heading';
 
-export default function UseResponsive() {
-  const { between, max, min, orientation, size } = useResponsive();
+export default function UseBreakpoint() {
+  const { between, max, min, orientation, size } = useBreakpoint();
 
   return (
     <Block>
-      <Heading>UseResponsive</Heading>
+      <Heading>UseBreakpoint</Heading>
       <Box as="header" mb="md">
         <H3 color="primary">
           {size} - {orientation}
