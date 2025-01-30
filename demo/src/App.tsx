@@ -4,6 +4,7 @@ import { Box, H1, Page } from '@gilbarbara/components';
 
 import UseBreakpoint from './examples/UseBreakpoint';
 import UseClickOutside from './examples/UseClickOutside';
+import UseDataChanges from './examples/UseDataChanges';
 import UseDebounce from './examples/UseDebounce';
 import UseElementMeasure from './examples/UseElementMeasure';
 import UseFetch from './examples/UseFetch';
@@ -20,7 +21,6 @@ import UseThrottleValue from './examples/UseThrottleValue';
 import UseTimeout from './examples/UseTimeout';
 import UseToggle from './examples/UseToggle';
 import UseUpdate from './examples/UseUpdate';
-import UseWhyDidYouUpdate from './examples/UseWhyDidYouUpdate';
 import UseWindowSize from './examples/UseWindowSize';
 
 export default function Hooks() {
@@ -46,7 +46,7 @@ export default function Hooks() {
         <UseTimeout />
         <UseToggle />
         <UseUpdate />
-        <UseWhyDidYouUpdate />
+        <UseDataChanges />
         <UseWindowSize />
       </Box>
     </Page>

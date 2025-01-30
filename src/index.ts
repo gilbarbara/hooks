@@ -4,6 +4,11 @@ export {
   type UseBreakpointResult,
 } from './useBreakpoint';
 export { useClickOutside } from './useClickOutside';
+export {
+  useDataChanges,
+  type UseDataChangesOptions,
+  type UseDataChangesResult,
+} from './useDataChanges';
 export { useDebounce } from './useDebounce';
 export { useEffectDeepCompare } from './useEffectDeepCompare';
 export { useEffectOnce } from './useEffectOnce';
@@ -21,8 +26,8 @@ export { useInterval } from './useInterval';
 export { useIsFirstMount } from './useIsFirstMount';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
-export { useLatest } from './useLatest';
 
+export { useLatest } from './useLatest';
 export { useLifecycleHooks } from './useLifecycleHooks';
 export {
   useLocalStorage,
@@ -52,9 +57,4 @@ export { useToggle, type UseToggleResult } from './useToggle';
 export { useUnmount } from './useUnmount';
 export { useUpdate } from './useUpdate';
 export { useUpdateEffect } from './useUpdateEffect';
-export {
-  useWhyDidYouUpdate,
-  type UseWhyDidYouUpdateOptions,
-  type UseWhyDidYouUpdateResult,
-} from './useWhyDidYouUpdate';
 export { useWindowSize, type UseWindowSizeResult } from './useWindowSize';

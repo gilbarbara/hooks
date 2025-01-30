@@ -16,7 +16,7 @@ Requires React 16.8+ (Hooks support). TypeScript support is included.
 
 - Built-in debouncing and throttling for smooth performance (`useDebounce`, `useThrottle`).
 - Advanced state management (`useSetState`, `useToggle`, `usePersistentState`).
-- Debugging tools to optimize re-renders (`useWhyDidYouUpdate`, `useRenderCount`).
+- Debugging tools to optimize re-renders (`useDataChanges`, `useRenderCount`).
 - Flexible API integrations (`useFetch` with retries and backoff support).
 
 ## Example
@@ -121,8 +121,8 @@ Hooks for working with APIs and third-party scripts.
 
 Hooks for debugging, monitoring, and optimizing component behavior.
 
+[useDataChanges](docs/useDataChanges) — Detect which prop/state changes are causing a component to re-render.  
 [useRenderCount](docs/useRenderCount.md) — Log how many times the component has rendered.  
-[useWhyDidYouUpdate](docs/useWhyDidYouUpdate.md) — Detect which prop/state changes are causing a component to re-render.  
 [useUpdate](docs/useUpdate.md) — Return a function that re-renders the component when called.
 
 ### Utilities
