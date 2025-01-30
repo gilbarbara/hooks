@@ -1,22 +1,22 @@
 import { Button, Paragraph, Spacer } from '@gilbarbara/components';
-import { useSetState, useWhyDidYouUpdate } from '@gilbarbara/hooks';
+import { useDataChanges, useSetState } from '@gilbarbara/hooks';
 
 import Block from '../components/Block';
 import BorderBox from '../components/BorderBox';
 import Code from '../components/Code';
 import Heading from '../components/Heading';
 
-export default function UseWhyDidYouUpdate() {
+export default function UseDataChanges() {
   const [state, setState] = useSetState<Record<string, any>>({
     propA: 1,
     propB: 2,
   });
 
-  const changes = useWhyDidYouUpdate(state);
+  const changes = useDataChanges(state, 'UseDataChanges');
 
   return (
     <Block>
-      <Heading>useWhyDidYouUpdate</Heading>
+      <Heading>useDataChanges</Heading>
       <BorderBox maxWidth={400}>
         <Code bold data={changes} mb="md" />
         <Spacer distribution="center">
