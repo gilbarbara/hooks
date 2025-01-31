@@ -28,7 +28,9 @@ export default function Hooks() {
     <Page align="center">
       <H1>@gilbarbara/hooks</H1>
       <Box width="100%">
+        <UseBreakpoint />
         <UseClickOutside />
+        <UseDataChanges />
         <UseDebounce />
         <UseFetch />
         <UseHasChanged />
@@ -39,14 +41,12 @@ export default function Hooks() {
         <UseElementMeasure />
         <UseMediaQuery />
         <UsePersistentState />
-        <UseBreakpoint />
         <UseResizeObserver />
         <UseThrottle />
         <UseThrottleValue />
         <UseTimeout />
         <UseToggle />
         <UseUpdate />
-        <UseDataChanges />
         <UseWindowSize />
       </Box>
     </Page>
