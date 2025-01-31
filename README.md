@@ -14,6 +14,7 @@ Requires React 16.8+ (Hooks support). TypeScript support is included.
 
 ## Features
 
+- Custom versions of `useEffect`, `useCallback`, and `useMemo` with deep comparison.
 - Built-in debouncing and throttling for smooth performance (`useDebounce`, `useThrottle`).
 - Advanced state management (`useSetState`, `useToggle`, `usePersistentState`).
 - Debugging tools to optimize re-renders (`useDataChanges`, `useRenderCount`).
@@ -44,6 +45,14 @@ function Component() {
 ```
 
 ## Hooks
+
+### React Hooks with Deep Comparison
+
+Custom React's built-in hooks **deep comparison** on their dependencies.
+
+[useCallbackDeepCompare](docs/useCallbackDeepCompare.md) — A custom `useCallback` with deep comparison.  
+[useEffectDeepCompare](docs/useEffectDeepCompare.md) — A custom `useEffect` with deep comparison.  
+[useMemoDeepCompare](docs/useMemoDeepCompare) — A custom `useMemo` with deep comparison.
 
 ### State
 
@@ -96,9 +105,7 @@ Hooks for managing user interactions and responsive design.
 
 Hooks for optimizing performance by reducing unnecessary renders or controlling execution frequency.
 
-[useCallbackDeepCompare](docs/useCallbackDeepCompare.md) — A custom useCallback that performs deep comparisons on its dependencies.  
 [useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
-[useEffectDeepCompare](docs/useEffectDeepCompare.md) — Uses deep comparisons of its dependencies.  
 [useMemoizedValue](docs/useMemoizedValue) — Get a stabilized value that only updates when the original value is truly different.  
 [useThrottle](docs/useThrottle.md) — Return a throttled function that invokes fn once per every ms.  
 [useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that changes only once per every ms.
