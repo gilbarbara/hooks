@@ -37,6 +37,7 @@ export {
 } from './useLocalStorage';
 export { useLocation, type UseLocationResult } from './useLocation';
 export { useMediaQuery } from './useMediaQuery';
+export { useMemoDeepCompare } from './useMemoDeepCompare';
 export { useMemoizedValue } from './useMemoizedValue';
 export { useMergeRefs } from './useMergeRefs';
 export { useMount } from './useMount';
