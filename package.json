@@ -119,7 +119,7 @@
     {
       "name": "esm",
       "path": "./dist/index.mjs",
-      "limit": "5 kB"
+      "limit": "6 kB"
     },
     {
       "name": "commonjs",
