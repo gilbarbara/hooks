@@ -3,6 +3,7 @@ export {
   type UseBreakpointOrientation,
   type UseBreakpointResult,
 } from './useBreakpoint';
+export { useCallbackDeepCompare } from './useCallbackDeepCompare';
 export { useClickOutside } from './useClickOutside';
 export {
   useDataChanges,

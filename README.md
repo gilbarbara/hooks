@@ -96,6 +96,7 @@ Hooks for managing user interactions and responsive design.
 
 Hooks for optimizing performance by reducing unnecessary renders or controlling execution frequency.
 
+[useCallbackDeepCompare](docs/useCallbackDeepCompare.md) — A custom useCallback that performs deep comparisons on its dependencies.  
 [useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
 [useEffectDeepCompare](docs/useEffectDeepCompare.md) — Uses deep comparisons of its dependencies.  
 [useMemoizedValue](docs/useMemoizedValue) — Get a stabilized value that only updates when the original value is truly different.  
