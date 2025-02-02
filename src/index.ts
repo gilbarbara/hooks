@@ -24,7 +24,7 @@ export {
 export { useHasChanged } from './useHasChanged';
 export { useIntersectionObserver } from './useIntersectionObserver';
 export { useInterval } from './useInterval';
-export { useIsFirstMount } from './useIsFirstMount';
+export { useIsFirstRender } from './useIsFirstRender';
 export { useIsMounted } from './useIsMounted';
 export { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 

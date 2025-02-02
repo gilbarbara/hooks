@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
 
-import { useIsFirstMount } from '../src/useIsFirstMount';
+import { useIsFirstRender } from '../src/useIsFirstRender';
 
-describe('useIsFirstRun', () => {
+describe('useIsFirstRender', () => {
   it('should return the expect value', () => {
-    const { rerender, result } = renderHook(() => useIsFirstMount());
+    const { rerender, result } = renderHook(() => useIsFirstRender());
 
     expect(result.current).toBe(true);
 

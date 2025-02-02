@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 import { useEffectDeepCompare } from './useEffectDeepCompare';
-import { useIsFirstMount } from './useIsFirstMount';
+import { useIsFirstRender } from './useIsFirstRender';
 
 export function useMemoizedValue<T = any>(value: T) {
   const [stableValue, setStableValue] = useState(() => value);
-  const isFirstMount = useIsFirstMount();
+  const isFirstRender = useIsFirstRender();
 
   useEffectDeepCompare(() => {
-    if (isFirstMount) {
+    if (isFirstRender) {
       return;
     }
 

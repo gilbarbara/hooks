@@ -104,6 +104,14 @@
     "overrides": [
       {
         "files": [
+          "src/**/*.ts?(x)"
+        ],
+        "rules": {
+          "testing-library/render-result-naming-convention": "off"
+        }
+      },
+      {
+        "files": [
           "test/**/*.ts?(x)"
         ],
         "rules": {

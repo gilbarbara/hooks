@@ -2,7 +2,7 @@ import { DependencyList, useCallback, useEffect, useRef } from 'react';
 
 import { TimerStatus } from './types';
 import { useEffectDeepCompare } from './useEffectDeepCompare';
-import { useIsFirstMount } from './useIsFirstMount';
+import { useIsFirstRender } from './useIsFirstRender';
 
 export type UseDebounceStatus = TimerStatus;
 
@@ -20,7 +20,7 @@ export function useDebounce(
   const status = useRef<UseDebounceStatus>('pending');
   const timeout = useRef<ReturnType<typeof setTimeout>>(null);
   const savedCallback = useRef(callback);
-  const isFirstMount = useIsFirstMount();
+  const isFirstRender = useIsFirstRender();
 
   const clear = useCallback(() => {
     status.current = 'cancelled';
@@ -44,7 +44,7 @@ export function useDebounce(
   }, [callback]);
 
   useEffectDeepCompare(() => {
-    if (!isFirstMount) {
+    if (!isFirstRender) {
       set();
 
       return clear;

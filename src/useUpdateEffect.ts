@@ -1,12 +1,12 @@
 import { DependencyList, EffectCallback, useEffect } from 'react';
 
-import { useIsFirstMount } from './useIsFirstMount';
+import { useIsFirstRender } from './useIsFirstRender';
 
 export function useUpdateEffect(effect: EffectCallback, dependencies?: DependencyList) {
-  const isFirstMount = useIsFirstMount();
+  const isFirstRender = useIsFirstRender();
 
   useEffect(() => {
-    if (!isFirstMount) {
+    if (!isFirstRender) {
       return effect();
     }
 
