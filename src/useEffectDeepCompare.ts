@@ -3,13 +3,10 @@ import deepEqual from '@gilbarbara/deep-equal';
 
 import { validateDependencies } from './utils';
 
-export function useEffectDeepCompare<TDeps extends DependencyList>(
-  effect: EffectCallback,
-  dependencies: TDeps,
-) {
+export function useEffectDeepCompare(effect: EffectCallback, dependencies: DependencyList) {
   validateDependencies(dependencies, 'useEffectDeepCompare', 'useEffect');
 
-  const ref = useRef<TDeps>(dependencies);
+  const ref = useRef<DependencyList>(dependencies);
 
   if (!deepEqual(dependencies, ref.current)) {
     ref.current = dependencies;
