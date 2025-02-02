@@ -138,6 +138,22 @@ Hooks for debugging, monitoring, and optimizing component behavior.
 [useLocation](docs/useLocation.md) — Track the browser’s location.  
 [useOnce](docs/useOnce) — Execute code just once before the component renders.
 
+## ESLint Configuration
+
+To take full advantage of hooks with dependencies, add the following rule to your ESLint config:
+
+```json
+{
+  "rules": {
+    "react-hooks/exhaustive-deps": [
+      "warn", {
+        "additionalHooks": "(useDebounce|useUpdateEffect|use.*DeepCompare)"
+      }
+    ]
+  }
+}
+```
+
 ## License
 
 MIT
