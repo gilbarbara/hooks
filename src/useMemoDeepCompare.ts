@@ -3,10 +3,7 @@ import deepEqual from '@gilbarbara/deep-equal';
 
 import { validateDependencies } from './utils';
 
-export function useMemoDeepCompare<T extends () => any>(
-  factory: T,
-  dependencies: DependencyList,
-): T {
+export function useMemoDeepCompare<T>(factory: () => T, dependencies: DependencyList): T {
   validateDependencies(dependencies, 'useMemoDeepCompare', 'useMemo');
 
   const ref = useRef<DependencyList>(dependencies);

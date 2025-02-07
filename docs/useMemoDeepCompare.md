@@ -32,8 +32,8 @@ function Component(props: { options: { step: number } }) {
 ## Reference
 
 ```typescript
-useMemoDeepCompare<T extends () => any>(
-  factory: T,
+useMemoDeepCompare<T>(
+  factory: () => T,
   dependencies: React.DependencyList,
 ): void;
 ```
