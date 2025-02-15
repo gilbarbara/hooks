@@ -40,6 +40,54 @@ function Component() {
   );
 }
 ```
+**Managing Fetch State with Callbacks**
+
+```tsx
+import { useFetch, USE_FETCH_STATUS, useSetState } from '@gilbarbara/hooks';
+
+interface ToDo {
+  completed: boolean;
+  id: number;
+  title: string;
+  userId: number;
+}
+
+function Component() {
+  const [{ data, status, error }, setState] = useSetState<{
+    data: Array<ToDo> | null;
+    status: UseFetchStatus;
+    error: string | null;
+  }>({
+    data: null,
+    status: USE_FETCH_STATUS.IDLE,
+    error: null,
+  });
+
+  useFetch<Array<ToDo>>({
+    url: 'https://jsonplaceholder.typicode.com/todos',
+    onLoading: () => setState({ status: USE_FETCH_STATUS.LOADING }), // ✅ Only fires once when fetch starts
+    onSuccess: fetchedData => setState({ data: fetchedData, status: USE_FETCH_STATUS.SUCCESS }),
+    onError: fetchError => setState({ error: fetchError.message, status: USE_FETCH_STATUS.ERROR }),
+  });
+
+  return (
+    <div>
+      {status === USE_FETCH_STATUS.LOADING && <p>Loading...</p>}
+      {status === USE_FETCH_STATUS.ERROR && <p>{error}</p>}
+      {status === USE_FETCH_STATUS.SUCCESS && (
+        <>
+          <h3>Fetched ToDos</h3>
+          <ul>
+            {data?.slice(0, 5).map(todo => (
+              <li key={todo.id}>{todo.title}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+```
 
 **Advanced Usage with Manual Trigger**
 
@@ -154,6 +202,14 @@ interface UseFetchOptions {
    * @default: 'cors'
    */
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  /** Callback fired when an error occurs */
+  onError?: (error: UseFetchError) => void;
+  /** Callback fired when the request completes (success or error) */
+  onFinally?: () => void;
+  /** Callback fired when the loading state changes */
+  onLoading?: () => void;
+  /** Callback fired when data is successfully fetched */
+  onSuccess?: (data: any) => void;
   /**
    * Number of retries.
    * @default: 3

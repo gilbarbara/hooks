@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 
 import { PlainObject } from './types';
 import { useIsMounted } from './useIsMounted';
+import { useMemoizedValue } from './useMemoizedValue';
 import { usePrevious } from './usePrevious';
 import { useSetState } from './useSetState';
 import { isPlainObject, isURL } from './utils';
@@ -47,6 +48,14 @@ export interface UseFetchOptions {
    * @default: 'cors'
    */
   mode?: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  /** Callback fired when an error occurs */
+  onError?: (error: UseFetchError) => void;
+  /** Callback fired when the request completes (success or error) */
+  onFinally?: () => void;
+  /** Callback fired when the loading state changes */
+  onLoading?: () => void;
+  /** Callback fired when data is successfully fetched */
+  onSuccess?: (data: any) => void;
   /**
    * Number of retries.
    */
@@ -120,14 +129,14 @@ async function request(options: UseFetchOptions): Promise<any> {
     ) as BodyInit;
   }
 
-  return fetch(url, params).then(async response => {
-    const text = await response.text();
+  try {
+    const response = await fetch(url, params);
     let content: unknown;
 
     try {
-      content = JSON.parse(text);
+      content = await response.json();
     } catch {
-      content = text;
+      content = await response.text();
     }
 
     if (response.status > 299) {
@@ -140,7 +149,14 @@ async function request(options: UseFetchOptions): Promise<any> {
     }
 
     return content;
-  });
+  } catch (error) {
+    // Handle hard failures (network issues, CORS errors, fetch rejection)
+    const fetchError = new Error('Network request failed') as UseFetchError;
+
+    fetchError.status = 0; // Status 0 indicates a network error
+    fetchError.response = error instanceof Error ? error.message : error;
+    throw fetchError;
+  }
 }
 
 export const useFetchCache = {
@@ -200,16 +216,19 @@ export function useFetch<TDataType = unknown>(
 ): UseFetchResult<TDataType> {
   const {
     cacheTTL = 0,
+    onError,
+    onFinally,
+    onLoading,
+    onSuccess,
     retries = 0,
     retryDelay = (attempt: number) => attempt * 1000,
     wait = false,
     ...options
-  } = isURL(urlOrOptions)
-    ? ({
-        type: 'json',
-        url: urlOrOptions,
-      } as const)
-    : urlOrOptions;
+  } = useMemoizedValue(
+    (isURL(urlOrOptions)
+      ? ({ type: 'json', url: urlOrOptions } as const)
+      : urlOrOptions) as UseFetchOptions,
+  );
   const [{ data, error, isCached, retryCount, status, url }, setState] = useSetState<
     UseFetchState<TDataType>
   >({
@@ -236,6 +255,8 @@ export function useFetch<TDataType = unknown>(
         status: USE_FETCH_STATUS.LOADING,
       }));
 
+      onLoading?.();
+
       // Check cache
       if (cacheTTL && useFetchCache.has(url) && !eraseData) {
         const cached = useFetchCache.get(url);
@@ -247,6 +268,9 @@ export function useFetch<TDataType = unknown>(
             isCached: true,
             status: USE_FETCH_STATUS.SUCCESS,
           });
+
+          onSuccess?.(cached.data);
+          onFinally?.();
 
           return;
         }
@@ -267,6 +291,7 @@ export function useFetch<TDataType = unknown>(
             retryCount: null,
             status: USE_FETCH_STATUS.SUCCESS,
           });
+          onSuccess?.(response);
         })
         .catch(responseError => {
           if (!isMounted()) {
@@ -280,6 +305,7 @@ export function useFetch<TDataType = unknown>(
               error: responseError,
               status: USE_FETCH_STATUS.ERROR,
             });
+            onError?.(responseError);
           }
 
           if (retries && counter < retries) {
@@ -287,9 +313,26 @@ export function useFetch<TDataType = unknown>(
               retryCount: counter + 1,
             });
           }
+        })
+        .finally(() => {
+          if (isMounted()) {
+            onFinally?.();
+          }
         });
     },
-    [cacheTTL, isMounted, options, retries, retryCount, setState, url],
+    [
+      cacheTTL,
+      isMounted,
+      onError,
+      onFinally,
+      onLoading,
+      onSuccess,
+      options,
+      retries,
+      retryCount,
+      setState,
+      url,
+    ],
   );
 
   useEffect(() => {

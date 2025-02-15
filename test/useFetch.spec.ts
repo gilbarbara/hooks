@@ -25,11 +25,11 @@ const mockRequestOptions = {
   mode: 'cors',
 };
 
-const mockData = JSON.stringify({
+const mockData = {
   total_count: 5765504,
   incomplete_results: false,
   items: repositories,
-});
+};
 const mockHandlers: Handler[] = [
   { data: mockData, method: 'get', url: 'https://api.github.com/search/repositories*' },
   { method: 'get', url: failureUrl, errorType: 'hard' },
@@ -40,6 +40,11 @@ const mockHandlers: Handler[] = [
 const requestMock = vi.fn();
 const server = getServer(mockHandlers, requestMock);
 
+const onLoading = vi.fn();
+const onSuccess = vi.fn();
+const onError = vi.fn();
+const onFinally = vi.fn();
+
 describe('useFetch', () => {
   beforeAll(() => {
     server.listen();
@@ -48,7 +53,7 @@ describe('useFetch', () => {
 
   afterEach(() => {
     server.resetHandlers(...mockHandlers.map(getHandler));
-    requestMock.mockClear();
+    vi.clearAllMocks();
     vi.useRealTimers();
   });
 
@@ -426,6 +431,71 @@ describe('useFetch', () => {
     await delay(100);
 
     expect(result.current.status).toBe(USE_FETCH_STATUS.LOADING);
+  });
+
+  it('should call onLoading when request state changes', async () => {
+    renderHook(() =>
+      useFetch<Response>({
+        url,
+        onLoading,
+      }),
+    );
+
+    expect(onLoading).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call onSuccess with a successful request', async () => {
+    renderHook(() =>
+      useFetch<Response>({
+        url,
+        onSuccess,
+        onError,
+      }),
+    );
+
+    await vi.waitFor(() => {
+      expect(onSuccess).toHaveBeenCalledWith(mockData);
+    });
+    expect(onError).not.toHaveBeenCalled();
+  });
+
+  it('should call onError when a request fails', async () => {
+    renderHook(() =>
+      useFetch<Response>({
+        url: failureUrl,
+        onError,
+        onSuccess,
+      }),
+    );
+
+    await vi.waitFor(() => {
+      expect(onError).toHaveBeenCalledWith(expect.objectContaining({ status: expect.any(Number) }));
+    });
+    expect(onSuccess).not.toHaveBeenCalled();
+  });
+
+  it('should call onFinally after success and failure', async () => {
+    renderHook(() =>
+      useFetch<Response>({
+        url,
+        onFinally,
+      }),
+    );
+
+    await vi.waitFor(() => {
+      expect(onFinally).toHaveBeenCalledTimes(1);
+    });
+
+    renderHook(() =>
+      useFetch<Response>({
+        url: failureUrl,
+        onFinally,
+      }),
+    );
+
+    await vi.waitFor(() => {
+      expect(onFinally).toHaveBeenCalledTimes(2);
+    });
   });
 });
 
