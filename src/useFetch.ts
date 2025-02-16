@@ -30,7 +30,7 @@ interface UseFetchState<TDataType> {
 
 export type UseFetchStatus = keyof typeof USE_FETCH_STATUS;
 
-export interface UseFetchOptions {
+export interface UseFetchOptions<TDataType = unknown> {
   body?: BodyInit | Record<string, any>;
   /**
    * Time to cache the request if provided.
@@ -55,7 +55,7 @@ export interface UseFetchOptions {
   /** Callback fired when the loading state changes */
   onLoading?: () => void;
   /** Callback fired when data is successfully fetched */
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: TDataType) => void;
   /**
    * Number of retries.
    */
@@ -212,7 +212,7 @@ export const useFetchCache = {
 };
 
 export function useFetch<TDataType = unknown>(
-  urlOrOptions: string | UseFetchOptions,
+  urlOrOptions: string | UseFetchOptions<TDataType>,
 ): UseFetchResult<TDataType> {
   const {
     cacheTTL = 0,

@@ -6,7 +6,7 @@ import { delay } from '../src/utils';
 import repositories from './__fixtures__/repositories.json';
 import { getHandler, getServer, Handler } from './__setup__/msw-setup';
 
-type Response = Array<(typeof repositories)[0]>;
+type Response = Array<typeof mockData>;
 
 const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 const altURL = 'https://api.github.com/search/repositories?q=vue&sort=stars';
@@ -85,6 +85,7 @@ describe('useFetch', () => {
     expect(result.current.isPaused()).toBe(false);
     expect(result.current.isError()).toBe(false);
     expect(result.current.isSuccess()).toBe(true);
+    expect(result.current.data).toEqual(mockData);
 
     rerender();
     expect(requestMock).toHaveBeenCalledTimes(1);
