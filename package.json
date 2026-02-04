@@ -34,53 +34,51 @@
     "react": "16.8 - 19"
   },
   "dependencies": {
-    "@gilbarbara/deep-equal": "^0.3.1"
+    "@gilbarbara/deep-equal": "^0.4.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.3",
-    "@gilbarbara/eslint-config": "^0.8.4",
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@gilbarbara/eslint-config": "^1.0.4",
     "@gilbarbara/prettier-config": "^1.0.0",
-    "@gilbarbara/tsconfig": "^0.2.3",
-    "@size-limit/preset-small-lib": "^11.1.6",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@types/node": "^22.13.4",
-    "@types/node-fetch": "^2.6.12",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@vitest/coverage-istanbul": "^3.0.5",
-    "@vitest/coverage-v8": "^3.0.5",
-    "del-cli": "^6.0.0",
+    "@gilbarbara/tsconfig": "^1.0.0",
+    "@size-limit/preset-small-lib": "^12.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^22.19.8",
+    "@types/node-fetch": "^2.6.13",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.0.18",
+    "del-cli": "^7.0.0",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
-    "is-ci-cli": "^2.2.0",
-    "jest-extended": "^4.0.2",
-    "jsdom": "^26.0.0",
-    "jsdom-testing-mocks": "^1.13.1",
-    "msw": "^2.7.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "jest-extended": "^7.0.0",
+    "jsdom": "^28.0.0",
+    "jsdom-testing-mocks": "^1.16.0",
+    "prettier": "^3.8.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "repo-tools": "^0.3.1",
-    "serve": "^14.2.4",
-    "size-limit": "^11.1.6",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.3.6",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.5"
+    "serve": "^14.2.5",
+    "size-limit": "^12.0.0",
+    "tsx": "^4.21.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "scripts": {
     "build": "npm run clean && tsup",
     "watch": "tsup --watch",
     "clean": "del dist/*",
-    "test": "is-ci \"test:coverage\" \"test:watch\"",
-    "test:coverage": "TZ=UTC vitest run --coverage",
-    "test:watch": "TZ=UTC vitest watch",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
     "lint": "eslint --fix src test",
     "typecheck": "tsc -p test/tsconfig.json",
     "typevalidation": "attw -P",
     "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
     "validate": "npm run lint && npm run test:coverage && npm run build && npm run size && npm run typevalidation",
     "size": "size-limit",
-    "prepublishOnly": "npm run validate",
     "prepare": "husky"
   },
   "tsup": {
@@ -94,33 +92,6 @@
     ],
     "sourcemap": true,
     "splitting": false
-  },
-  "eslintConfig": {
-    "extends": [
-      "@gilbarbara/eslint-config",
-      "@gilbarbara/eslint-config/testing-library",
-      "@gilbarbara/eslint-config/vitest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "src/**/*.ts?(x)"
-        ],
-        "rules": {
-          "testing-library/render-result-naming-convention": "off"
-        }
-      },
-      {
-        "files": [
-          "test/**/*.ts?(x)"
-        ],
-        "rules": {
-          "no-console": "off",
-          "testing-library/no-container": "off",
-          "testing-library/no-node-access": "off"
-        }
-      }
-    ]
   },
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [

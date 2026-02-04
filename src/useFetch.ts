@@ -276,6 +276,7 @@ export function useFetch<TDataType = unknown>(
         }
       }
 
+      // eslint-disable-next-line promise/catch-or-return
       request({ ...options })
         .then(response => {
           if (!isMounted()) {

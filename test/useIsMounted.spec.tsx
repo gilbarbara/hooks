@@ -17,6 +17,7 @@ function Component() {
   useEffect(() => {
     callbackMock();
 
+    // eslint-disable-next-line promise/catch-or-return
     delay(30).then(() => {
       delayMock();
 
