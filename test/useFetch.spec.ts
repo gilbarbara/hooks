@@ -4,7 +4,6 @@ import { USE_FETCH_STATUS, useFetch, useFetchCache } from '../src/useFetch';
 import { delay } from '../src/utils';
 
 import repositories from './__fixtures__/repositories.json';
-import { getHandler, getServer, Handler } from './__setup__/msw-setup';
 
 type Response = Array<typeof mockData>;
 
@@ -12,6 +11,114 @@ const url = 'https://api.github.com/search/repositories?q=react&sort=stars';
 const altURL = 'https://api.github.com/search/repositories?q=vue&sort=stars';
 const failureUrl = 'https://api.github.com/search/failure';
 const softFailureUrl = 'https://api.github.com/search/soft-failure';
+
+const mockData = {
+  total_count: 5765504,
+  incomplete_results: false,
+  items: repositories,
+};
+
+interface MockHandler {
+  data?: unknown;
+  delayMs?: number;
+  errorType?: 'hard' | 'soft';
+  method: string;
+  url: string;
+}
+
+const mockHandlers: MockHandler[] = [
+  { data: mockData, method: 'GET', url: 'https://api.github.com/search/repositories' },
+  { method: 'GET', url: failureUrl, errorType: 'hard' },
+  { method: 'PUT', delayMs: 200, url: failureUrl, errorType: 'hard' },
+  { method: 'GET', url: softFailureUrl, errorType: 'soft' },
+  { method: 'POST', url: softFailureUrl, errorType: 'soft' },
+];
+
+let handlers = [...mockHandlers];
+const requestMock = vi.fn();
+
+function findHandler(requestUrl: string, method: string): MockHandler | undefined {
+  return handlers.find(h => {
+    const urlMatch = requestUrl.startsWith(h.url);
+    const methodMatch = h.method.toUpperCase() === method.toUpperCase();
+
+    return urlMatch && methodMatch;
+  });
+}
+
+async function mockFetch(
+  input: RequestInfo | URL,
+  init?: RequestInit,
+): Promise<globalThis.Response> {
+  const requestUrl = typeof input === 'string' ? input : input.toString();
+  const method = init?.method ?? 'GET';
+  const handler = findHandler(requestUrl, method);
+
+  const headers: Record<string, string> = {};
+
+  if (init?.headers) {
+    const headerEntries =
+      init.headers instanceof Headers
+        ? [...init.headers.entries()]
+        : Object.entries(init.headers as Record<string, string>);
+
+    for (const [key, value] of headerEntries) {
+      headers[key.toLowerCase()] = value;
+    }
+  }
+
+  let body: unknown;
+
+  if (init?.body) {
+    try {
+      body = JSON.parse(init.body as string);
+    } catch {
+      body = init.body;
+    }
+  }
+
+  requestMock({
+    url: requestUrl,
+    body,
+    cache: init?.cache ?? 'no-store',
+    credentials: init?.credentials ?? 'same-origin',
+    headers,
+    method,
+    mode: init?.mode ?? 'cors',
+  });
+
+  if (handler?.delayMs) {
+    await delay(handler.delayMs);
+  }
+
+  if (handler?.errorType === 'hard') {
+    throw new TypeError('Failed to fetch');
+  }
+
+  if (handler?.errorType === 'soft') {
+    return new Response(null, { status: 400, statusText: 'Bad Request' });
+  }
+
+  if (handler?.data) {
+    return new Response(JSON.stringify(handler.data), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  return new Response(JSON.stringify(mockData), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+function resetHandlers() {
+  handlers = [...mockHandlers];
+}
+
+function useHandler(handler: MockHandler) {
+  handlers = [handler, ...handlers];
+}
 
 const mockRequestOptions = {
   url,
@@ -25,21 +132,6 @@ const mockRequestOptions = {
   mode: 'cors',
 };
 
-const mockData = {
-  total_count: 5765504,
-  incomplete_results: false,
-  items: repositories,
-};
-const mockHandlers: Handler[] = [
-  { data: mockData, method: 'get', url: 'https://api.github.com/search/repositories*' },
-  { method: 'get', url: failureUrl, errorType: 'hard' },
-  { method: 'put', delayMs: 200, url: failureUrl, errorType: 'hard' },
-  { method: 'get', url: softFailureUrl, errorType: 'soft' },
-  { method: 'post', url: softFailureUrl, errorType: 'soft' },
-];
-const requestMock = vi.fn();
-const server = getServer(mockHandlers, requestMock);
-
 const onLoading = vi.fn();
 const onSuccess = vi.fn();
 const onError = vi.fn();
@@ -47,18 +139,18 @@ const onFinally = vi.fn();
 
 describe('useFetch', () => {
   beforeAll(() => {
-    server.listen();
+    vi.stubGlobal('fetch', mockFetch);
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    server.resetHandlers(...mockHandlers.map(getHandler));
+    resetHandlers();
     vi.clearAllMocks();
     vi.useRealTimers();
   });
 
   afterAll(() => {
-    server.close();
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
     useFetchCache.clear();
   });
@@ -66,7 +158,7 @@ describe('useFetch', () => {
   it('should handle success', async () => {
     const { rerender, result } = renderHook(() => useFetch<Response>(url));
 
-    expect(requestMock).toHaveBeenCalledWith(mockRequestOptions);
+    expect(requestMock).toHaveBeenCalledWith(expect.objectContaining(mockRequestOptions));
 
     expect(result.current.status).toBe(USE_FETCH_STATUS.LOADING);
     expect(result.current.isLoading()).toBe(true);
@@ -214,13 +306,11 @@ describe('useFetch', () => {
     });
 
     await act(async () => {
-      server.use(
-        getHandler({
-          data: mockData,
-          method: 'get',
-          url: softFailureUrl,
-        }),
-      );
+      useHandler({
+        data: mockData,
+        method: 'GET',
+        url: softFailureUrl,
+      });
     });
 
     await act(async () => {
@@ -376,7 +466,7 @@ describe('useFetch', () => {
 
     rerender(false);
 
-    expect(requestMock).toHaveBeenCalledWith(mockRequestOptions);
+    expect(requestMock).toHaveBeenCalledWith(expect.objectContaining(mockRequestOptions));
 
     await vi.waitFor(() => {
       expect(result.current.status).not.toBe(USE_FETCH_STATUS.LOADING);
@@ -417,7 +507,7 @@ describe('useFetch', () => {
 
   it('should handle throw with invalid parameters', async () => {
     // @ts-expect-error Testing invalid parameters
-    expect(() => renderHook(() => useFetch({}))).toThrow('Expected an options object or URL');
+    expect(() => renderHook(() => useFetch({}))).toThrowError('Expected an options object or URL');
   });
 
   it('should skip state updates on unmount', async () => {

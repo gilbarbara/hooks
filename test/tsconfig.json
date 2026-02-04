@@ -1,8 +1,9 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "types": ["jest-extended", "node", "vitest/globals"]
   },
   "include": ["**/*"]
 }
