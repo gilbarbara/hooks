@@ -52,13 +52,13 @@ Custom React's built-in hooks **deep comparison** on their dependencies.
 
 [useCallbackDeepCompare](docs/useCallbackDeepCompare.md) — A custom `useCallback` with deep comparison.  
 [useEffectDeepCompare](docs/useEffectDeepCompare.md) — A custom `useEffect` with deep comparison.  
-[useMemoDeepCompare](docs/useMemoDeepCompare) — A custom `useMemo` with deep comparison.
+[useMemoDeepCompare](docs/useMemoDeepCompare.md) — A custom `useMemo` with deep comparison.
 
 ### State
 
 Hooks for managing and persisting application state.
 
-[usePersistentState](docs/usePersistentState) — State hook that persists the state in localStorage.  
+[usePersistentState](docs/usePersistentState.md) — State hook that persists the state in localStorage.  
 [useSetState](docs/useSetState.md) — Returns a setState that merges object changes into the current state.  
 [useToggle](docs/useToggle.md) — State hook to track the value of a boolean.
 
@@ -77,9 +77,9 @@ Hooks for managing component lifecycle events such as mounting and unmounting.
 
 [useMount](docs/useMount.md) — Execute a callback when the component is mounted.  
 [useUnmount](docs/useUnmount.md) — Execute a callback when the component is unmounted.  
-[useLifecycleHooks](docs/useLifecycleHooks) — Execute the callbacks when the component mount and unmount.  
+[useLifecycleHooks](docs/useLifecycleHooks.md) — Execute the callbacks when the component mount and unmount.  
 [useIsMounted](docs/useIsMounted.md) — Check if the component is still mounted.  
-[useIsFirstRender](docs/useIsFirstRender) — Check if it’s the first mount.  
+[useIsFirstRender](docs/useIsFirstRender.md) — Check if it’s the first mount.  
 
 ### Refs and DOM
 
@@ -93,9 +93,9 @@ Hooks for managing refs and interacting with the DOM.
 
 Hooks for managing user interactions and responsive design.
 
-[useBreakpoint](docs/useBreakpoint) — Get responsive breakpoints for adaptive layouts.  
+[useBreakpoint](docs/useBreakpoint.md) — Get responsive breakpoints for adaptive layouts.  
 [useClickOutside](docs/useClickOutside.md) — Execute the callback when clicking outside the target element.  
-[useElementMeasure](docs/useElementMeasure) — Get element dimensions using the ResizeObserver API.  
+[useElementMeasure](docs/useElementMeasure.md) — Get element dimensions using the ResizeObserver API.  
 [useMediaQuery](docs/useMediaQuery.md) — Detect media query changes.  
 [useIntersectionObserver](docs/useIntersectionObserver.md) — Detects the visibility of an element on the viewport using the [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API.  
 [useResizeObserver](docs/useResizeObserver.md) — Get element dimensions using the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) API.  
@@ -106,7 +106,7 @@ Hooks for managing user interactions and responsive design.
 Hooks for optimizing performance by reducing unnecessary renders or controlling execution frequency.
 
 [useDebounce](docs/useDebounce.md) — Defer function execution until the delay has elapsed since the last invocation.  
-[useMemoizedValue](docs/useMemoizedValue) — Get a stabilized value that only updates when the original value is truly different.  
+[useMemoizedValue](docs/useMemoizedValue.md) — Get a stabilized value that only updates when the original value is truly different.  
 [useThrottle](docs/useThrottle.md) — Return a throttled function that invokes fn once per every ms.  
 [useThrottleValue](docs/useThrottleValue.md) — Return a throttled value that changes only once per every ms.
 
@@ -129,14 +129,14 @@ Hooks for working with APIs and third-party scripts.
 
 Hooks for debugging, monitoring, and optimizing component behavior.
 
-[useDataChanges](docs/useDataChanges) — Detect which prop/state changes are causing a component to re-render.  
+[useDataChanges](docs/useDataChanges.md) — Detect which prop/state changes are causing a component to re-render.  
 [useRenderCount](docs/useRenderCount.md) — Log how many times the component has rendered.  
 [useUpdate](docs/useUpdate.md) — Return a function that re-renders the component when called.
 
 ### Utilities
 [useLocalStorage](docs/useLocalStorage.md) — Interact with the browser’s localStorage API.  
 [useLocation](docs/useLocation.md) — Track the browser’s location.  
-[useOnce](docs/useOnce) — Execute code just once before the component renders.
+[useOnce](docs/useOnce.md) — Execute code just once before the component renders.
 
 ## ESLint Configuration
 
