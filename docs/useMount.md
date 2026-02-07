@@ -1,9 +1,8 @@
 # useMount
 
-Executes the provided effect once, similar to `useEffect` with an empty dependency array.
-Ideal for running initialization logic like API calls or subscriptions.
+Executes the provided callback when the component mounts, equivalent to `useEffect` with an empty dependency array.
 
-> For more details on `useEffect`, refer to the [React documentation](https://react.dev/reference/react/useEffect).
+> If you need the callback to run exactly once even in StrictMode, use `useEffectOnce` instead.
 
 ## Usage
 

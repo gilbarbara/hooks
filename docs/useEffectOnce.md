@@ -1,9 +1,9 @@
 # useEffectOnce
 
-Executes the provided effect once, similar to `useEffect` with an empty dependency array.  
-Ideal for running initialization logic like API calls or subscriptions.
+Executes the provided effect exactly once, even in React's StrictMode.
+Uses a ref guard to bypass StrictMode's double-invocation in development mode.
 
-> For more details on `useEffect`, refer to the [React documentation](https://react.dev/reference/react/useEffect).
+> If you want standard `useEffect` behavior with an empty dependency array (StrictMode-compatible), use `useEffect` directly or `useMount`/`useUnmount`.
 
 ## Usage
 
@@ -12,11 +12,13 @@ import { useEffectOnce } from '@gilbarbara/hooks';
 
 function Component() {
   useEffectOnce(() => {
-    // Runs only once when the component mounts
+    // Runs exactly once, even in StrictMode
     console.log('Running effect once on mount')
 
     return () => {
-      // Runs when the component unmounts
+      // Cleanup runs once on unmount
+      // ⚠️ In StrictMode dev mode, this fires during the simulated
+      // unmount and will NOT fire on the actual unmount.
       console.log('Running clean-up of effect on unmount')
     }
   });

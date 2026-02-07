@@ -1,8 +1,13 @@
-import { useEffectOnce } from './useEffectOnce';
+import { useEffect } from 'react';
+
 import { useLatest } from './useLatest';
 
 export function useUnmount(callback: () => void) {
-  const unmountFn = useLatest(callback);
+  const callbackRef = useLatest(callback);
 
-  useEffectOnce(() => unmountFn.current);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => callbackRef.current();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }
